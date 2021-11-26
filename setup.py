@@ -45,7 +45,9 @@ setuptools.setup(
     zip_safe=True,
     entry_points={
         "climetlab.datasets": [
-            "eumetnet-postprocessing-benchmark-training-data= climetlab_eumetnet_postprocessing_benchmark.training_data:TrainingData",  # noqa: E501
+            # "eumetnet-postprocessing-benchmark-training-data= climetlab_eumetnet_postprocessing_benchmark.training_data:TrainingData",  # noqa: E501
+            "eumetnet-postprocessing-benchmark-training-data-efi= climetlab_eumetnet_postprocessing_benchmark.training_data_efi:TrainingDataEfi",
+
             # other datasets can be included here
         ]
         # source plugins would be here
