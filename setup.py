@@ -37,7 +37,7 @@ setuptools.setup(
     author="Jonathan Demaeyer",
     author_email="jodemaey@meteo.be",
     url="https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark",
-    license="Apache License Version 2.0",
+    license="BSD-3-Clause License",
     packages=setuptools.find_packages(),
     include_package_data=True,
     install_requires=["climetlab>=0.5.6"],
