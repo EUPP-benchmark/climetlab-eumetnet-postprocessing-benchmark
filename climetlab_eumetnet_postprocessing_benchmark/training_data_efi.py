@@ -63,6 +63,6 @@ class TrainingDataEfi(Dataset):
                    "url": BASEURL,
                    "month": self.month,
                    "year": self.year}
-        self.source = cml.load_source("url-indexing", PerUrlIndex(PATTERN), request)
+        self.source = cml.load_source("indexed-urls", PerUrlIndex(PATTERN), request)
 
 
