@@ -46,7 +46,7 @@ setuptools.setup(
     entry_points={
         "climetlab.datasets": [
             "eumetnet-postprocessing-benchmark-training-data= climetlab_eumetnet_postprocessing_benchmark.training_data:TrainingData",  # noqa: E501
-            "eumetnet-postprocessing-benchmark-training-data-efi= climetlab_eumetnet_postprocessing_benchmark.training_data_efi:TrainingDataEfi",
+            "eumetnet-postprocessing-benchmark-training-data-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.training_data_forecasts:TrainingDataForecastEfi",
             "eumetnet-postprocessing-benchmark-training-data-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.training_data_forecasts:TrainingDataForecastSurface",
 
             # other datasets can be included here
