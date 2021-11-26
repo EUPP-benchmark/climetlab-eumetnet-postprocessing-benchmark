@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import climetlab as cml
 from climetlab import Dataset
-from climetlab.normalize import normalize_args
+from climetlab.normalize import normalize
 from climetlab.indexing import PerUrlIndex
 
 __version__ = "0.1.0"
@@ -34,18 +34,13 @@ class TrainingDataEfi(Dataset):
 
     dataset = None
 
-    @normalize_args(parameter=["capesi", "10fgi", "capei", "sfi", "10wsi", "2ti", "mx2ti", "mn2ti", "tpi"])
+    @normalize("parameter", ["capesi", "10fgi", "capei", "sfi", "10wsi", "2ti", "mx2ti", "mn2ti", "tpi"])
+    @normalize("date", "date(%Y%m%d)")
     def __init__(self, date, parameter):
         self.parameter = parameter
-        if '-' in date:
-            d = date.split('-')
-            self.date = "".join(d)
-            self.year = d[0]
-            self.month = d[1]
-        else:
-            self.date = date
-            self.year = date[:4]
-            self.month = date[4:6]
+        self.date = date
+        self.year = date[:4]
+        self.month = date[4:6]
         self.domain = "g"
         self.levtype = "sfc"
         self.time = "0000"
@@ -68,6 +63,6 @@ class TrainingDataEfi(Dataset):
                    "url": BASEURL,
                    "month": self.month,
                    "year": self.year}
-        self.source = cml.load_source("url-indexing", PerUrlIndex(PATTERN), PATTERN, request)
+        self.source = cml.load_source("url-indexing", PerUrlIndex(PATTERN), request)
 
 
