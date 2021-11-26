@@ -69,7 +69,7 @@ class TrainingDataForecastSurface(Dataset):
                            "isodate": self.isodate[:7]
                            })
             self.ctr_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
-            self.fcs_source = cml.load_source("multi", self.ens_source, self.ctr_source)
+            self.source = cml.load_source("multi", self.ens_source, self.ctr_source)
         else:  # default to highres forecasts
             self.isodate = "-".join([date[:4], date[4:6]])
             request = {"param": self.parameter,
@@ -80,21 +80,23 @@ class TrainingDataForecastSurface(Dataset):
                        "ltype": self.ltype,
                        "isodate": self.isodate
                        }
-            self.fcs_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
+            self.source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
 
-    def to_xarray(self, obs_kwargs=None, **fcs_kwargs):
-        fcs = self.fcs_source.to_xarray(**fcs_kwargs)
+    def get_observations_as_xarray(self, fcs_kwargs=None, **obs_kwargs):
+        if fcs_kwargs is None:
+            fcs_kwargs = dict()
+        fcs = self.source.to_xarray(**fcs_kwargs)
         valid_time = fcs.valid_time.to_pandas()
-        time_list = list(map(_convert, valid_time.iloc[0,:]))
+        fcs_time_list = list(map(_convert, valid_time.iloc[0, :]))
         year_months = list()
-        for t in time_list:
+        for t in fcs_time_list:
             year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
             if year_month not in year_months:
                 year_months.append(year_month)
         days = dict()
         for year_month in year_months:
             days[year_month] = list()
-        for t in time_list:
+        for t in fcs_time_list:
             year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
             days[year_month].append(str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0') + str(t.day).rjust(2, '0'))
 
@@ -110,10 +112,15 @@ class TrainingDataForecastSurface(Dataset):
             source = cml.load_source("indexed-urls", PerUrlIndex(self._ANA_PATTERN), request)
             sources_list.append(source)
         self.obs_source = cml.load_source("multi", *sources_list)
-        if obs_kwargs is None:
-            obs_kwargs = dict()
         obs = self.obs_source.to_xarray(**obs_kwargs)
-        return obs, fcs
+        valid_time = obs.valid_time.to_pandas()
+        obs_time_list = list(map(_convert, valid_time.iloc[:, 0]))
+        idx = list()
+        for i, t in enumerate(obs_time_list):
+            if t in fcs_time_list:
+                idx.append(i)
+        obs_fcs = obs.isel(time=idx)
+        return obs_fcs
 
 
 
