@@ -40,7 +40,7 @@ setuptools.setup(
     license="BSD-3-Clause License",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=["climetlab>=0.5.6"],
+    install_requires=["climetlab>=0.9.4"],
     extras_require=extras_require,
     zip_safe=True,
     entry_points={
@@ -48,17 +48,18 @@ setuptools.setup(
             "eumetnet-postprocessing-benchmark-training-data= climetlab_eumetnet_postprocessing_benchmark.training_data:TrainingData",  # noqa: E501
             "eumetnet-postprocessing-benchmark-training-data-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.training_data_forecasts:TrainingDataForecastEfi",
             "eumetnet-postprocessing-benchmark-training-data-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.training_data_forecasts:TrainingDataForecastSurface",
+            "eumetnet-postprocessing-benchmark-training-data-forecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.training_data_forecasts:TrainingDataForecastPressure",
 
             # other datasets can be included here
         ]
         # source plugins would be here
         # "climetlab.sources": []
     },
-    keywords="meteorology",
+    keywords=["meteorology", "postprocessing"],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: BSD-3-Clause License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
