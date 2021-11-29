@@ -11,7 +11,7 @@ def test_rfcs_surf():
     obs = ds.get_observations_as_xarray()
     print(xds)
     print(obs)
-    assert xds.t2m.shape == obs.t2m.shape
+    assert xds.t2m.shape[1:] == obs.t2m.shape[1:]
 
 
 def test_rfcs_press():

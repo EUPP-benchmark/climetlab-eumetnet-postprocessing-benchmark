@@ -73,6 +73,8 @@ class TrainingDataForecast(Dataset):
                        "ltype": self.ltype,
                        "isodate": "-".join([year_month[:4], year_month[4:]])
                        }
+            if self.level is not None:
+                request.update({'levelist': self.level})
             source = cml.load_source("indexed-urls", PerUrlIndex(self._ANALYSIS_PATTERN), request)
             sources_list.append(source)
         self.obs_source = cml.load_source("multi", *sources_list)
