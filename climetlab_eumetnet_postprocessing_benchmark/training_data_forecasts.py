@@ -160,7 +160,7 @@ class TrainingDataForecastSurface(TrainingDataForecast):
     )
 
     _surf_parameters = ["2t", "10u", "10v", "tcc", "tp", "100u", "100v", "cape", "stl1", "sshf", "slhf",
-                        "tcw", "tcwv", "swvl1", "ssr", "str", "sd", "cp", "cin", "ssrd", "strd", "3020", "all"]
+                        "tcw", "tcwv", "swvl1", "ssr", "str", "sd", "cp", "cin", "ssrd", "strd", "vis", "all"]
     # _surf_pp_parameters = ["10fg6", "mn2t6", "mx2t6"]  TODO: obs not yet ready
     _surf_pp_parameters = []
 
