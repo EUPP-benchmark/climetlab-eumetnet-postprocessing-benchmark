@@ -89,6 +89,7 @@ class TrainingDataForecast(Dataset):
         obs_dict = obs_fcs.to_dict()
         _, obs_fcs = xr.align(fcs, obs_fcs, join='left', exclude=['number'])
         new_obs_dict = obs_fcs.to_dict()
+        new_obs_dict['coords']['valid_time']['data'] = [fcs_time_list]
         for var in new_obs_dict['data_vars']:
             new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).swapaxes(1, 2))
         obs_fcs = obs_fcs.from_dict(new_obs_dict)
@@ -258,14 +259,14 @@ class TrainingDataForecastPressure(TrainingDataForecast):
                        "ltype": self.ltype,
                        "isodate": self.isodate
                        }
-            self.ens_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
+            ens_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
             request.update({"date": self.date,
                             # Parameters passed to the filename mangling
                             "kind": "ctr",
                             "isodate": self.isodate[:7]
                             })
-            self.ctr_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
-            self.source = cml.load_source("multi", self.ens_source, self.ctr_source)
+            ctr_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
+            self.source = cml.load_source("multi", ens_source, ctr_source)
         else:  # default to highres forecasts
             request = {"param": self.parameter,
                        "date": self.date,
@@ -277,4 +278,3 @@ class TrainingDataForecastPressure(TrainingDataForecast):
                        "isodate": self.isodate[:7]
                        }
             self.source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
-

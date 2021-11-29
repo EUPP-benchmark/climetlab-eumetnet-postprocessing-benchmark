@@ -14,18 +14,18 @@ on:
     types: [created]
 
 jobs:
-  quality:
-    name: Code QA
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: pip install black flake8 isort
-      - run: isort --version
-      - run: black --version
-      - run: flake8 --version
-      - run: black --check .
-      - run: isort --check .
-      - run: flake8 .
+#  quality:
+#    name: Code QA
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - run: pip install black flake8 isort
+#      - run: isort --version
+#      - run: black --version
+#      - run: flake8 --version
+#      - run: black --check .
+#      - run: isort --check .
+#      - run: flake8 .
 
   checks:
     strategy:

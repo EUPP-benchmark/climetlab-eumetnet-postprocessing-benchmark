@@ -15,7 +15,7 @@ EXAMPLES = os.path.join(
     "notebooks",
 )
 
-SKIP = ("demo_do_not_test_me.ipynb",)
+SKIP = ("demo_training_data.ipynb",)
 
 
 def notebooks_list():

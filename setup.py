@@ -45,7 +45,6 @@ setuptools.setup(
     zip_safe=True,
     entry_points={
         "climetlab.datasets": [
-            "eumetnet-postprocessing-benchmark-training-data= climetlab_eumetnet_postprocessing_benchmark.training_data:TrainingData",  # noqa: E501
             "eumetnet-postprocessing-benchmark-training-data-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.training_data_forecasts:TrainingDataForecastEfi",
             "eumetnet-postprocessing-benchmark-training-data-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.training_data_forecasts:TrainingDataForecastSurface",
             "eumetnet-postprocessing-benchmark-training-data-forecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.training_data_forecasts:TrainingDataForecastPressure",

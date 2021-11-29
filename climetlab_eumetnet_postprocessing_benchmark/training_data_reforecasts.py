@@ -12,6 +12,7 @@ from .utils import convert
 
 __version__ = "0.1.1"
 
+
 class TrainingDataReforecast(TrainingDataForecast):
 
     def __init__(self, *args, **kwargs):
@@ -71,6 +72,7 @@ class TrainingDataReforecast(TrainingDataForecast):
         obs_dict = obs_fcs.to_dict()
         _, obs_fcs = xr.align(fcs, obs_fcs, join='left', exclude=['number'])
         new_obs_dict = obs_fcs.to_dict()
+        new_obs_dict['coords']['valid_time']['data'] = fcs_time_list
         for var in new_obs_dict['data_vars']:
             new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).reshape(shape))
         obs_fcs = obs_fcs.from_dict(new_obs_dict)
@@ -97,7 +99,6 @@ class TrainingDataReforecastSurface(TrainingDataReforecast, TrainingDataForecast
         TrainingDataForecastSurface.__init__(self, date, parameter, "ensemble")
 
 
-
 class TrainingDataReforecastPressure(TrainingDataReforecast, TrainingDataForecastPressure):
     name = None  # TODO
     home_page = "-"  # TODO
@@ -115,4 +116,3 @@ class TrainingDataReforecastPressure(TrainingDataReforecast, TrainingDataForecas
     def __init__(self, date, parameter, level):
 
         TrainingDataForecastPressure.__init__(self, date, parameter, level, "ensemble")
-
