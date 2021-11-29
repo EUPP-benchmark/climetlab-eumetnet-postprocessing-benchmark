@@ -5,7 +5,7 @@ import climetlab as cml
 from climetlab import Dataset
 from climetlab.normalize import normalize_args
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 URL = "https://storage.ecmwf.europeanweather.cloud"
 
