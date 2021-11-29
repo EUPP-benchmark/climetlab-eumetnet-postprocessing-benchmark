@@ -27,17 +27,20 @@ class TrainingDataForecast(Dataset):
         "If you do not agree with such terms, do not download the data. "
     )
 
-    _BASEURL = ""
+    _BASEURL = "https://storage.ecmwf.europeanweather.cloud/benchmark-dataset/"
 
     _PATTERN = ""
 
-    _ANALYSIS_PATTERN = ""
+    _ANALYSIS_PATTERN = (
+        "{url}data/ana/{leveltype}/"
+        "EU_analysis_{leveltype}_params_{isodate}.grb"
+    )
 
     def __init__(self, *args, **kwargs):
         """Do almost nothing. To be overridden by the inherithing class."""
         self.parameter = list()
         self.date = ""
-        self.ltype = "pressure"
+        self.leveltype = ""
         self.kind = ""
         self.obs_source = None
         self.isodate = ""
@@ -70,7 +73,7 @@ class TrainingDataForecast(Dataset):
                        "date": days[year_month],
                        # Parameters passed to the filename mangling
                        "url": self._BASEURL,
-                       "ltype": self.ltype,
+                       "leveltype": self.leveltype,
                        "isodate": "-".join([year_month[:4], year_month[4:]])
                        }
             if self.level is not None:
@@ -107,8 +110,6 @@ class TrainingDataForecastEfi(TrainingDataForecast):
     citation = "-"  # TODO
 
     dataset = None
-
-    _BASEURL = "https://storage.ecmwf.europeanweather.cloud/benchmark-dataset/"
 
     _PATTERN = (
         "{url}data/fcs/efi/"
@@ -150,16 +151,9 @@ class TrainingDataForecastSurface(TrainingDataForecast):
 
     dataset = None
 
-    _BASEURL = "https://storage.ecmwf.europeanweather.cloud/benchmark-dataset/"
-
     _PATTERN = (
-        "{url}data/fcs/{ltype}/"
-        "EU_forecast_{kind}_{ltype}_params_{isodate}_0.grb"
-    )
-
-    _ANALYSIS_PATTERN = (
-        "{url}data/ana/{ltype}/"
-        "EU_analysis_{ltype}_params_{isodate}.grb"
+        "{url}data/fcs/{leveltype}/"
+        "EU_forecast_{kind}_{leveltype}_params_{isodate}_0.grb"
     )
 
     _surf_parameters = ["2t", "10u", "10v", "tcc", "tp", "100u", "100v", "cape", "stl1", "sshf", "slhf",
@@ -180,7 +174,7 @@ class TrainingDataForecastSurface(TrainingDataForecast):
         else:
             self.parameter = parameter
         self.date = date
-        self.ltype = "surf"
+        self.leveltype = "surf"
         self.kind = kind
         self.obs_source = None
         self.isodate = "-".join([date[:4], date[4:6], date[6:]])
@@ -190,7 +184,7 @@ class TrainingDataForecastSurface(TrainingDataForecast):
                        # Parameters passed to the filename mangling
                        "url": self._BASEURL,
                        "kind": "ens",
-                       "ltype": self.ltype,
+                       "leveltype": self.leveltype,
                        "isodate": self.isodate
                        }
             ens_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
@@ -207,7 +201,7 @@ class TrainingDataForecastSurface(TrainingDataForecast):
                        # Parameters passed to the filename mangling
                        "url": self._BASEURL,
                        "kind": "hr",
-                       "ltype": self.ltype,
+                       "leveltype": self.leveltype,
                        "isodate": self.isodate[:7]
                        }
             self.source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
@@ -222,16 +216,9 @@ class TrainingDataForecastPressure(TrainingDataForecast):
 
     dataset = None
 
-    _BASEURL = "https://storage.ecmwf.europeanweather.cloud/benchmark-dataset/"
-
     _PATTERN = (
-        "{url}data/fcs/{ltype}/"
-        "EU_forecast_{kind}_{ltype}_params_{isodate}_0.grb"
-    )
-
-    _ANALYSIS_PATTERN = (
-        "{url}data/ana/{ltype}/"
-        "EU_analysis_{ltype}_params_{isodate}.grb"
+        "{url}data/fcs/{leveltype}/"
+        "EU_forecast_{kind}_{leveltype}_params_{isodate}_0.grb"
     )
 
     _pressure_parameters = ['z', 'u', 'v', 'q', 't', 'r']
@@ -246,7 +233,7 @@ class TrainingDataForecastPressure(TrainingDataForecast):
 
         self.parameter = parameter
         self.date = date
-        self.ltype = "pressure"
+        self.leveltype = "pressure"
         self.kind = kind
         self.level = str(level)
         self.obs_source = None
@@ -258,7 +245,7 @@ class TrainingDataForecastPressure(TrainingDataForecast):
                        # Parameters passed to the filename mangling
                        "url": self._BASEURL,
                        "kind": "ens",
-                       "ltype": self.ltype,
+                       "leveltype": self.leveltype,
                        "isodate": self.isodate
                        }
             ens_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
@@ -276,7 +263,7 @@ class TrainingDataForecastPressure(TrainingDataForecast):
                        # Parameters passed to the filename mangling
                        "url": self._BASEURL,
                        "kind": "hr",
-                       "ltype": self.ltype,
+                       "leveltype": self.leveltype,
                        "isodate": self.isodate[:7]
                        }
             self.source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)

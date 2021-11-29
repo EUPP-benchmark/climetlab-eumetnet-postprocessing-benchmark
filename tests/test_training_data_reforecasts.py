@@ -3,15 +3,16 @@
 import climetlab as cml
 
 
-def test_rfcs_surf():
-    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-reforecasts-surface',
-                          date="2017-12-28",
-                          parameter="2t")
-    xds = ds.to_xarray()
-    obs = ds.get_observations_as_xarray()
-    print(xds)
-    print(obs)
-    assert xds.t2m.shape[1:] == obs.t2m.shape[1:]
+# Time and resource consuming - uncomment only if needed
+# def test_rfcs_surf():
+#     ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-reforecasts-surface',
+#                           date="2017-12-28",
+#                           parameter="2t")
+#     xds = ds.to_xarray()
+#     obs = ds.get_observations_as_xarray()
+#     print(xds)
+#     print(obs)
+#     assert xds.t2m.shape[1:] == obs.t2m.shape[1:]
 
 
 def test_rfcs_press():

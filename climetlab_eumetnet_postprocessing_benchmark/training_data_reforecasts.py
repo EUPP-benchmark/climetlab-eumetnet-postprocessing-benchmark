@@ -47,7 +47,7 @@ class TrainingDataReforecast(TrainingDataForecast):
                        "date": days[year_month],
                        # Parameters passed to the filename mangling
                        "url": self._BASEURL,
-                       "ltype": self.ltype,
+                       "leveltype": self.leveltype,
                        "isodate": "-".join([year_month[:4], year_month[4:]])
                        }
             if self.level is not None:
@@ -91,8 +91,8 @@ class TrainingDataReforecastSurface(TrainingDataReforecast, TrainingDataForecast
     dataset = None
 
     _PATTERN = (
-        "{url}data/rfcs/{ltype}/"
-        "EU_reforecast_{kind}_{ltype}_params_{isodate}_0.grb"
+        "{url}data/rfcs/{leveltype}/"
+        "EU_reforecast_{kind}_{leveltype}_params_{isodate}_0.grb"
     )
 
     def __init__(self, date, parameter):
@@ -110,8 +110,8 @@ class TrainingDataReforecastPressure(TrainingDataReforecast, TrainingDataForecas
     dataset = None
 
     _PATTERN = (
-        "{url}data/rfcs/{ltype}/"
-        "EU_reforecast_{kind}_{ltype}_params_{isodate}_0.grb"
+        "{url}data/rfcs/{leveltype}/"
+        "EU_reforecast_{kind}_{leveltype}_params_{isodate}_0.grb"
     )
 
     def __init__(self, date, parameter, level):
