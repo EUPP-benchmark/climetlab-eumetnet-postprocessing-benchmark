@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import datetime
+import numpy as np
+import xarray as xr
 
 import climetlab as cml
 from climetlab import Dataset
@@ -86,22 +88,27 @@ class TrainingDataForecastSurface(Dataset):
     )
 
     _surf_parameters = ["2t", "10u", "10v", "tcc", "tp", "100u", "100v", "cape", "stl1", "sshf", "slhf",
-                        "tcw", "tcwv", "swvl1", "ssr", "str", "sd", "cp", "cin", "ssrd", "strd", "3020"]
+                        "tcw", "tcwv", "swvl1", "ssr", "str", "sd", "cp", "cin", "ssrd", "strd", "3020", "all"]
     # _surf_pp_parameters = ["10fg6", "mn2t6", "mx2t6"]  TODO: obs not yet ready
     _surf_pp_parameters = []
+
+    _ensemble_alias = ["ensemble", "ens", "proba", "probabilistic"]
 
     @normalize("parameter", _surf_parameters + _surf_pp_parameters)
     @normalize("date", "date(%Y%m%d)")
     def __init__(self, date, parameter, kind):
-        self.parameter = parameter
+        if parameter == "all":
+            self.parameter = self._surf_parameters
+        else:
+            self.parameter = parameter
         self.date = date
         self.ltype = "surf"
         self.kind = kind
         self.obs_source = None
-        if kind in ["ensemble", "ens"]:
-            self.isodate = "-".join([date[:4], date[4:6], date[6:]])
+        self.isodate = "-".join([date[:4], date[4:6], date[6:]])
+        if kind in self._ensemble_alias:
             request = {"param": self.parameter,
-                       "date": self.date,
+                       # "date": self.date,  ## Not needed
                        # Parameters passed to the filename mangling
                        "url": self._BASEURL,
                        "kind": "ens",
@@ -109,21 +116,21 @@ class TrainingDataForecastSurface(Dataset):
                        "isodate": self.isodate
                        }
             self.ens_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
-            request.update({  # Parameters passed to the filename mangling
-                           "kind": "ctr",
-                           "isodate": self.isodate[:7]
-                           })
+            request.update({"date": self.date,
+                            # Parameters passed to the filename mangling
+                            "kind": "ctr",
+                            "isodate": self.isodate[:7]
+                            })
             self.ctr_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
             self.source = cml.load_source("multi", self.ens_source, self.ctr_source)
         else:  # default to highres forecasts
-            self.isodate = "-".join([date[:4], date[4:6]])
             request = {"param": self.parameter,
                        "date": self.date,
                        # Parameters passed to the filename mangling
                        "url": self._BASEURL,
                        "kind": "hr",
                        "ltype": self.ltype,
-                       "isodate": self.isodate
+                       "isodate": self.isodate[:7]
                        }
             self.source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
 
@@ -165,6 +172,15 @@ class TrainingDataForecastSurface(Dataset):
             if t in fcs_time_list:
                 idx.append(i)
         obs_fcs = obs.isel(time=idx)
+
+        # reshape obs to fit fcs TODO: still messy, should be reworked
+        obs_dict = obs_fcs.to_dict()
+        _, obs_fcs = xr.align(fcs, obs_fcs, join='left', exclude=['number'])
+        new_obs_dict = obs_fcs.to_dict()
+        for var in new_obs_dict['data_vars']:
+            new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).swapaxes(1, 2))
+        obs_fcs = obs_fcs.from_dict(new_obs_dict)
+
         return obs_fcs
 
 
@@ -200,6 +216,8 @@ class TrainingDataForecastPressure(Dataset):
 
     _pressure_parameters = ['z', 'u', 'v', 'q', 't', 'r']
 
+    _ensemble_alias = ["ensemble", "ens", "proba", "probabilistic"]
+
     @normalize("parameter", _pressure_parameters)
     @normalize("date", "date(%Y%m%d)")
     def __init__(self, date, parameter, level, kind):
@@ -209,10 +227,10 @@ class TrainingDataForecastPressure(Dataset):
         self.kind = kind
         self.level = str(level)
         self.obs_source = None
-        if kind in ["ensemble", "ens"]:
-            self.isodate = "-".join([date[:4], date[4:6], date[6:]])
+        self.isodate = "-".join([date[:4], date[4:6], date[6:]])
+        if kind in self._ensemble_alias:
             request = {"param": self.parameter,
-                       "date": self.date,
+                       # "date": self.date,  ## Not needed
                        "levelist": self.level,
                        # Parameters passed to the filename mangling
                        "url": self._BASEURL,
@@ -221,14 +239,14 @@ class TrainingDataForecastPressure(Dataset):
                        "isodate": self.isodate
                        }
             self.ens_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
-            request.update({  # Parameters passed to the filename mangling
-                "kind": "ctr",
-                "isodate": self.isodate[:7]
-            })
+            request.update({"date": self.date,
+                            # Parameters passed to the filename mangling
+                            "kind": "ctr",
+                            "isodate": self.isodate[:7]
+                            })
             self.ctr_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
             self.source = cml.load_source("multi", self.ens_source, self.ctr_source)
         else:  # default to highres forecasts
-            self.isodate = "-".join([date[:4], date[4:6]])
             request = {"param": self.parameter,
                        "date": self.date,
                        "levelist": self.level,
@@ -236,7 +254,7 @@ class TrainingDataForecastPressure(Dataset):
                        "url": self._BASEURL,
                        "kind": "hr",
                        "ltype": self.ltype,
-                       "isodate": self.isodate
+                       "isodate": self.isodate[:7]
                        }
             self.source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
 
@@ -279,6 +297,15 @@ class TrainingDataForecastPressure(Dataset):
             if t in fcs_time_list:
                 idx.append(i)
         obs_fcs = obs.isel(time=idx)
+
+        # reshape obs to fit fcs TODO: still messy, should be reworked
+        obs_dict = obs_fcs.to_dict()
+        _, obs_fcs = xr.align(fcs, obs_fcs, join='left', exclude=['number'])
+        new_obs_dict = obs_fcs.to_dict()
+        for var in new_obs_dict['data_vars']:
+            new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).swapaxes(1, 2))
+        obs_fcs = obs_fcs.from_dict(new_obs_dict)
+
         return obs_fcs
 
 
