@@ -1,6 +1,6 @@
 # The Eumetnet postprocessing benchmark dataset Climetlab plugin
 
-[![build](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml/badge.svg)](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml)
+[![build](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml/badge.svg?branch=main)](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml)
 
 A plugin for [climetlab](https://github.com/ecmwf/climetlab) for the Eumetnet postprocessing benchmark dataset.
 
