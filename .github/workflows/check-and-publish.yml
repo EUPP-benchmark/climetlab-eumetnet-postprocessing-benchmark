@@ -123,12 +123,12 @@ jobs:
 
 # Uncomment to publish and make it available through pip
 # (PYPI_API_TOKEN must be in the github secret for this space/repos)
-#
-#    - name: Publish on pypi.org
-#      env:
-#      
-#        TWINE_USERNAME: __token__
-#        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-#      
-#      run: |
-#        twine upload dist/* --verbose
+
+    - name: Publish on pypi.org
+      env:
+
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+
+      run: |
+        twine upload dist/* --verbose
