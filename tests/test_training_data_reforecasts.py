@@ -5,7 +5,7 @@ import climetlab as cml
 
 # Time and resource consuming - uncomment only if needed
 # def test_rfcs_surf():
-#     ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-reforecasts-surface',
+#     ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface',
 #                           date="2017-12-28",
 #                           parameter="2t")
 #     xds = ds.to_xarray()
@@ -16,7 +16,7 @@ import climetlab as cml
 
 
 def test_rfcs_press():
-    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-reforecasts-pressure',
+    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-pressure',
                           date="2017-12-28",
                           parameter="z",
                           level=500)

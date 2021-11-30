@@ -5,7 +5,7 @@ import climetlab as cml
 
 
 def test_efi():
-    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-forecasts-efi',
+    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-efi',
                           date="2017-12-28",
                           parameter="2ti")
     xds = ds.to_xarray()
@@ -13,7 +13,7 @@ def test_efi():
 
 
 def test_fcs_surf():
-    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-forecasts-surface',
+    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface',
                           date="2017-12-28",
                           parameter="2t",
                           kind="highres")
@@ -25,7 +25,7 @@ def test_fcs_surf():
 
 
 def test_fcs_press():
-    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-forecasts-pressure',
+    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-pressure',
                           date="2017-12-28",
                           parameter="z",
                           level=500,
