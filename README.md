@@ -1,5 +1,7 @@
 # The Eumetnet postprocessing benchmark dataset Climetlab plugin
 
+[![build](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml/badge.svg)](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml)
+
 A plugin for [climetlab](https://github.com/ecmwf/climetlab) for the Eumetnet postprocessing benchmark dataset.
 
 Ease the download of the dataset time-aligned forecasts, reforecasts (hindcasts) and observations ([ERA5 reanalysis](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)).
