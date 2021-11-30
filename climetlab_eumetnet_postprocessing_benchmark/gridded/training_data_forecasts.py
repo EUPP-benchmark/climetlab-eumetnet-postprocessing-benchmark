@@ -238,6 +238,10 @@ class TrainingDataForecastPressure(TrainingDataForecast):
 
     _pressure_parameters = ['z', 'u', 'v', 'q', 't', 'r', 'all']
 
+    _pressure_parameters_by_level = {500: ['z'],
+                                     700: ['u', 'v', 'q'],
+                                     850: ['t', 'r']}
+
     @normalize("parameter", _pressure_parameters)
     @normalize("date", "date(%Y%m%d)")
     def __init__(self, date, parameter, level, kind):
@@ -249,7 +253,7 @@ class TrainingDataForecastPressure(TrainingDataForecast):
                           'Providing a list of dates might lead to a failure.')
 
         if parameter == "all":
-            self.parameter = self._pressure_parameters
+            self.parameter = self._pressure_parameters_by_level[int(level)]
         else:
             self.parameter = parameter
         self.date = date
