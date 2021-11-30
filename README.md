@@ -42,7 +42,7 @@ There are two main datasets:
 ## 1 - Gridded Data
 
 
-![](./docs/gridded_data.jpg)
+![](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/docs/gridded_data.jpg?raw=true)
 
  * The Eumetnet postprocessing benchmark dataset contains [ECMWF](https://www.ecmwf.int/) ensemble and deterministic forecasts over a large portion of Europe,  from 36 to 67° in latitude and from -6 to 17° of longitude,
 and covers the years 2017-2018.
@@ -259,9 +259,9 @@ Please open a [issue on github](https://github.com/Climdyn/climetlab-eumetnet-po
 LICENSE
 -------
 
-See the [LICENSE](./LICENSE) file for the code, and the [DATA_LICENSE](./DATA_LICENSE) for the data.
+See the [LICENSE](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/LICENSE) file for the code, and the [DATA_LICENSE](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/DATA_LICENSE) for the data.
 
 Authors
 -------
 
-See the [CONTRIBUTORS.md](./CONTRIBUTORS.md) file.
+See the [CONTRIBUTORS.md](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/CONTRIBUTORS.md) file.
