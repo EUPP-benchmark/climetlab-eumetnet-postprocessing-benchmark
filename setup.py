@@ -28,9 +28,7 @@ setuptools.setup(
     name=package_name,
     version=version,
     description=(
-        "A dataset plugin for climetlab for the dataset "
-        "eumetnet-postprocessing-benchmark/"  # noqa: E501
-        "training-data."  # noqa: E501
+        "A plugin for climetlab to retrieve the Eumetnet postprocessing benchmark dataset."
     ),
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
@@ -62,7 +60,6 @@ setuptools.setup(
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
