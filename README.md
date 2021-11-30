@@ -159,7 +159,7 @@ The variables on pressure level can be obtained for each forecast date, both for
 
 It includes:
 
-| Parameter name                                                                 | Level(s)       |  ECMWF key | Remarks                         |
+| Parameter name                                                                 |   Level        |  ECMWF key | Remarks                         |
 |--------------------------------------------------------------------------------|----------------|------------|---------------------------------|
 | [Temperature](https://apps.ecmwf.int/codes/grib/param-db/?id=130)              |    850         |  t         |                                 |
 | [U component of wind](https://apps.ecmwf.int/codes/grib/param-db/?id=131)      |    700         |  u         |                                 |
