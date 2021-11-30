@@ -10,7 +10,7 @@ from climetlab.indexing import PerUrlIndex
 from .training_data_forecasts import TrainingDataForecast, TrainingDataForecastSurface, TrainingDataForecastPressure
 from ..utils import convert_to_datetime
 
-__version__ = "0.1.1"
+__version__ = "0.1.1beta"
 
 # TODO: Add a check for valid reforecast date and then warn the user if not valid
 

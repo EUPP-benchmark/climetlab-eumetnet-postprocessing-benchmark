@@ -131,6 +131,7 @@ The forecast are available for the model steps (in hours) 0, 1, 2, 3, 4, 5, 6, 7
 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
 93, 96, 99, 102, 105, 108, 111, 114, 117, 120, 123, 126, 129, 132, 135, 138, 141, 144, 150, 156, 162, 168, 174, 180, 186, 192, 198,
 204, 210, 216, 222, 228, 234 and 240.
+All the steps are automatically retrieved.
 
 **Usage:** The surface variables forecasts can retrieved by calling
 
@@ -163,7 +164,7 @@ It includes:
 | [V component of wind](https://apps.ecmwf.int/codes/grib/param-db/?id=132)      |    700         |  v         |                                 |
 | [Geopotential](https://apps.ecmwf.int/codes/grib/param-db/?id=129)             |    500         |  z         |                                 |
 | [Specific humidity](https://apps.ecmwf.int/codes/grib/param-db/?id=133)        |    700         |  q         |                                 |
-| [Relative humidity](https://apps.ecmwf.int/codes/grib/param-db/?id=157)        |    850         |  q         |                                 |
+| [Relative humidity](https://apps.ecmwf.int/codes/grib/param-db/?id=157)        |    850         |  r         |                                 |
 
 The forecast are available for the same model steps as the surface variables above.
 
@@ -193,6 +194,7 @@ All the variables described at the point **1.2** above are available.
 
 The forecast are available for the model steps (in hours) 0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102, 108,
 114, 120, 126, 132, 138, 144, 150, 156, 162, 168, 174, 180, 186, 192, 198, 204, 210, 216, 222, 228, 234 and 240.
+All the steps are automatically retrieved.
 
 > **Remark:** The ECMWF reforecasts are only available Mondays and Thursdays. Providing any other date provided will fail.
 

@@ -13,7 +13,7 @@ from climetlab.indexing import PerUrlIndex
 
 from ..utils import convert_to_datetime
 
-__version__ = "0.1.1"
+__version__ = "0.1.1beta"
 
 _terms_of_use = """By downloading data from this dataset, you agree to the terms and conditions defined at
 
