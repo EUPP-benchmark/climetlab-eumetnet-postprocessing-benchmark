@@ -43,8 +43,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-            ref: ${{ github.ref }}
 
       - uses: actions/setup-python@v2
         with:
