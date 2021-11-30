@@ -1,0 +1,32 @@
+
+--------------------
+License for the data
+--------------------
+
+
+-----------------
+# Forecast data #
+-----------------
+
+Gridded forecast reforecast data source
+
+Source https://www.ecmwf.int
+
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+Copyright (c) 2021 European Centre for Medium-Range Weather Forecasts (ECMWF).
+
+--------------------
+# Observation data #
+--------------------
+
+Copernicus ERA5 gridded reanalysis data source
+
+Source https://cds.climate.copernicus.eu/
+
+Copyright (c) 2021 European Union.
+
+Generated using Copernicus Climate Change Service information 2021.
+
+Hersbach et al. (2018): ERA5 hourly data on single levels from 1979 to present.
+
+Copernicus Climate Change Service (C3S) Climate Data Store (CDS). (Accessed on < 21-04-2021 >), doi:10.24381/cds.adbb2d47.

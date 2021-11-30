@@ -15,17 +15,20 @@ from .utils import convert
 
 __version__ = "0.1.1"
 
+_terms_of_use = """By downloading data from this dataset, you agree to the terms and conditions defined at
+
+    https://github.com/Climdyn/climetlab_eumetnet_postprocessing_benchmark/LICENSE
+    
+and
+
+    https://github.com/Climdyn/climetlab_eumetnet_postprocessing_benchmark/DATA_LICENSE
+
+If you do not agree with such terms, do not download the data. """
+
 
 class TrainingDataForecast(Dataset):
 
-    terms_of_use = (
-        "By downloading data from this dataset, "
-        "you agree to the terms and conditions defined at "
-        "https://github.com/Climdyn/"
-        "climetlab_eumetnet_postprocessing_benchmark/"
-        "LICENSE"
-        "If you do not agree with such terms, do not download the data. "
-    )
+    terms_of_use = _terms_of_use
 
     _BASEURL = "https://storage.ecmwf.europeanweather.cloud/benchmark-dataset/"
 
