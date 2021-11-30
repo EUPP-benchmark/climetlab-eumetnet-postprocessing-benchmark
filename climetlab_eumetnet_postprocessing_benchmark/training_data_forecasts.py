@@ -11,7 +11,7 @@ from climetlab import Dataset
 from climetlab.normalize import normalize
 from climetlab.indexing import PerUrlIndex
 
-from .utils import convert
+from .utils import convert_to_datetime
 
 __version__ = "0.1.1"
 
@@ -57,7 +57,7 @@ class TrainingDataForecast(Dataset):
             fcs_kwargs = dict()
         fcs = self.source.to_xarray(**fcs_kwargs)
         valid_time = fcs.valid_time.to_pandas()
-        fcs_time_list = list(map(convert, valid_time.iloc[0, :]))
+        fcs_time_list = list(map(convert_to_datetime, valid_time.iloc[0, :]))
         year_months = list()
         for t in fcs_time_list:
             year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
@@ -86,7 +86,7 @@ class TrainingDataForecast(Dataset):
         self.obs_source = cml.load_source("multi", *sources_list)
         obs = self.obs_source.to_xarray(**obs_kwargs)
         valid_time = obs.valid_time.to_pandas()
-        obs_time_list = list(map(convert, valid_time.iloc[:, 0]))
+        obs_time_list = list(map(convert_to_datetime, valid_time.iloc[:, 0]))
         idx = list()
         for i, t in enumerate(obs_time_list):
             if t in fcs_time_list:

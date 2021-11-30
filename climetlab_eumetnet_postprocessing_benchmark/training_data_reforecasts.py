@@ -8,7 +8,7 @@ import climetlab as cml
 from climetlab.indexing import PerUrlIndex
 
 from .training_data_forecasts import TrainingDataForecast, TrainingDataForecastSurface, TrainingDataForecastPressure
-from .utils import convert
+from .utils import convert_to_datetime
 
 __version__ = "0.1.1"
 
@@ -26,7 +26,7 @@ class TrainingDataReforecast(TrainingDataForecast):
         valid_time = fcs.valid_time.to_pandas()
         fcs_time_list = list()
         for i in range(valid_time.shape[0]):
-            fcs_time_list.append(list(map(convert, valid_time.iloc[i, :])))
+            fcs_time_list.append(list(map(convert_to_datetime, valid_time.iloc[i, :])))
         year_months = list()
         for fcs_time in fcs_time_list:
             for t in fcs_time:
@@ -57,7 +57,7 @@ class TrainingDataReforecast(TrainingDataForecast):
         self.obs_source = cml.load_source("multi", *sources_list)
         obs = self.obs_source.to_xarray(**obs_kwargs)
         valid_time = obs.valid_time.to_pandas()
-        obs_time_list = list(map(convert, valid_time.iloc[:, 0]))
+        obs_time_list = list(map(convert_to_datetime, valid_time.iloc[:, 0]))
         idx = list()
         for i, t in enumerate(obs_time_list):
             for fcs_time in fcs_time_list:
