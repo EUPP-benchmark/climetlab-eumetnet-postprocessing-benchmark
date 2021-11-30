@@ -11,7 +11,7 @@ from climetlab import Dataset
 from climetlab.normalize import normalize
 from climetlab.indexing import PerUrlIndex
 
-from .utils import convert_to_datetime
+from ..utils import convert_to_datetime
 
 __version__ = "0.1.1"
 
@@ -38,6 +38,8 @@ class TrainingDataForecast(Dataset):
         "{url}data/ana/{leveltype}/"
         "EU_analysis_{leveltype}_params_{isodate}.grb"
     )
+
+    _ensemble_alias = ["ensemble", "ens", "proba", "probabilistic"]
 
     def __init__(self, *args, **kwargs):
         """Do almost nothing. To be overridden by the inherithing class."""
@@ -118,15 +120,23 @@ class TrainingDataForecastEfi(TrainingDataForecast):
         "{url}data/fcs/efi/"
         "EU_forecast_efi_params_{year}-{month}_0.grb"
     )
-    _efi_params = ["capesi", "10fgi", "capei", "sfi", "10wsi", "2ti", "mx2ti", "mn2ti", "tpi"]
+    _efi_parameters = ["capesi", "10fgi", "capei", "sfi", "10wsi", "2ti", "mx2ti", "mn2ti", "tpi", "all"]
 
-    @normalize("parameter", _efi_params)
+    @normalize("parameter", _efi_parameters)
     @normalize("date", "date(%Y%m%d)")
     def __init__(self, date, parameter):
 
         TrainingDataForecast.__init__(self)
 
-        self.parameter = parameter
+        if isinstance(date, (list, tuple)):
+            warnings.warn('Please note that you can only download one forecast date per `climmetlab.load_dataset` call.\n' +
+                          'Providing a list of dates might lead to a failure.')
+
+        if parameter == "all":
+            self.parameter = self._efi_parameters
+        else:
+            self.parameter = parameter
+
         self.date = date
         self.year = date[:4]
         self.month = date[4:6]
@@ -164,13 +174,15 @@ class TrainingDataForecastSurface(TrainingDataForecast):
     # _surf_pp_parameters = ["10fg6", "mn2t6", "mx2t6"]  TODO: obs not yet ready
     _surf_pp_parameters = []
 
-    _ensemble_alias = ["ensemble", "ens", "proba", "probabilistic"]
-
     @normalize("parameter", _surf_parameters + _surf_pp_parameters)
     @normalize("date", "date(%Y%m%d)")
     def __init__(self, date, parameter, kind):
 
         TrainingDataForecast.__init__(self)
+
+        if isinstance(date, (list, tuple)):
+            warnings.warn('Please note that you can only download one forecast date per `climmetlab.load_dataset` call.\n' +
+                          'Providing a list of dates might lead to a failure.')
 
         if parameter == "all":
             self.parameter = self._surf_parameters
@@ -224,9 +236,7 @@ class TrainingDataForecastPressure(TrainingDataForecast):
         "EU_forecast_{kind}_{leveltype}_params_{isodate}_0.grb"
     )
 
-    _pressure_parameters = ['z', 'u', 'v', 'q', 't', 'r']
-
-    _ensemble_alias = ["ensemble", "ens", "proba", "probabilistic"]
+    _pressure_parameters = ['z', 'u', 'v', 'q', 't', 'r', 'all']
 
     @normalize("parameter", _pressure_parameters)
     @normalize("date", "date(%Y%m%d)")
@@ -234,7 +244,14 @@ class TrainingDataForecastPressure(TrainingDataForecast):
 
         TrainingDataForecast.__init__(self)
 
-        self.parameter = parameter
+        if isinstance(date, (list, tuple)):
+            warnings.warn('Please note that you can only download one forecast date per `climmetlab.load_dataset` call.\n' +
+                          'Providing a list of dates might lead to a failure.')
+
+        if parameter == "all":
+            self.parameter = self._pressure_parameters
+        else:
+            self.parameter = parameter
         self.date = date
         self.leveltype = "pressure"
         self.kind = kind

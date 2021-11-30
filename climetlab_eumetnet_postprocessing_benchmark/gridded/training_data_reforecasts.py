@@ -8,7 +8,7 @@ import climetlab as cml
 from climetlab.indexing import PerUrlIndex
 
 from .training_data_forecasts import TrainingDataForecast, TrainingDataForecastSurface, TrainingDataForecastPressure
-from .utils import convert_to_datetime
+from ..utils import convert_to_datetime
 
 __version__ = "0.1.1"
 

@@ -45,11 +45,11 @@ setuptools.setup(
     zip_safe=True,
     entry_points={
         "climetlab.datasets": [
-            "eumetnet-postprocessing-benchmark-training-data-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.training_data_forecasts:TrainingDataForecastEfi",
-            "eumetnet-postprocessing-benchmark-training-data-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.training_data_forecasts:TrainingDataForecastSurface",
-            "eumetnet-postprocessing-benchmark-training-data-forecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.training_data_forecasts:TrainingDataForecastPressure",
-            "eumetnet-postprocessing-benchmark-training-data-reforecasts-surface= climetlab_eumetnet_postprocessing_benchmark.training_data_reforecasts:TrainingDataReforecastSurface",
-            "eumetnet-postprocessing-benchmark-training-data-reforecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.training_data_reforecasts:TrainingDataReforecastPressure",
+            "eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_forecasts:TrainingDataForecastEfi",
+            "eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_forecasts:TrainingDataForecastSurface",
+            "eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_forecasts:TrainingDataForecastPressure",
+            "eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_reforecasts:TrainingDataReforecastSurface",
+            "eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_reforecasts:TrainingDataReforecastPressure",
 
             # other datasets can be included here
         ]
