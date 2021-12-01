@@ -1,8 +1,10 @@
 # The Eumetnet postprocessing benchmark dataset Climetlab plugin
 
-[![build](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml/badge.svg)](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml)
+[![PyPI version](https://badge.fury.io/py/climetlab-eumetnet-postprocessing-benchmark.svg)](https://badge.fury.io/py/climetlab-eumetnet-postprocessing-benchmark)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/climetlab-eumetnet-postprocessing-benchmark.svg)](https://pypi.org/project/climetlab-eumetnet-postprocessing-benchmark/)
+[![build](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml/badge.svg?branch=main)](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml)
 
-A plugin for [climetlab](https://github.com/ecmwf/climetlab) for the Eumetnet postprocessing benchmark dataset.
+A plugin for [climetlab](https://github.com/ecmwf/climetlab) to retrieve the Eumetnet postprocessing benchmark dataset.
 
 Ease the download of the dataset time-aligned forecasts, reforecasts (hindcasts) and observations ([ERA5 reanalysis](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)).
 
@@ -42,7 +44,7 @@ There are two main datasets:
 ## 1 - Gridded Data
 
 
-![](./docs/gridded_data.jpg)
+![](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/docs/gridded_data.jpg?raw=true)
 
  * The Eumetnet postprocessing benchmark dataset contains [ECMWF](https://www.ecmwf.int/) ensemble and deterministic forecasts over a large portion of Europe,  from 36 to 67° in latitude and from -6 to 17° of longitude,
 and covers the years 2017-2018.
@@ -159,7 +161,7 @@ The variables on pressure level can be obtained for each forecast date, both for
 
 It includes:
 
-| Parameter name                                                                 | Level(s)       |  ECMWF key | Remarks                         |
+| Parameter name                                                                 |   Level        |  ECMWF key | Remarks                         |
 |--------------------------------------------------------------------------------|----------------|------------|---------------------------------|
 | [Temperature](https://apps.ecmwf.int/codes/grib/param-db/?id=130)              |    850         |  t         |                                 |
 | [U component of wind](https://apps.ecmwf.int/codes/grib/param-db/?id=131)      |    700         |  u         |                                 |
@@ -259,9 +261,9 @@ Please open a [issue on github](https://github.com/Climdyn/climetlab-eumetnet-po
 LICENSE
 -------
 
-See the [LICENSE](./LICENSE) file for the code, and the [DATA_LICENSE](./DATA_LICENSE) for the data.
+See the [LICENSE](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/LICENSE) file for the code, and the [DATA_LICENSE](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/DATA_LICENSE) for the data.
 
 Authors
 -------
 
-See the [CONTRIBUTORS.md](./CONTRIBUTORS.md) file.
+See the [CONTRIBUTORS.md](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/CONTRIBUTORS.md) file.

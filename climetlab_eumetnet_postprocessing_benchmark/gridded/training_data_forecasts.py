@@ -13,15 +13,15 @@ from climetlab.indexing import PerUrlIndex
 
 from ..utils import convert_to_datetime
 
-__version__ = "0.1.1alpha"
+__version__ = "0.1.1-beta"
 
 _terms_of_use = """By downloading data from this dataset, you agree to the terms and conditions defined at
 
-    https://github.com/Climdyn/climetlab_eumetnet_postprocessing_benchmark/LICENSE
+    https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/LICENSE
     
 and
 
-    https://github.com/Climdyn/climetlab_eumetnet_postprocessing_benchmark/DATA_LICENSE
+    https://github.com/Climdyn/climetlab_eumetnet_postprocessing_benchmark/blob/main/DATA_LICENSE
 
 If you do not agree with such terms, do not download the data. """
 
