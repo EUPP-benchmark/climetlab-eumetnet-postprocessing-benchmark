@@ -45,6 +45,7 @@ setuptools.setup(
         "climetlab.datasets": [
             "eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_forecasts:TrainingDataForecastEfi",
             "eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_forecasts:TrainingDataForecastSurface",
+            "eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_forecasts:TrainingDataForecastSurfacePostProcessed",
             "eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_forecasts:TrainingDataForecastPressure",
             "eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_reforecasts:TrainingDataReforecastSurface",
             "eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_reforecasts:TrainingDataReforecastPressure",

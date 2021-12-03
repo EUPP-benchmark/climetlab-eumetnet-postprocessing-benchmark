@@ -70,7 +70,9 @@ class TrainingDataForecast(Dataset):
             days[year_month] = list()
         for t in fcs_time_list:
             year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
-            days[year_month].append(str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0') + str(t.day).rjust(2, '0'))
+            day = year_month + str(t.day).rjust(2, '0')
+            if day not in days[year_month]:
+                days[year_month].append(day)
 
         sources_list = list()
         for year_month in year_months:
@@ -169,12 +171,10 @@ class TrainingDataForecastSurface(TrainingDataForecast):
         "EU_forecast_{kind}_{leveltype}_params_{isodate}_0.grb"
     )
 
-    _surf_parameters = ["2t", "10u", "10v", "tcc", "tp", "100u", "100v", "cape", "stl1", "sshf", "slhf",
+    _surf_parameters = ["2t", "10u", "10v", "tcc", "100u", "100v", "cape", "stl1", "sshf", "slhf",
                         "tcw", "tcwv", "swvl1", "ssr", "str", "sd", "cp", "cin", "ssrd", "strd", "vis", "all"]
-    # _surf_pp_parameters = ["10fg6", "mn2t6", "mx2t6"]  TODO: obs not yet ready
-    _surf_pp_parameters = []
 
-    @normalize("parameter", _surf_parameters + _surf_pp_parameters)
+    @normalize("parameter", _surf_parameters)
     @normalize("date", "date(%Y%m%d)")
     def __init__(self, date, parameter, kind):
 
@@ -291,3 +291,202 @@ class TrainingDataForecastPressure(TrainingDataForecast):
                        "isodate": self.isodate[:7]
                        }
             self.source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
+
+
+class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
+    name = None  # TODO
+    home_page = "-"  # TODO
+    licence = "-"  # TODO
+    documentation = "-"  # TODO
+    citation = "-"  # TODO
+
+    dataset = None
+
+    _PATTERN = (
+        "{url}data/fcs/{leveltype}/"
+        "EU_forecast_{kind}_{leveltype}_params_{isodate}_0.grb"
+    )
+
+    _surf_pp_parameters = ["tp", "10fg6", "mn2t6", "mx2t6"]
+
+    _parameters_ufunc = {"tp": 'sum',
+                         "10fg6": "max",
+                         "mn2t6": "min",
+                         "mx2t6": "max"}
+
+    _parameters_base = {"tp": 6,
+                        "10fg6": 0,
+                        "mn2t6": 0,
+                        "mx2t6": 0}
+
+    _parameters_loffset = {"tp": '-1H',
+                           "10fg6": 0,
+                           "mn2t6": 0,
+                           "mx2t6": 0}
+
+    @normalize("parameter", _surf_pp_parameters)
+    @normalize("date", "date(%Y%m%d)")
+    def __init__(self, date, parameter, kind):
+
+        TrainingDataForecast.__init__(self)
+
+        if isinstance(date, (list, tuple)):
+            warnings.warn('Please note that you can only download one forecast date per `climmetlab.load_dataset` call.\n' +
+                          'Providing a list of dates might lead to a failure.')
+
+        if parameter == "all":
+            self.parameter = self._surf_pp_parameters
+        else:
+            self.parameter = parameter
+        self.date = date
+        self.leveltype = "surf"
+        self.kind = kind
+        self.obs_source = None
+        self.isodate = "-".join([date[:4], date[4:6], date[6:]])
+        if kind in self._ensemble_alias:
+            request = {"param": self.parameter,
+                       # "date": self.date,  ## Not needed
+                       # Parameters passed to the filename mangling
+                       "url": self._BASEURL,
+                       "kind": "ens",
+                       "leveltype": self.leveltype,
+                       "isodate": self.isodate
+                       }
+            ens_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
+            request.update({"date": self.date,
+                            # Parameters passed to the filename mangling
+                            "kind": "ctr",
+                            "isodate": self.isodate[:7]
+                            })
+            ctr_source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
+            self.source = cml.load_source("multi", ens_source, ctr_source)
+        else:  # default to highres forecasts
+            request = {"param": self.parameter,
+                       "date": self.date,
+                       # Parameters passed to the filename mangling
+                       "url": self._BASEURL,
+                       "kind": "hr",
+                       "leveltype": self.leveltype,
+                       "isodate": self.isodate[:7]
+                       }
+            self.source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
+
+    def to_xarray(self, **kwargs):
+        fcs = self.source.to_xarray(**kwargs)
+        variables = list(fcs.keys())
+        ds_list = list()
+        for var in variables:
+            if var == 'tp':  # need to skip the first time at 00:00:00 for total precip
+                da = fcs[var][:, :, 1:]
+            else:
+                da = fcs[var]
+            if var == 'p10fg6':
+                var = var[1:]
+
+            if self._parameters_ufunc[var] == "sum":
+                ds_resampled = da.resample({'step': '6H'}, label='right', closed='right',
+                                           base=self._parameters_base[var],
+                                           loffset=self._parameters_loffset[var]).sum()
+            elif self._parameters_ufunc[var] == "min":
+                ds_resampled = da.resample({'step': '6H'}, label='right', closed='right',
+                                           base=self._parameters_base[var],
+                                           loffset=self._parameters_loffset[var]).min()
+            elif self._parameters_ufunc[var] == "max":
+                ds_resampled = da.resample({'step': '6H'}, label='right', closed='right',
+                                           base=self._parameters_base[var],
+                                           loffset=self._parameters_loffset[var]).max()
+            else:  # for debug, do nothing
+                ds_resampled = da
+            ds_list.append(ds_resampled.to_dataset())
+
+        ds = xr.merge(ds_list).assign_attrs(fcs.attrs)
+        try:
+            new_ds = ds.rename_vars({'tp': 'tp6'})
+            ds = new_ds
+        except:
+            pass
+
+        return ds
+
+    # WARNING: Function not yet working as it should !!!!!!
+    def get_observations_as_xarray(self, fcs_kwargs=None, **obs_kwargs):
+        if fcs_kwargs is None:
+            fcs_kwargs = dict()
+        fcs = self.source.to_xarray(**fcs_kwargs)
+        valid_time = fcs.valid_time.to_pandas()
+        fcs_time_list = list(map(convert_to_datetime, valid_time.iloc[0, :]))
+        year_months = list()
+        for t in fcs_time_list:
+            year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
+            if year_month not in year_months:
+                year_months.append(year_month)
+        days = dict()
+        for year_month in year_months:
+            days[year_month] = list()
+        for t in fcs_time_list:
+            year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
+            day = year_month + str(t.day).rjust(2, '0')
+            if day not in days[year_month]:
+                days[year_month].append(day)
+
+        parameters = list()
+        for param in self.parameter:
+            if param == 'tp':
+                parameters.append(param)
+            else:
+                parameters.append(param[:-1])
+        sources_list = list()
+        for year_month in year_months:
+            request = {"param": parameters,
+                       "date": days[year_month],
+                       # Parameters passed to the filename mangling
+                       "url": self._BASEURL,
+                       "leveltype": self.leveltype,
+                       "isodate": "-".join([year_month[:4], year_month[4:]])
+                       }
+            if self.level is not None:
+                request.update({'levelist': self.level})
+            source = cml.load_source("indexed-urls", PerUrlIndex(self._ANALYSIS_PATTERN), request)
+            sources_list.append(source)
+        self.obs_source = cml.load_source("multi", *sources_list)
+        obs = self.obs_source.to_xarray(**obs_kwargs)
+
+        # TODO: transforms obs to a file compatible with the forecasts first: 1 time and then steps (and take one day before to get the first 6 h)
+
+        # reshape obs to fit fcs
+        variables = list(obs.keys())
+        ds_list = list()
+        for var in variables:
+            da = obs[var][:, :, 1:]
+            if var == 'p10fg6':
+                var = var[1:]
+            elif var in ['mn2t', 'mx2t', '10fg']:
+                var += '6'
+
+            if self._parameters_ufunc[var] == "sum":
+                ds_resampled = da.resample({'step': '6H'}, label='right', closed='right',
+                                           base=6,
+                                           loffset="-1H").sum()
+            elif self._parameters_ufunc[var] == "min":
+                ds_resampled = da.resample({'step': '6H'}, label='right', closed='right',
+                                           base=6,
+                                           loffset="-1H").min()
+            elif self._parameters_ufunc[var] == "max":
+                ds_resampled = da.resample({'step': '6H'}, label='right', closed='right',
+                                           base=6,
+                                           loffset="-1H").max()
+            else:  # for debug, do nothing
+                ds_resampled = da
+            ds_list.append(ds_resampled.to_dataset())
+
+        obs_fcs = xr.merge(ds_list).assign_attrs(obs.attrs)
+
+        # reshape obs to fit fcs TODO: still messy, should be reworked
+        obs_dict = obs_fcs.to_dict()
+        _, obs_fcs = xr.align(fcs, obs_fcs, join='left', exclude=['number'])
+        new_obs_dict = obs_fcs.to_dict()
+        for var in new_obs_dict['data_vars']:
+            new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).swapaxes(1, 2))
+        obs_fcs = obs_fcs.from_dict(new_obs_dict)
+
+        return obs_fcs

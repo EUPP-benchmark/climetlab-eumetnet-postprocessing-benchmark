@@ -41,7 +41,9 @@ class TrainingDataReforecast(TrainingDataForecast):
         for fcs_time in fcs_time_list:
             for t in fcs_time:
                 year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
-                days[year_month].append(str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0') + str(t.day).rjust(2, '0'))
+                day = year_month + str(t.day).rjust(2, '0')
+                if day not in days[year_month]:
+                    days[year_month].append(day)
 
         sources_list = list()
         for year_month in year_months:
