@@ -29,7 +29,7 @@ import climetlab as cml
 ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface', "2017-12-02", "2t", "highres")
 fcs = ds.to_xarray()
 ```
-which download the deterministic (high-resolution) forecasts for the 2 metre temperature. 
+which download the deterministic (high-resolution) forecasts for the 2 metres temperature. 
 Once obtained, the corresponding observations can be retrieved in the [xarray](http://xarray.pydata.org/en/stable/index.html) format by using the `get_observations_as_xarray` method:
 ``` python
 obs = ds.get_observations_as_xarray()
@@ -83,7 +83,7 @@ It includes:
 
 The EFI are available for the model step range (in hours) 0-24, 24-48, 48-72, 72-96, 96-120, 120-144 and 144-168.
 
-**Usage:** The EFI variables can retrieved by calling 
+**Usage:** The EFI variables can be retrieved by calling 
 
 ``` python
 ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-efi', date, parameter)
@@ -130,14 +130,14 @@ It includes:
 | [Surface thermal radiation downwards](https://apps.ecmwf.int/codes/grib/param-db/?id=175)      |  strd      |                                 |
 | [Visibility](https://apps.ecmwf.int/codes/grib/param-db/?id=3020)                              |  vis       | Observations not available      |
 
-The forecast are available for the model steps (in hours) 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+The forecasts are available for the model steps (in hours) 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
 93, 96, 99, 102, 105, 108, 111, 114, 117, 120, 123, 126, 129, 132, 135, 138, 141, 144, 150, 156, 162, 168, 174, 180, 186, 192, 198,
 204, 210, 216, 222, 228, 234 and 240.
 All the steps are automatically retrieved.
 
-**Usage:** The surface variables forecasts can retrieved by calling
+**Usage:** The surface variables forecasts can be retrieved by calling
 
 ``` python
 ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface', date, parameter, kind)
@@ -170,9 +170,9 @@ It includes:
 | [Specific humidity](https://apps.ecmwf.int/codes/grib/param-db/?id=133)        |    700         |  q         |                                 |
 | [Relative humidity](https://apps.ecmwf.int/codes/grib/param-db/?id=157)        |    850         |  r         |                                 |
 
-The forecast are available for the same model steps as the surface variables above.
+The forecasts are available for the same model steps as the surface variables above.
 
-**Usage:** The pressure level variables forecasts can retrieved by calling
+**Usage:** The pressure level variables forecasts can be retrieved by calling
 
 ``` python
 ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-pressure', date, parameter, level, kind)
@@ -194,7 +194,7 @@ ds.to_xarray()
 ### 1.4 - Postprocessed surface variable forecasts
 
 Postprocessed surface variables can be obtained for each forecast date, both for the ensemble (51 members) and deterministic runs.
-A postprocessed variable is either accumulated or filtered.
+A postprocessed variable is either accumulated, averaged or filtered.
 
 It includes:
 
@@ -206,14 +206,14 @@ It includes:
 | [10 metre wind gust](https://apps.ecmwf.int/codes/grib/param-db/?id=123)                       |  10fg6     |                                 |
 
 All these variables are accumulated or filtered over the last 6 hours preceding a given forecast timestamp.
-Therefore the forecast are available for the model steps (in hours) 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102, 108,
+Therefore, the forecasts are available for the model steps (in hours) 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102, 108,
 114, 120, 126, 132, 138, 144, 150, 156, 162, 168, 174, 180, 186, 192, 198, 204, 210, 216, 222, 228, 234 and 240.
 All the steps are automatically retrieved.
 
-**Usage:** The surface variables forecasts can retrieved by calling
+**Usage:** The surface variables forecasts can be retrieved by calling
 
 ``` python
-ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-postprocessd', date, parameter, kind)
+ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-postprocessed', date, parameter, kind)
 ds.to_xarray()
 ```
 
@@ -221,7 +221,7 @@ where the `date` argument is a string with a single date, and the `parameter` ar
 ECMWF keys described above. The `kind` argument allows to select
 the deterministic or ensemble forecasts, by setting it to `'highres'` or `'ensemble'`.
 
-> **Remark:** For technical reason, the total precipitation fields cannot be retrieved along the other and must be used alone.
+> **Remark:** For technical reason, the total precipitation fields cannot be retrieved along the others and must be downloaded alone.
 > E.g. a request with `parameter=['tp', 'mx2t6']` will fail while one with `parameter='tp'` will succeed.
 
 **Example:**
@@ -236,13 +236,13 @@ ds.to_xarray()
 The surface variables for the ensemble reforecasts (11 members) can be obtained for each reforecast date.
 All the variables described at the point **1.2** above are available.
 
-The forecast are available for the model steps (in hours) 0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102, 108,
+The forecasts are available for the model steps (in hours) 0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102, 108,
 114, 120, 126, 132, 138, 144, 150, 156, 162, 168, 174, 180, 186, 192, 198, 204, 210, 216, 222, 228, 234 and 240.
 All the steps are automatically retrieved.
 
 > **Remark:** The ECMWF reforecasts are only available Mondays and Thursdays. Providing any other date provided will fail.
 
-**Usage:** The surface variables reforecasts can retrieved by calling
+**Usage:** The surface variables reforecasts can be retrieved by calling
 
 ``` python
 ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface', date, parameter)
@@ -268,7 +268,7 @@ The reforecast are available for the same model steps as the surface variables a
 
 > **Remark:** The ECMWF reforecasts are only available Mondays and Thursdays. Providing any other date provided will fail.
 
-**Usage:** The pressure level variables reforecasts can retrieved by calling
+**Usage:** The pressure level variables reforecasts can be retrieved by calling
 
 ``` python
 ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-pressure', date, parameter, level)
