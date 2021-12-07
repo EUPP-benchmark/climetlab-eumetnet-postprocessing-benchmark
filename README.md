@@ -191,7 +191,47 @@ ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-f
 ds.to_xarray()
 ```
 
-### 1.4 - Surface variable reforecasts
+### 1.4 - Postprocessed surface variable forecasts
+
+Postprocessed surface variables can be obtained for each forecast date, both for the ensemble (51 members) and deterministic runs.
+A postprocessed variable is either accumulated or filtered.
+
+It includes:
+
+| Parameter name                                                                                 |  ECMWF key | Remarks                         |
+|------------------------------------------------------------------------------------------------|------------|---------------------------------|
+| [Total precipitation](https://apps.ecmwf.int/codes/grib/param-db/?id=228)        	             |  tp        |                                 |
+| [Maximum temperature at 2 metres](https://apps.ecmwf.int/codes/grib/param-db/?id=121)	         |  mx2t6     |                                 |
+| [Minimum temperature at 2 metres](https://apps.ecmwf.int/codes/grib/param-db/?id=122)	         |  mn2t6     |                                 |
+| [10 metre wind gust](https://apps.ecmwf.int/codes/grib/param-db/?id=123)                       |  10fg6     |                                 |
+
+All these variables are accumulated or filtered over the last 6 hours preceding a given forecast timestamp.
+Therefore the forecast are available for the model steps (in hours) 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102, 108,
+114, 120, 126, 132, 138, 144, 150, 156, 162, 168, 174, 180, 186, 192, 198, 204, 210, 216, 222, 228, 234 and 240.
+All the steps are automatically retrieved.
+
+**Usage:** The surface variables forecasts can retrieved by calling
+
+``` python
+ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-postprocessd', date, parameter, kind)
+ds.to_xarray()
+```
+
+where the `date` argument is a string with a single date, and the `parameter` argument is a string or a list of string with the
+ECMWF keys described above. The `kind` argument allows to select
+the deterministic or ensemble forecasts, by setting it to `'highres'` or `'ensemble'`.
+
+> **Remark:** For technical reason, the total precipitation fields cannot be retrieved along the other and must be used alone.
+> E.g. a request with `parameter=['tp', 'mx2t6']` will fail while one with `parameter='tp'` will succeed.
+
+**Example:**
+
+``` python
+ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-postprocessed', "2017-12-02", "mx2t6", "highres")
+ds.to_xarray()
+```
+
+### 1.5 - Surface variable reforecasts
 
 The surface variables for the ensemble reforecasts (11 members) can be obtained for each reforecast date.
 All the variables described at the point **1.2** above are available.
@@ -219,7 +259,7 @@ ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-r
 ds.to_xarray()
 ```
 
-### 1.5 - Pressure level variable reforecasts
+### 1.6 - Pressure level variable reforecasts
 
 The variables on pressure level for the ensemble reforecasts (11 members) can be obtained for each reforecast date
 All the variables described at the point **1.3** above are available.
@@ -245,6 +285,11 @@ The `level` argument is the pressure level, as a string or an integer.
 ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-pressure', "2017-12-28", "z", 500)
 ds.to_xarray()
 ```
+
+### 1.7 - Postprocessed surface variable reforecasts
+
+Not yet provided, coming soon.
+
 ## 2 - Stations Data
 
 Not yet provided.
