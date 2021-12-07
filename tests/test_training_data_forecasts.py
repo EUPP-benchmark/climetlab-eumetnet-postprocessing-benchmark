@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import climetlab as cml
+import numpy as np
 # TODO: test values
 
 
@@ -19,9 +20,9 @@ def test_fcs_surf():
                           kind="highres")
     xds = ds.to_xarray()
     obs = ds.get_observations_as_xarray()
-    print(xds)
-    print(obs)
     assert xds.t2m.shape == obs.t2m.shape
+    assert np.all(xds.time == obs.time)
+    assert np.all(xds.valid_time == obs.valid_time)
 
 
 def test_fcs_press():
@@ -32,12 +33,25 @@ def test_fcs_press():
                           kind="ensemble")
     xds = ds.to_xarray()
     obs = ds.get_observations_as_xarray()
-    print(xds)
-    print(obs)
     assert xds.z.shape[1:] == obs.z.shape[1:]
+    assert np.all(xds.time == obs.time)
+    assert np.all(xds.valid_time == obs.valid_time)
+
+
+def test_fcs_pp():
+    ds = cml.load_dataset("eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-postprocessed",
+                          date="2017-12-02",
+                          parameter=["mx2t6"],
+                          kind="hr")
+    xds = ds.to_xarray()
+    obs = ds.get_observations_as_xarray()
+    assert xds.mx2t6.shape[1:] == obs.mx2t6.shape[1:]
+    assert np.all(xds.time == obs.time)
+    assert np.all(xds.valid_time == obs.valid_time)
 
 
 if __name__ == "__main__":
     test_efi()
     test_fcs_surf()
     test_fcs_press()
+    test_fcs_pp()
