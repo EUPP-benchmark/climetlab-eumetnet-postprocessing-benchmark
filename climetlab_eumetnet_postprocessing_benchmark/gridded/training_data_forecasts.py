@@ -23,7 +23,7 @@ _terms_of_use = """By downloading data from this dataset, you agree to the terms
     
 and
 
-    https://github.com/Climdyn/climetlab_eumetnet_postprocessing_benchmark/blob/main/DATA_LICENSE
+    https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/DATA_LICENSE
 
 If you do not agree with such terms, do not download the data. """
 
