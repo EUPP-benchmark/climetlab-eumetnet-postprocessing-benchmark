@@ -60,8 +60,8 @@ class TrainingDataForecast(Dataset):
         if fcs_kwargs is None:
             fcs_kwargs = dict()
         fcs = self.source.to_xarray(**fcs_kwargs)
-        valid_time = fcs.valid_time.to_pandas()
-        fcs_time_list = list(map(convert_to_datetime, valid_time.iloc[0, :]))
+        fcs_valid_time = fcs.valid_time.to_pandas()
+        fcs_time_list = list(map(convert_to_datetime, fcs_valid_time.iloc[0, :]))
         days = dict()
         for t in fcs_time_list:
             year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
@@ -86,8 +86,8 @@ class TrainingDataForecast(Dataset):
             sources_list.append(source)
         self.obs_source = cml.load_source("multi", *sources_list)
         obs = self.obs_source.to_xarray(**obs_kwargs)
-        valid_time = obs.valid_time.to_pandas()
-        obs_time_list = list(map(convert_to_datetime, valid_time.iloc[:, 0]))
+        obs_valid_time = obs.valid_time.to_pandas()
+        obs_time_list = list(map(convert_to_datetime, obs_valid_time.iloc[:, 0]))
         idx = list()
         for i, t in enumerate(obs_time_list):
             if t in fcs_time_list:
@@ -382,8 +382,8 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         variables = list(fcs.keys())
         ds_list = list()
         for var in variables:
-            if var == 'tp':  # need to skip the first time at 00:00:00 for total precip
-                da = fcs[var][:, :, 1:]
+            if var == 'tp':  # need to do a finite difference of tp to get the accumulation per step
+                da = fcs[var].diff('step')
             else:
                 da = fcs[var]
             if var == 'p10fg6':
@@ -415,88 +415,89 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         return ds.assign_coords(valid_time=ds.time + ds.step)
 
     def get_observations_as_xarray(self, fcs_kwargs=None, **obs_kwargs):
-        if 'tp' not in self.parameter:
-            if fcs_kwargs is None:
-                fcs_kwargs = dict()
-            fcs = self.to_xarray(**fcs_kwargs)
-            valid_time = fcs.valid_time.to_pandas()
-            fcs_time_list = list(map(convert_to_datetime, valid_time.iloc[0, :]))
-            initial_time = fcs_time_list[0]
-            final_time = fcs_time_list[-1]
-            previous_time = initial_time - datetime.timedelta(days=1)
-            tlist = [previous_time] + fcs_time_list
-            days = dict()
-            for t in tlist:
-                year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
-                if year_month not in days:
-                    days[year_month] = list()
-                day = year_month + str(t.day).rjust(2, '0')
-                if day not in days[year_month]:
-                    days[year_month].append(day)
 
-            parameters = list()
-            for param in self.parameter:
+        if fcs_kwargs is None:
+            fcs_kwargs = dict()
+        fcs = self.to_xarray(**fcs_kwargs)
+        fcs_valid_time = fcs.valid_time.to_pandas()
+        fcs_time_list = list(map(convert_to_datetime, fcs_valid_time.iloc[0, :]))
+        initial_time = fcs_time_list[0]
+        final_time = fcs_time_list[-1]
+        previous_time = initial_time - datetime.timedelta(days=1)
+        tlist = [previous_time] + fcs_time_list
+        days = dict()
+        for t in tlist:
+            year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
+            if year_month not in days:
+                days[year_month] = list()
+            day = year_month + str(t.day).rjust(2, '0')
+            if day not in days[year_month]:
+                days[year_month].append(day)
+
+        parameters = list()
+        for param in self.parameter:
+            if param != 'tp':
                 parameters.append(param[:-1])
-            sources_list = list()
-            for year_month in days:
-                request = {"param": parameters,
-                           "date": days[year_month],
-                           # Parameters passed to the filename mangling
-                           "url": self._BASEURL,
-                           "leveltype": self.leveltype,
-                           "isodate": "-".join([year_month[:4], year_month[4:]])
-                           }
-                if self.level is not None:
-                    request.update({'levelist': self.level})
-                source = cml.load_source("indexed-urls", PerUrlIndex(self._ANALYSIS_PATTERN), request)
-                sources_list.append(source)
-            self.obs_source = cml.load_source("multi", *sources_list)
-            obs = self.obs_source.to_xarray(**obs_kwargs)
-            new_obs = obs.stack(datetime=("time", "step")).drop_vars("datetime").swap_dims({"datetime": "time"}).rename({"valid_time": "time"})
-            time = new_obs.time.to_pandas()
-            valid_time = (final_time >= time) & (time >= initial_time - datetime.timedelta(hours=5))
-            obs_fcs = new_obs.isel(time=valid_time)
+            else:
+                parameters.append(param)
+        sources_list = list()
+        for year_month in days:
+            request = {"param": parameters,
+                       "date": days[year_month],
+                       # Parameters passed to the filename mangling
+                       "url": self._BASEURL,
+                       "leveltype": self.leveltype,
+                       "isodate": "-".join([year_month[:4], year_month[4:]])
+                       }
+            if self.level is not None:
+                request.update({'levelist': self.level})
+            source = cml.load_source("indexed-urls", PerUrlIndex(self._ANALYSIS_PATTERN), request)
+            sources_list.append(source)
+        self.obs_source = cml.load_source("multi", *sources_list)
+        obs = self.obs_source.to_xarray(**obs_kwargs)
+        new_obs = obs.stack(datetime=("time", "step")).drop_vars("datetime").swap_dims({"datetime": "time"}).rename({"valid_time": "time"})
+        time = new_obs.time.to_pandas()
+        obs_valid_time = (final_time >= time) & (time >= initial_time - datetime.timedelta(hours=5))
+        obs_fcs = new_obs.isel(time=obs_valid_time)
 
-            # filter obs to fit fcs
-            variables = list(obs_fcs.keys())
-            ds_list = list()
-            for var in variables:
-                da = obs_fcs[var].set_index(time="time")
-                if var == 'p10fg6':
-                    var = var[1:]
-                elif var in ['mn2t', 'mx2t', '10fg']:
-                    var += '6'
+        # filter obs to fit fcs
+        variables = list(obs_fcs.keys())
+        ds_list = list()
+        for var in variables:
+            da = obs_fcs[var].set_index(time="time")
+            if var == 'fg10':
+                var = '10fg6'
+            elif var in ['mn2t', 'mx2t']:
+                var += '6'
 
-                if self._parameters_ufunc[var] == "sum":
-                    ds_resampled = da.resample({'time': '6H'}, label='right', closed='right').sum()
-                elif self._parameters_ufunc[var] == "min":
-                    ds_resampled = da.resample({'time': '6H'}, label='right', closed='right').min()
-                elif self._parameters_ufunc[var] == "max":
-                    ds_resampled = da.resample({'time': '6H'}, label='right', closed='right').max()
-                else:  # for debug, do nothing
-                    ds_resampled = da
-                ds_list.append(ds_resampled.to_dataset())
+            if self._parameters_ufunc[var] == "sum":
+                ds_resampled = da.resample({'time': '6H'}, label='right', closed='right').sum()
+            elif self._parameters_ufunc[var] == "min":
+                ds_resampled = da.resample({'time': '6H'}, label='right', closed='right').min()
+            elif self._parameters_ufunc[var] == "max":
+                ds_resampled = da.resample({'time': '6H'}, label='right', closed='right').max()
+            else:  # for debug, do nothing
+                ds_resampled = da
+            ds_list.append(ds_resampled.to_dataset())
 
-            obs_fcs = xr.merge(ds_list).assign_attrs(obs.attrs)
+        obs_fcs = xr.merge(ds_list).assign_attrs(obs.attrs)
 
-            # reshape obs to fit fcs TODO: still messy, should be reworked
-            shape = list(fcs[list(fcs.keys())[0]].shape)
-            shape[0] = 1
-            obs_dict = obs_fcs.to_dict()
-            _, obs_fcs = xr.align(fcs, obs, join='left', exclude=['number'])
-            new_obs_dict = obs_fcs.to_dict()
-            new_obs_dict['coords']['valid_time']['data'] = [fcs_time_list]
-            for var in new_obs_dict['data_vars']:
-                new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).reshape(shape))
-            obs_fcs = obs_fcs.from_dict(new_obs_dict)
-            var_name = dict()
-            for var in obs_fcs.keys():
-                if var == 'p10fg6':
-                    var_name[var] = var[1:]
-                elif var in ['mn2t', 'mx2t', '10fg']:
-                    var_name[var] = var + '6'
-            obs_fcs = obs_fcs.rename_vars(var_name)
-        else:
-            pass
+        # reshape obs to fit fcs TODO: still messy, should be reworked
+        shape = list(fcs[list(fcs.keys())[0]].shape)
+        shape[0] = 1
+        obs_dict = obs_fcs.to_dict()
+        _, obs_fcs = xr.align(fcs, obs, join='left', exclude=['number'])
+        new_obs_dict = obs_fcs.to_dict()
+        new_obs_dict['coords']['valid_time']['data'] = [fcs_time_list]
+        for var in new_obs_dict['data_vars']:
+            new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).reshape(shape))
+        obs_fcs = obs_fcs.from_dict(new_obs_dict)
+        var_name = dict()
+        for var in obs_fcs.keys():
+            if var == 'fg10':
+                var_name[var] = "p10fg6"
+            elif var in ['mn2t', 'mx2t', 'tp']:
+                var_name[var] = var + '6'
+        obs_fcs = obs_fcs.rename_vars(var_name)
 
         return obs_fcs
