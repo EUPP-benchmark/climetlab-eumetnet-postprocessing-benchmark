@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import datetime
+
 import numpy as np
 import xarray as xr
 
 import climetlab as cml
 from climetlab.indexing import PerUrlIndex
 
-from .training_data_forecasts import TrainingDataForecast, TrainingDataForecastSurface, TrainingDataForecastPressure
+from .training_data_forecasts import TrainingDataForecast, TrainingDataForecastSurface, TrainingDataForecastPressure,\
+    TrainingDataForecastSurfacePostProcessed
 from ..utils import convert_to_datetime
 
 __version__ = "0.1.1-beta"
@@ -21,32 +24,26 @@ class TrainingDataReforecast(TrainingDataForecast):
         """Do almost nothing. To be overridden by the inherithing class."""
         TrainingDataForecast.__init__(self, *args, **kwargs)
 
-    def get_observations_as_xarray(self, fcs_kwargs=None, **obs_kwargs):
-        if fcs_kwargs is None:
-            fcs_kwargs = dict()
-        fcs = self.source.to_xarray(**fcs_kwargs)
-        valid_time = fcs.valid_time.to_pandas()
-        fcs_time_list = list()
-        for i in range(valid_time.shape[0]):
-            fcs_time_list.append(list(map(convert_to_datetime, valid_time.iloc[i, :])))
-        year_months = list()
-        for fcs_time in fcs_time_list:
-            for t in fcs_time:
-                year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
-                if year_month not in year_months:
-                    year_months.append(year_month)
+    def get_observations_as_xarray(self, rfcs_kwargs=None, **obs_kwargs):
+        if rfcs_kwargs is None:
+            rfcs_kwargs = dict()
+        rfcs = self.source.to_xarray(**rfcs_kwargs)
+        rfcs_valid_time = rfcs.valid_time.to_pandas()
+        rfcs_time_list = list()
+        for i in range(rfcs_valid_time.shape[0]):
+            rfcs_time_list.append(list(map(convert_to_datetime, rfcs_valid_time.iloc[i, :])))
         days = dict()
-        for year_month in year_months:
-            days[year_month] = list()
-        for fcs_time in fcs_time_list:
-            for t in fcs_time:
+        for rfcs_time in rfcs_time_list:
+            for t in rfcs_time:
                 year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
+                if year_month not in days:
+                    days[year_month] = list()
                 day = year_month + str(t.day).rjust(2, '0')
                 if day not in days[year_month]:
                     days[year_month].append(day)
 
         sources_list = list()
-        for year_month in year_months:
+        for year_month in days:
             request = {"param": self.parameter,
                        "date": days[year_month],
                        # Parameters passed to the filename mangling
@@ -60,29 +57,29 @@ class TrainingDataReforecast(TrainingDataForecast):
             sources_list.append(source)
         self.obs_source = cml.load_source("multi", *sources_list)
         obs = self.obs_source.to_xarray(**obs_kwargs)
-        valid_time = obs.valid_time.to_pandas()
-        obs_time_list = list(map(convert_to_datetime, valid_time.iloc[:, 0]))
+        obs_time = obs.valid_time.to_pandas()
+        obs_time_list = list(map(convert_to_datetime, obs_time.iloc[:, 0]))
         idx = list()
         for i, t in enumerate(obs_time_list):
-            for fcs_time in fcs_time_list:
-                if t in fcs_time:
+            for rfcs_time in rfcs_time_list:
+                if t in rfcs_time:
                     idx.append(i)
-        obs_fcs = obs.isel(time=idx)
+        obs_rfcs = obs.isel(time=idx)
 
-        # reshape obs to fit fcs TODO: still messy, should be reworked
-        for var in fcs:
-            shape = list(fcs[var].shape)
+        # reshape obs to fit rfcs TODO: still messy, should be reworked
+        for var in rfcs:
+            shape = list(rfcs[var].shape)
             break
         shape[0] = 1
-        obs_dict = obs_fcs.to_dict()
-        _, obs_fcs = xr.align(fcs, obs_fcs, join='left', exclude=['number'])
-        new_obs_dict = obs_fcs.to_dict()
-        new_obs_dict['coords']['valid_time']['data'] = fcs_time_list
+        obs_dict = obs_rfcs.to_dict()
+        _, obs_rfcs = xr.align(rfcs, obs_rfcs, join='left', exclude=['number'])
+        new_obs_dict = obs_rfcs.to_dict()
+        new_obs_dict['coords']['valid_time']['data'] = rfcs_time_list
         for var in new_obs_dict['data_vars']:
             new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).reshape(shape))
-        obs_fcs = obs_fcs.from_dict(new_obs_dict)
+        obs_rfcs = obs_rfcs.from_dict(new_obs_dict)
 
-        return obs_fcs
+        return obs_rfcs
 
 
 class TrainingDataReforecastSurface(TrainingDataReforecast, TrainingDataForecastSurface):
@@ -121,3 +118,122 @@ class TrainingDataReforecastPressure(TrainingDataReforecast, TrainingDataForecas
     def __init__(self, date, parameter, level):
 
         TrainingDataForecastPressure.__init__(self, date, parameter, level, "ensemble")
+
+
+class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, TrainingDataForecastSurfacePostProcessed):
+    name = None  # TODO
+    home_page = "-"  # TODO
+    licence = "-"  # TODO
+    documentation = "-"  # TODO
+    citation = "-"  # TODO
+
+    dataset = None
+
+    _PATTERN = (
+        "{url}data/rfcs/{leveltype}/"
+        "EU_reforecast_{kind}_{leveltype}_params_{isodate}_0.grb"
+    )
+
+    def __init__(self, date, parameter):
+
+        TrainingDataForecastSurfacePostProcessed.__init__(self, date, parameter, "ensemble")
+
+    # Warning : function not yet ready !!!!
+    def get_observations_as_xarray(self, rfcs_kwargs=None, **obs_kwargs):
+
+        if rfcs_kwargs is None:
+            rfcs_kwargs = dict()
+        rfcs = self.to_xarray(**rfcs_kwargs)
+        rfcs_valid_time = rfcs.valid_time.to_pandas()
+        rfcs_time_list = list()
+        initial_time_list = list()
+        previous_time_list = list()
+        final_time_list = list()
+        for i in range(rfcs_valid_time.shape[0]):
+            rfcs_time_list.append(list(map(convert_to_datetime, rfcs_valid_time.iloc[i, :])))
+            initial_time_list.append(rfcs_time_list[-1][0])
+            final_time_list.append(rfcs_time_list[-1][-1])
+            previous_time_list.append(initial_time_list[-1] - datetime.timedelta(days=1))
+        days = dict()
+        for i, rfcs_time in enumerate(rfcs_time_list):
+            tlist = [previous_time_list[i]] + rfcs_time
+            for t in tlist:
+                year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
+                if year_month not in days:
+                    days[year_month] = list()
+                day = year_month + str(t.day).rjust(2, '0')
+                if day not in days[year_month]:
+                    days[year_month].append(day)
+
+        parameters = list()
+        for param in self.parameter:
+            if param != 'tp':
+                parameters.append(param[:-1])
+            else:
+                parameters.append(param)
+        sources_list = list()
+        for year_month in days:
+            request = {"param": parameters,
+                       "date": days[year_month],
+                       # Parameters passed to the filename mangling
+                       "url": self._BASEURL,
+                       "leveltype": self.leveltype,
+                       "isodate": "-".join([year_month[:4], year_month[4:]])
+                       }
+            if self.level is not None:
+                request.update({'levelist': self.level})
+            source = cml.load_source("indexed-urls", PerUrlIndex(self._ANALYSIS_PATTERN), request)
+            sources_list.append(source)
+        self.obs_source = cml.load_source("multi", *sources_list)
+        obs = self.obs_source.to_xarray(**obs_kwargs)
+        new_obs = obs.stack(datetime=("time", "step")).drop_vars("datetime").swap_dims({"datetime": "time"}).rename({"valid_time": "time"})
+        obs_time = new_obs.time.to_pandas()
+        obs_time_list = list(map(convert_to_datetime, obs_time.iloc[:, 0]))
+        idx = list()
+        for i, t in enumerate(obs_time_list):
+            for final_time, initial_time in zip(final_time_list, initial_time_list):
+                if final_time >= t >= initial_time - datetime.timedelta(hours=5):
+                    idx.append(i)
+        obs_rfcs = new_obs.isel(time=idx)
+
+        # filter obs to fit fcs
+        variables = list(obs_rfcs.keys())
+        ds_list = list()
+        for var in variables:
+            da = obs_rfcs[var].set_index(time="time")
+            if var == 'fg10':
+                var = '10fg6'
+            elif var in ['mn2t', 'mx2t']:
+                var += '6'
+
+            if self._parameters_ufunc[var] == "sum":
+                ds_resampled = da.resample({'time': '6H'}, label='right', closed='right').sum()
+            elif self._parameters_ufunc[var] == "min":
+                ds_resampled = da.resample({'time': '6H'}, label='right', closed='right').min()
+            elif self._parameters_ufunc[var] == "max":
+                ds_resampled = da.resample({'time': '6H'}, label='right', closed='right').max()
+            else:  # for debug, do nothing
+                ds_resampled = da
+            ds_list.append(ds_resampled.to_dataset())
+
+        obs_rfcs = xr.merge(ds_list).assign_attrs(obs.attrs)
+
+        # reshape obs to fit fcs TODO: still messy, should be reworked
+        shape = list(rfcs[list(rfcs.keys())[0]].shape)
+        shape[0] = 1
+        obs_dict = obs_rfcs.to_dict()
+        _, obs_rfcs = xr.align(rfcs, obs, join='left', exclude=['number'])
+        new_obs_dict = obs_rfcs.to_dict()
+        new_obs_dict['coords']['valid_time']['data'] = [rfcs_time_list]
+        for var in new_obs_dict['data_vars']:
+            new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).reshape(shape))
+        obs_rfcs = obs_rfcs.from_dict(new_obs_dict)
+        var_name = dict()
+        for var in obs_rfcs.keys():
+            if var == 'fg10':
+                var_name[var] = "p10fg6"
+            elif var in ['mn2t', 'mx2t', 'tp']:
+                var_name[var] = var + '6'
+        obs_rfcs = obs_rfcs.rename_vars(var_name)
+
+        return obs_rfcs

@@ -456,8 +456,8 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         self.obs_source = cml.load_source("multi", *sources_list)
         obs = self.obs_source.to_xarray(**obs_kwargs)
         new_obs = obs.stack(datetime=("time", "step")).drop_vars("datetime").swap_dims({"datetime": "time"}).rename({"valid_time": "time"})
-        time = new_obs.time.to_pandas()
-        obs_valid_time = (final_time >= time) & (time >= initial_time - datetime.timedelta(hours=5))
+        obs_time = new_obs.time.to_pandas()
+        obs_valid_time = (final_time >= obs_time) & (obs_time >= initial_time - datetime.timedelta(hours=5))
         obs_fcs = new_obs.isel(time=obs_valid_time)
 
         # filter obs to fit fcs
