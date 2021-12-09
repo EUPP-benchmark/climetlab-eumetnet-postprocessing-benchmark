@@ -40,7 +40,7 @@ def test_fcs_press():
 
 def test_fcs_pp():
     ds = cml.load_dataset("eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-postprocessed",
-                          date="2017-12-02",
+                          date="2017-12-28",
                           parameter=["mx2t6"],
                           kind="hr")
     xds = ds.to_xarray()

@@ -188,7 +188,7 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
         obs = self.obs_source.to_xarray(**obs_kwargs)
         new_obs = obs.stack(datetime=("time", "step")).drop_vars("datetime").swap_dims({"datetime": "time"}).rename({"valid_time": "time"})
         obs_time = new_obs.time.to_pandas()
-        obs_time_list = list(map(convert_to_datetime, obs_time.iloc[:, 0]))
+        obs_time_list = list(map(convert_to_datetime, obs_time))
         idx = list()
         for i, t in enumerate(obs_time_list):
             for final_time, initial_time in zip(final_time_list, initial_time_list):
@@ -217,6 +217,14 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
             ds_list.append(ds_resampled.to_dataset())
 
         obs_rfcs = xr.merge(ds_list).assign_attrs(obs.attrs)
+        new_obs_time = obs_rfcs.time.to_pandas()
+        new_obs_time_list = list(map(convert_to_datetime, new_obs_time))
+        idx = list()
+        for i, t in enumerate(new_obs_time_list):
+            for rfcs_time in rfcs_time_list:
+                if t in rfcs_time:
+                    idx.append(i)
+        obs_rfcs = obs_rfcs.isel(time=idx)
 
         # reshape obs to fit fcs TODO: still messy, should be reworked
         shape = list(rfcs[list(rfcs.keys())[0]].shape)
@@ -224,7 +232,7 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
         obs_dict = obs_rfcs.to_dict()
         _, obs_rfcs = xr.align(rfcs, obs, join='left', exclude=['number'])
         new_obs_dict = obs_rfcs.to_dict()
-        new_obs_dict['coords']['valid_time']['data'] = [rfcs_time_list]
+        new_obs_dict['coords']['valid_time']['data'] = rfcs_time_list
         for var in new_obs_dict['data_vars']:
             new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).reshape(shape))
         obs_rfcs = obs_rfcs.from_dict(new_obs_dict)

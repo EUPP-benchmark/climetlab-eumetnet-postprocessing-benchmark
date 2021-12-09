@@ -426,6 +426,7 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         previous_time = initial_time - datetime.timedelta(days=1)
         tlist = [previous_time] + fcs_time_list
         days = dict()
+        extra_date = None
         for t in tlist:
             year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
             if year_month not in days:
@@ -433,6 +434,10 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
             day = year_month + str(t.day).rjust(2, '0')
             if day not in days[year_month]:
                 days[year_month].append(day)
+                if t.day == 1:  # Edge case when crossing months
+                    pt = t - datetime.timedelta(days=1)
+                    iso_pt = str(pt.year).rjust(4, '0') + str(pt.month).rjust(2, '0') + str(pt.day).rjust(2, '0')
+                    extra_date = {year_month: iso_pt}
 
         parameters = list()
         for param in self.parameter:
@@ -453,9 +458,32 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
                 request.update({'levelist': self.level})
             source = cml.load_source("indexed-urls", PerUrlIndex(self._ANALYSIS_PATTERN), request)
             sources_list.append(source)
+        extra_sources_list = list()
+        if extra_date is not None:  # Edge case when crossing months
+            for year_month in extra_date:
+                request = {"param": parameters,
+                           "date": extra_date[year_month],
+                           # Parameters passed to the filename mangling
+                           "url": self._BASEURL,
+                           "leveltype": self.leveltype,
+                           "isodate": "-".join([year_month[:4], year_month[4:]])
+                           }
+                if self.level is not None:
+                    request.update({'levelist': self.level})
+                extra_source = cml.load_source("indexed-urls", PerUrlIndex(self._ANALYSIS_PATTERN), request)
+                extra_sources_list.append(extra_source)
+            extra_source = cml.load_source("multi", *extra_sources_list)
+        else:
+            extra_source = None
+
         self.obs_source = cml.load_source("multi", *sources_list)
         obs = self.obs_source.to_xarray(**obs_kwargs)
-        new_obs = obs.stack(datetime=("time", "step")).drop_vars("datetime").swap_dims({"datetime": "time"}).rename({"valid_time": "time"})
+        if extra_source is not None:
+            extra_obs = extra_source.to_xarray(**obs_kwargs)
+            new_obs = obs.merge(extra_obs)
+        else:
+            new_obs = obs
+        new_obs = new_obs.stack(datetime=("time", "step")).drop_vars("datetime").swap_dims({"datetime": "time"}).rename({"valid_time": "time"})
         obs_time = new_obs.time.to_pandas()
         obs_valid_time = (final_time >= obs_time) & (obs_time >= initial_time - datetime.timedelta(hours=5))
         obs_fcs = new_obs.isel(time=obs_valid_time)
