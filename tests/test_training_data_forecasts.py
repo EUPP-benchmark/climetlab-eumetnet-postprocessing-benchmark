@@ -48,6 +48,7 @@ def test_fcs_pp():
     assert xds.mx2t6.shape[1:] == obs.mx2t6.shape[1:]
     assert np.all(xds.time == obs.time)
     assert np.all(xds.valid_time == obs.valid_time)
+    assert not np.any(np.isnan(obs.mx2t6))
 
 
 if __name__ == "__main__":

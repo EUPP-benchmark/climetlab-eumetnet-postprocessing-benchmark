@@ -67,9 +67,7 @@ class TrainingDataReforecast(TrainingDataForecast):
         obs_rfcs = obs.isel(time=idx)
 
         # reshape obs to fit rfcs TODO: still messy, should be reworked
-        for var in rfcs:
-            shape = list(rfcs[var].shape)
-            break
+        shape = list(rfcs[list(rfcs.keys())[0]].shape)
         shape[0] = 1
         obs_dict = obs_rfcs.to_dict()
         _, obs_rfcs = xr.align(rfcs, obs_rfcs, join='left', exclude=['number'])
@@ -155,8 +153,10 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
             final_time_list.append(rfcs_time_list[-1][-1])
             previous_time_list.append(initial_time_list[-1] - datetime.timedelta(days=1))
         days = dict()
+        extra_date_list = list()
         for i, rfcs_time in enumerate(rfcs_time_list):
             tlist = [previous_time_list[i]] + rfcs_time
+            extra_date = None
             for t in tlist:
                 year_month = str(t.year).rjust(4, '0') + str(t.month).rjust(2, '0')
                 if year_month not in days:
@@ -164,6 +164,11 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
                 day = year_month + str(t.day).rjust(2, '0')
                 if day not in days[year_month]:
                     days[year_month].append(day)
+                    if t.day == 1:  # Edge case when crossing months
+                        pt = t - datetime.timedelta(days=1)
+                        iso_pt = str(pt.year).rjust(4, '0') + str(pt.month).rjust(2, '0') + str(pt.day).rjust(2, '0')
+                        extra_date = {year_month: iso_pt}
+            extra_date_list.append(extra_date)
 
         parameters = list()
         for param in self.parameter:
@@ -184,9 +189,36 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
                 request.update({'levelist': self.level})
             source = cml.load_source("indexed-urls", PerUrlIndex(self._ANALYSIS_PATTERN), request)
             sources_list.append(source)
+
+        extra_sources_list = list()
+        for extra_date in extra_date_list:
+            if extra_date is not None:  # Edge case when crossing months
+                for year_month in extra_date:
+                    request = {"param": parameters,
+                               "date": extra_date[year_month],
+                               # Parameters passed to the filename mangling
+                               "url": self._BASEURL,
+                               "leveltype": self.leveltype,
+                               "isodate": "-".join([year_month[:4], year_month[4:]])
+                               }
+                    if self.level is not None:
+                        request.update({'levelist': self.level})
+                    extra_source = cml.load_source("indexed-urls", PerUrlIndex(self._ANALYSIS_PATTERN), request)
+                    extra_sources_list.append(extra_source)
+
+        if extra_sources_list:
+            extra_source = cml.load_source("multi", *extra_sources_list)
+        else:
+            extra_source = None
+
         self.obs_source = cml.load_source("multi", *sources_list)
         obs = self.obs_source.to_xarray(**obs_kwargs)
-        new_obs = obs.stack(datetime=("time", "step")).drop_vars("datetime").swap_dims({"datetime": "time"}).rename({"valid_time": "time"})
+        if extra_source is not None:
+            extra_obs = extra_source.to_xarray(**obs_kwargs)
+            new_obs = obs.merge(extra_obs)
+        else:
+            new_obs = obs
+        new_obs = new_obs.stack(datetime=("time", "step")).drop_vars("datetime").swap_dims({"datetime": "time"}).rename({"valid_time": "time"})
         obs_time = new_obs.time.to_pandas()
         obs_time_list = list(map(convert_to_datetime, obs_time))
         idx = list()
@@ -234,7 +266,7 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
         new_obs_dict = obs_rfcs.to_dict()
         new_obs_dict['coords']['valid_time']['data'] = rfcs_time_list
         for var in new_obs_dict['data_vars']:
-            new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).reshape(shape))
+            new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).swapaxes(1, -1).reshape(shape))
         obs_rfcs = obs_rfcs.from_dict(new_obs_dict)
         var_name = dict()
         for var in obs_rfcs.keys():

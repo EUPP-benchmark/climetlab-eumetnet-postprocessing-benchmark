@@ -13,6 +13,7 @@ from climetlab import Dataset
 from climetlab.normalize import normalize
 from climetlab.indexing import PerUrlIndex
 
+from ..config import baseurl
 from ..utils import convert_to_datetime
 
 __version__ = "0.1.1-beta"
@@ -32,7 +33,7 @@ class TrainingDataForecast(Dataset):
 
     terms_of_use = _terms_of_use
 
-    _BASEURL = "https://storage.ecmwf.europeanweather.cloud/benchmark-dataset/"
+    _BASEURL = baseurl
 
     _PATTERN = ""
 
@@ -518,7 +519,7 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         new_obs_dict = obs_fcs.to_dict()
         new_obs_dict['coords']['valid_time']['data'] = [fcs_time_list]
         for var in new_obs_dict['data_vars']:
-            new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).reshape(shape))
+            new_obs_dict['data_vars'][var]['data'] = list(np.array(obs_dict['data_vars'][var]["data"]).swapaxes(-1, -2).swapaxes(-2, -3) .reshape(shape))
         obs_fcs = obs_fcs.from_dict(new_obs_dict)
         var_name = dict()
         for var in obs_fcs.keys():

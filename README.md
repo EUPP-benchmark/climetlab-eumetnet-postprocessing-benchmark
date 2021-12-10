@@ -8,6 +8,8 @@ A plugin for [climetlab](https://github.com/ecmwf/climetlab) to retrieve the Eum
 
 Ease the download of the dataset time-aligned forecasts, reforecasts (hindcasts) and observations ([ERA5 reanalysis](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)).
 
+> **Warning:** The current development stage is **Alpha**.
+> 
 ## Using climetlab to access the data
 
 See the [demo notebooks](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks)
