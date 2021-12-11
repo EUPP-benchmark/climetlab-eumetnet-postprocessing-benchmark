@@ -238,7 +238,7 @@ ds.to_xarray()
 The surface variables for the ensemble reforecasts (11 members) can be obtained for each reforecast date.
 All the variables described at the point **1.2** above are available.
 
-The forecasts are available for the model steps (in hours) 0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102, 108,
+The reforecasts are available for the model steps (in hours) 0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102, 108,
 114, 120, 126, 132, 138, 144, 150, 156, 162, 168, 174, 180, 186, 192, 198, 204, 210, 216, 222, 228, 234 and 240.
 All the steps are automatically retrieved.
 
@@ -252,7 +252,7 @@ ds.to_xarray()
 ```
 
 where the `date` argument is a string with a single date, and the `parameter` argument is a string or a list of string with the
-ECMWF keys described above. Setting `'all'` as `parameter` download all the surface parameters. 
+ECMWF keys. Setting `'all'` as `parameter` download all the surface parameters. 
 
 **Example:**
 
@@ -278,7 +278,7 @@ ds.to_xarray()
 ```
 
 where the `date` argument is a string with a single date, and the `parameter` argument is a string or a list of string with the
-ECMWF keys described above. Setting `'all'` as `parameter` download all the parameters at the given pressure level.
+ECMWF keys. Setting `'all'` as `parameter` download all the parameters at the given pressure level.
 The `level` argument is the pressure level, as a string or an integer.
 
 **Example:**
@@ -290,7 +290,31 @@ ds.to_xarray()
 
 ### 1.7 - Postprocessed surface variable reforecasts
 
-Not yet provided, coming soon.
+Postprocessed surface variables as described in section **1.4** can also be obtained as ensemble reforecasts (11 members).
+
+The reforecast are available for the same model steps as the surface variables described in section **1.5**.
+
+> **Remark:** The ECMWF reforecasts are only available Mondays and Thursdays. Providing any other date provided will fail.
+
+**Usage:** The surface variables forecasts can be retrieved by calling
+
+``` python
+ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface-postprocessed', date, parameter)
+ds.to_xarray()
+```
+
+where the `date` argument is a string with a single date, and the `parameter` argument is a string or a list of string with the
+ECMWF keys.
+
+> **Remark:** For technical reason, the total precipitation fields cannot be retrieved along the others and must be downloaded alone.
+> E.g. a request with `parameter=['tp', 'mx2t6']` will fail while one with `parameter='tp'` will succeed.
+
+**Example:**
+
+``` python
+ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface-postprocessed', "2017-12-28", "mx2t6")
+ds.to_xarray()
+```
 
 ## 2 - Stations Data
 
