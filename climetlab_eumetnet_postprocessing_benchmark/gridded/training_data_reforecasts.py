@@ -135,7 +135,7 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
     def __init__(self, date, parameter):
 
         TrainingDataForecastSurfacePostProcessed.__init__(self, date, parameter, "ensemble")
-        self._parameters_loffset.update(tp='-6H')
+        self._parameters_loffset.update(tp=0)
 
     # Warning : function not yet ready !!!!
     def get_observations_as_xarray(self, rfcs_kwargs=None, **obs_kwargs):

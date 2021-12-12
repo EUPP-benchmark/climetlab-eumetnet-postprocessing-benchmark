@@ -312,12 +312,12 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
                          "mn2t6": "min",
                          "mx2t6": "max"}
 
-    _parameters_base = {"tp": 6,
+    _parameters_base = {"tp": 0,
                         "10fg6": 0,
                         "mn2t6": 0,
                         "mx2t6": 0}
 
-    _parameters_loffset = {"tp": '-1H',
+    _parameters_loffset = {"tp": '5H',
                            "10fg6": 0,
                            "mn2t6": 0,
                            "mx2t6": 0}
