@@ -38,7 +38,7 @@ setuptools.setup(
     license="BSD-3-Clause License",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=["climetlab>=0.9.5"],
+    install_requires=["climetlab>=0.9.8"],
     extras_require=extras_require,
     zip_safe=True,
     entry_points={
