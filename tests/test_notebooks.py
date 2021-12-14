@@ -15,7 +15,7 @@ EXAMPLES = os.path.join(
     "notebooks",
 )
 
-SKIP = ('', )
+SKIP = ('demo_ensemble_forecasts.ipynb', )
 
 
 def notebooks_list():
