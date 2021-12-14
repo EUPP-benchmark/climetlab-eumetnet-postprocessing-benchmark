@@ -69,7 +69,7 @@ jobs:
         run: |
           pip install pytest
           pip freeze
-          pip install nbformat nbconvert ipykernel # dependencies for test/test_notebooks.py
+          pip install nbformat nbconvert ipykernel matplotlib # dependencies for test/test_notebooks.py
 
       - name: Run tests
         run: |

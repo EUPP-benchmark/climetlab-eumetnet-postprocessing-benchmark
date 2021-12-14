@@ -11,3 +11,4 @@ flake8
 nbformat
 nbconvert
 ipykernel
+matplotlib
