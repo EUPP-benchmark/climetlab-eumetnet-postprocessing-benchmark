@@ -37,12 +37,11 @@ ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-f
 fcs = ds.to_xarray()
 ```
 which download the deterministic (high-resolution) forecasts for the 2 metres temperature. 
-Once obtained, the corresponding observations can be retrieved in the [xarray](http://xarray.pydata.org/en/stable/index.html) format by using the `get_observations_as_xarray` method:
+Once obtained, the corresponding observations (if available) can be retrieved in the [xarray](http://xarray.pydata.org/en/stable/index.html) format by using the `get_observations_as_xarray` method:
 ``` python
 obs = ds.get_observations_as_xarray()
 ```
 
-> **Remark:** For obvious reasons, observations are not available for Extreme Forecast Indices (EFI).
 
 ## Datasets description 
 
@@ -107,6 +106,10 @@ ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-f
 ds.to_xarray()
 ```
 
+**Remark:** 
+
+By definition, observations are not available for Extreme Forecast Indices (EFI).
+
 ### 1.2 - Surface variable forecasts
 
 The surface variables can be obtained for each forecast date, both for the ensemble (51 members) and deterministic runs.
@@ -119,23 +122,18 @@ It includes:
 | [10 metre U wind component](https://apps.ecmwf.int/codes/grib/param-db/?id=165)	             |  10u       |                                 |
 | [10 metre V wind component](https://apps.ecmwf.int/codes/grib/param-db/?id=166)	             |  10v       |                                 |
 | [Total cloud cover](https://apps.ecmwf.int/codes/grib/param-db/?id=164)                        |  tcc       |                                 |
-| [100 metre U wind component anomaly](https://apps.ecmwf.int/codes/grib/param-db/?id=171006)    |  100ua     |                                 |
-| [100 metre V wind component anomaly](https://apps.ecmwf.int/codes/grib/param-db/?id=171007)    |  100va     |                                 |
+| [100 metre U wind component anomaly](https://apps.ecmwf.int/codes/grib/param-db/?id=171006)    |  100ua     | Observations not available      |
+| [100 metre V wind component anomaly](https://apps.ecmwf.int/codes/grib/param-db/?id=171007)    |  100va     | Observations not available      |
 | [Convective available potential energy](https://apps.ecmwf.int/codes/grib/param-db/?id=59)     |  cape      |                                 |
 | [Soil temperature level 1](https://apps.ecmwf.int/codes/grib/param-db/?id=139)                 |  stl1      |                                 |
-| [Surface sensible heat flux](https://apps.ecmwf.int/codes/grib/param-db/?id=146)               |  sshf      |                                 |
-| [Surface latent heat flux](https://apps.ecmwf.int/codes/grib/param-db/?id=147)                 |  slhf      |                                 |
 | [Total column water](https://apps.ecmwf.int/codes/grib/param-db/?id=136)                       |  tcw       |                                 |
 | [Total column water vapour](https://apps.ecmwf.int/codes/grib/param-db/?id=137)                |  tcwv      |                                 |
 | [Volumetric soil water layer 1](https://apps.ecmwf.int/codes/grib/param-db/?id=39)             |  swvl1     |                                 |
-| [Surface net solar radiation](https://apps.ecmwf.int/codes/grib/param-db/?id=176)              |  ssr       |                                 |
-| [Surface net thermal radiation](https://apps.ecmwf.int/codes/grib/param-db/?id=177)            |  str       |                                 |
 | [Snow depth](https://apps.ecmwf.int/codes/grib/param-db/?id=141)                               |  sd        |                                 |
-| [Convective precipitation](https://apps.ecmwf.int/codes/grib/param-db/?id=143)                 |  cp        |                                 |
-| [Convective inhibition](https://apps.ecmwf.int/codes/grib/param-db/?id=228001)                 |  cin       |                                 |
-| [Surface solar radiation downwards](https://apps.ecmwf.int/codes/grib/param-db/?id=169)        |  ssrd      |                                 |
-| [Surface thermal radiation downwards](https://apps.ecmwf.int/codes/grib/param-db/?id=175)      |  strd      |                                 |
+| [Convective inhibition](https://apps.ecmwf.int/codes/grib/param-db/?id=228001)                 |  cin       | Observations not available      |
 | [Visibility](https://apps.ecmwf.int/codes/grib/param-db/?id=3020)                              |  vis       | Observations not available      |
+
+Some missing observations will become available later.
 
 The forecasts are available for the model steps (in hours) 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55,
@@ -158,7 +156,7 @@ the deterministic or ensemble forecasts, by setting it to `'highres'` or `'ensem
 **Example:**
 
 ``` python
-ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface', "2017-12-02", "ssr", "highres")
+ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface', "2017-12-02", "sd", "highres")
 ds.to_xarray()
 ```
 
@@ -208,8 +206,15 @@ It includes:
 | Parameter name                                                                                 |  ECMWF key | Remarks                         |
 |------------------------------------------------------------------------------------------------|------------|---------------------------------|
 | [Total precipitation](https://apps.ecmwf.int/codes/grib/param-db/?id=228)        	             |  tp        |                                 |
+| [Surface sensible heat flux](https://apps.ecmwf.int/codes/grib/param-db/?id=146)               |  sshf      |                                 |
+| [Surface latent heat flux](https://apps.ecmwf.int/codes/grib/param-db/?id=147)                 |  slhf      |                                 |
+| [Surface net solar radiation](https://apps.ecmwf.int/codes/grib/param-db/?id=176)              |  ssr       |                                 |
+| [Surface net thermal radiation](https://apps.ecmwf.int/codes/grib/param-db/?id=177)            |  str       |                                 |
+| [Convective precipitation](https://apps.ecmwf.int/codes/grib/param-db/?id=143)                 |  cp        |                                 |
 | [Maximum temperature at 2 metres](https://apps.ecmwf.int/codes/grib/param-db/?id=121)	         |  mx2t6     |                                 |
 | [Minimum temperature at 2 metres](https://apps.ecmwf.int/codes/grib/param-db/?id=122)	         |  mn2t6     |                                 |
+| [Surface solar radiation downwards](https://apps.ecmwf.int/codes/grib/param-db/?id=169)        |  ssrd      |                                 |
+| [Surface thermal radiation downwards](https://apps.ecmwf.int/codes/grib/param-db/?id=175)      |  strd      |                                 |
 | [10 metre wind gust](https://apps.ecmwf.int/codes/grib/param-db/?id=123)                       |  10fg6     |                                 |
 
 All these variables are accumulated or filtered over the last 6 hours preceding a given forecast timestamp.
@@ -228,7 +233,7 @@ where the `date` argument is a string with a single date, and the `parameter` ar
 ECMWF keys described above. The `kind` argument allows to select
 the deterministic or ensemble forecasts, by setting it to `'highres'` or `'ensemble'`.
 
-> **Remark:** For technical reason, the total precipitation fields cannot be retrieved along the others and must be downloaded alone.
+> **Remark:** For technical reason, most fields cannot be retrieved along the others and must be downloaded alone.
 > E.g. a request with `parameter=['tp', 'mx2t6']` will fail while one with `parameter='tp'` will succeed.
 
 **Example:**
@@ -262,7 +267,7 @@ ECMWF keys. Setting `'all'` as `parameter` download all the surface parameters.
 **Example:**
 
 ``` python
-ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface', "2017-12-28", "ssr")
+ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface', "2017-12-28", "sd")
 ds.to_xarray()
 ```
 
@@ -311,7 +316,7 @@ ds.to_xarray()
 where the `date` argument is a string with a single date, and the `parameter` argument is a string or a list of string with the
 ECMWF keys.
 
-> **Remark:** For technical reason, the total precipitation fields cannot be retrieved along the others and must be downloaded alone.
+> **Remark:** For technical reason, most fields cannot be retrieved along the others and must be downloaded alone.
 > E.g. a request with `parameter=['tp', 'mx2t6']` will fail while one with `parameter='tp'` will succeed.
 
 **Example:**
