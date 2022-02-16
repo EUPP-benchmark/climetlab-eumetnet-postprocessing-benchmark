@@ -170,7 +170,7 @@ class TrainingDataForecastSurface(TrainingDataForecast):
     )
 
     _surf_parameters = ["2t", "10u", "10v", "tcc", "100u", "100v", "cape", "stl1",
-                        "tcw", "tcwv", "swvl1", "ssr", "str", "sd", "cp", "cin", "ssrd", "strd", "vis", "all"]
+                        "tcw", "tcwv", "swvl1", "vis", "all"]
 
     @normalize("parameter", _surf_parameters)
     @normalize("date", "date(%Y%m%d)")
@@ -305,30 +305,36 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         "EU_forecast_{kind}_{leveltype}_params_{isodate}_0.grb"
     )
 
-    _surf_pp_parameters = ["tp", "sshf", "slhf", "10fg6", "mn2t6", "mx2t6"]
+    _surf_pp_parameters = ["tp", "sshf", "slhf", "ssr", "str", "cp", "ssrd", "strd", "cin", "10fg6", "mn2t6", "mx2t6"]
 
-    _to_diff = ["tp", "sshf", "slhf"]  # accumulated parameters to differentiate
+    _not_6 = []
 
-    _parameters_ufunc = {"tp": 'sum',
-                         "sshf": 'sum',
-                         "slhf": 'sum',
-                         "10fg6": "max",
+    for par in _surf_pp_parameters:
+        if '6' not in par:
+            _not_6.append(par)
+
+    _to_diff = ["tp", "sshf", "slhf", "ssr", "str", "cp", "ssrd", "strd"]  # accumulated parameters to differentiate
+
+    _parameters_ufunc = {"10fg6": "max",
                          "mn2t6": "min",
                          "mx2t6": "max"}
 
-    _parameters_base = {"tp": 0,
-                        "sshf": 0,
-                        "slhf": 0,
-                        "10fg6": 0,
+    for par in _not_6:
+        _parameters_ufunc[par] = 'sum'
+
+    _parameters_base = {"10fg6": 0,
                         "mn2t6": 0,
                         "mx2t6": 0}
 
-    _parameters_loffset = {"tp": '5H',
-                           "sshf": '5H',
-                           "slhf": '5H',
-                           "10fg6": 0,
+    for par in _not_6:
+        _parameters_base[par] = 0
+
+    _parameters_loffset = {"10fg6": 0,
                            "mn2t6": 0,
                            "mx2t6": 0}
+
+    for par in _not_6:
+        _parameters_loffset[par] = '5H'
 
     @normalize("parameter", _surf_pp_parameters)
     @normalize("date", "date(%Y%m%d)")
@@ -393,6 +399,8 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         for var in variables:
             if var in self._to_diff:  # need to do a finite difference to get the accumulation per step
                 da = fcs[var].diff('step')
+            elif var == 'cin':
+                da = fcs[var].isel(step=slice(1, None))
             else:
                 da = fcs[var]
             if var == 'p10fg6':  # remove first step for wind gusts
@@ -416,7 +424,7 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
 
         ds = xr.merge(ds_list).assign_attrs(fcs.attrs)
         for var in variables:
-            if var in self._to_diff:
+            if var in self._not_6:
                 try:
                     new_ds = ds.rename_vars({var: var + '6'})
                     ds = new_ds
@@ -452,7 +460,7 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
 
         parameters = list()
         for param in self.parameter:
-            if param not in self._to_diff:
+            if param not in self._not_6:
                 parameters.append(param[:-1])
             else:
                 parameters.append(param)
@@ -535,7 +543,7 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         for var in obs_fcs.keys():
             if var == 'fg10':
                 var_name[var] = "p10fg6"
-            elif var in ['mn2t', 'mx2t'] or var in self._to_diff:
+            elif var in ['mn2t', 'mx2t'] or var in self._not_6:
                 var_name[var] = var + '6'
         obs_fcs = obs_fcs.rename_vars(var_name)
 
