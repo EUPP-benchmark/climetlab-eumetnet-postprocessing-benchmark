@@ -169,7 +169,7 @@ class TrainingDataForecastSurface(TrainingDataForecast):
         "EU_forecast_{kind}_{leveltype}_params_{isodate}_0.grb"
     )
 
-    _surf_parameters = ["2t", "10u", "10v", "tcc", "100u", "100v", "cape", "stl1",
+    _surf_parameters = ["2t", "10u", "10v", "tcc", "100u", "100v", "cape", "stl1", "sd",
                         "tcw", "tcwv", "swvl1", "vis", "all"]
     _surf_parameters += ["cin"]
 
