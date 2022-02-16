@@ -171,6 +171,7 @@ class TrainingDataForecastSurface(TrainingDataForecast):
 
     _surf_parameters = ["2t", "10u", "10v", "tcc", "100u", "100v", "cape", "stl1",
                         "tcw", "tcwv", "swvl1", "vis", "all"]
+    _surf_parameters += ["cin"]
 
     @normalize("parameter", _surf_parameters)
     @normalize("date", "date(%Y%m%d)")
@@ -305,7 +306,8 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         "EU_forecast_{kind}_{leveltype}_params_{isodate}_0.grb"
     )
 
-    _surf_pp_parameters = ["tp", "sshf", "slhf", "ssr", "str", "cp", "ssrd", "strd", "cin", "10fg6", "mn2t6", "mx2t6"]
+    _surf_pp_parameters = ["tp", "sshf", "slhf", "ssr", "str", "cp", "ssrd", "strd", "10fg6", "mn2t6", "mx2t6"]
+    # _surf_pp_parameters += ["cin"]
 
     _not_6 = []
 
@@ -399,8 +401,8 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         for var in variables:
             if var in self._to_diff:  # need to do a finite difference to get the accumulation per step
                 da = fcs[var].diff('step')
-            elif var == 'cin':
-                da = fcs[var].isel(step=slice(1, None))
+            # elif var == 'cin':
+            #     da = fcs[var].isel(step=slice(1, None))
             else:
                 da = fcs[var]
             if var == 'p10fg6':  # remove first step for wind gusts
