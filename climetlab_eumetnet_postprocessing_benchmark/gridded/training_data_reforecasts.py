@@ -135,7 +135,8 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
     def __init__(self, date, parameter):
 
         TrainingDataForecastSurfacePostProcessed.__init__(self, date, parameter, "ensemble")
-        self._parameters_loffset.update(tp=0)
+        for par in self._not_6:
+            self._parameters_loffset.update({par: 0})
 
     # Warning : function not yet ready !!!!
     def get_observations_as_xarray(self, rfcs_kwargs=None, **obs_kwargs):
@@ -173,7 +174,7 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
 
         parameters = list()
         for param in self.parameter:
-            if param != 'tp':
+            if param not in self._not_6:
                 parameters.append(param[:-1])
             else:
                 parameters.append(param)
@@ -273,7 +274,7 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
         for var in obs_rfcs.keys():
             if var == 'fg10':
                 var_name[var] = "p10fg6"
-            elif var in ['mn2t', 'mx2t', 'tp']:
+            elif var in ['mn2t', 'mx2t'] or var in self._not_6:
                 var_name[var] = var + '6'
         obs_rfcs = obs_rfcs.rename_vars(var_name)
 
