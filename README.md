@@ -252,7 +252,7 @@ The reforecasts are available for the model steps (in hours) 0, 6, 12, 18, 24, 3
 114, 120, 126, 132, 138, 144, 150, 156, 162, 168, 174, 180, 186, 192, 198, 204, 210, 216, 222, 228, 234 and 240.
 All the steps are automatically retrieved.
 
-> **Remark:** The ECMWF reforecasts are only available Mondays and Thursdays. Providing any other date provided will fail.
+> **Remark:** The ECMWF reforecasts are only available Mondays and Thursdays. Providing any other date will fail.
 
 **Usage:** The surface variables reforecasts can be retrieved by calling
 
@@ -278,7 +278,7 @@ All the variables described at the point **1.3** above are available.
 
 The reforecast are available for the same model steps as the surface variables above.
 
-> **Remark:** The ECMWF reforecasts are only available Mondays and Thursdays. Providing any other date provided will fail.
+> **Remark:** The ECMWF reforecasts are only available Mondays and Thursdays. Providing any other date will fail.
 
 **Usage:** The pressure level variables reforecasts can be retrieved by calling
 
@@ -304,7 +304,7 @@ Postprocessed surface variables as described in section **1.4** can also be obta
 
 The reforecast are available for the same model steps as the surface variables described in section **1.5**.
 
-> **Remark:** The ECMWF reforecasts are only available Mondays and Thursdays. Providing any other date provided will fail.
+> **Remark:** The ECMWF reforecasts are only available Mondays and Thursdays. Providing any other date will fail.
 
 **Usage:** The surface variables forecasts can be retrieved by calling
 
