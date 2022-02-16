@@ -169,7 +169,7 @@ class TrainingDataForecastSurface(TrainingDataForecast):
         "EU_forecast_{kind}_{leveltype}_params_{isodate}_0.grb"
     )
 
-    _surf_parameters = ["2t", "10u", "10v", "tcc", "100u", "100v", "cape", "stl1", "sshf", "slhf",
+    _surf_parameters = ["2t", "10u", "10v", "tcc", "100u", "100v", "cape", "stl1",
                         "tcw", "tcwv", "swvl1", "ssr", "str", "sd", "cp", "cin", "ssrd", "strd", "vis", "all"]
 
     @normalize("parameter", _surf_parameters)
@@ -305,19 +305,27 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         "EU_forecast_{kind}_{leveltype}_params_{isodate}_0.grb"
     )
 
-    _surf_pp_parameters = ["tp", "10fg6", "mn2t6", "mx2t6"]
+    _surf_pp_parameters = ["tp", "sshf", "slhf", "10fg6", "mn2t6", "mx2t6"]
+
+    _to_diff = ["tp", "sshf", "slhf"]  # accumulated parameters to differentiate
 
     _parameters_ufunc = {"tp": 'sum',
+                         "sshf": 'sum',
+                         "slhf": 'sum',
                          "10fg6": "max",
                          "mn2t6": "min",
                          "mx2t6": "max"}
 
     _parameters_base = {"tp": 0,
+                        "sshf": 0,
+                        "slhf": 0,
                         "10fg6": 0,
                         "mn2t6": 0,
                         "mx2t6": 0}
 
     _parameters_loffset = {"tp": '5H',
+                           "sshf": '5H',
+                           "slhf": '5H',
                            "10fg6": 0,
                            "mn2t6": 0,
                            "mx2t6": 0}
@@ -383,11 +391,11 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         variables = list(fcs.keys())
         ds_list = list()
         for var in variables:
-            if var == 'tp':  # need to do a finite difference of tp to get the accumulation per step
+            if var in self._to_diff:  # need to do a finite difference to get the accumulation per step
                 da = fcs[var].diff('step')
             else:
                 da = fcs[var]
-            if var == 'p10fg6':
+            if var == 'p10fg6':  # remove first step for wind gusts
                 var = var[1:]
 
             if self._parameters_ufunc[var] == "sum":
@@ -407,11 +415,13 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
             ds_list.append(ds_resampled.to_dataset())
 
         ds = xr.merge(ds_list).assign_attrs(fcs.attrs)
-        try:
-            new_ds = ds.rename_vars({'tp': 'tp6'})
-            ds = new_ds
-        except:
-            pass
+        for var in variables:
+            if var in self._to_diff:
+                try:
+                    new_ds = ds.rename_vars({var: var + '6'})
+                    ds = new_ds
+                except:
+                    pass
 
         return ds.assign_coords(valid_time=ds.time + ds.step)
 
@@ -442,7 +452,7 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
 
         parameters = list()
         for param in self.parameter:
-            if param != 'tp':
+            if param not in self._to_diff:
                 parameters.append(param[:-1])
             else:
                 parameters.append(param)
@@ -525,7 +535,7 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
         for var in obs_fcs.keys():
             if var == 'fg10':
                 var_name[var] = "p10fg6"
-            elif var in ['mn2t', 'mx2t', 'tp']:
+            elif var in ['mn2t', 'mx2t'] or var in self._to_diff:
                 var_name[var] = var + '6'
         obs_fcs = obs_fcs.rename_vars(var_name)
 
