@@ -56,11 +56,14 @@ class TrainingDataForecast(Dataset):
         self.year = ""
         self.month = ""
         self.step = []
+        
+    def to_xarray(self, **kwargs):
+        return self.source.to_xarray(xarray_open_dataset_kwargs={"backend_kwargs": {"ignore_keys": ["dataType"]}}, **kwargs)
 
     def get_observations_as_xarray(self, fcs_kwargs=None, **obs_kwargs):
         if fcs_kwargs is None:
             fcs_kwargs = dict()
-        fcs = self.source.to_xarray(**fcs_kwargs)
+        fcs = self.source.to_xarray(xarray_open_dataset_kwargs={"backend_kwargs": {"ignore_keys": ["dataType"]}}, **fcs_kwargs)
         fcs_valid_time = fcs.valid_time.to_pandas()
         fcs_time_list = list(map(convert_to_datetime, fcs_valid_time.iloc[0, :]))
         days = dict()
@@ -395,7 +398,7 @@ class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
             self.source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
 
     def to_xarray(self, **kwargs):
-        fcs = self.source.to_xarray(**kwargs)
+        fcs = self.source.to_xarray(xarray_open_dataset_kwargs={"backend_kwargs": {"ignore_keys": ["dataType"]}}, **kwargs)
         variables = list(fcs.keys())
         ds_list = list()
         for var in variables:

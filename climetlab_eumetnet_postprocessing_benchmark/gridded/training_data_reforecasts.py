@@ -27,7 +27,7 @@ class TrainingDataReforecast(TrainingDataForecast):
     def get_observations_as_xarray(self, rfcs_kwargs=None, **obs_kwargs):
         if rfcs_kwargs is None:
             rfcs_kwargs = dict()
-        rfcs = self.source.to_xarray(**rfcs_kwargs)
+        rfcs = self.source.to_xarray(xarray_open_dataset_kwargs={"backend_kwargs": {"ignore_keys": ["dataType"]}}, **rfcs_kwargs)
         rfcs_valid_time = rfcs.valid_time.to_pandas()
         rfcs_time_list = list()
         for i in range(rfcs_valid_time.shape[0]):
