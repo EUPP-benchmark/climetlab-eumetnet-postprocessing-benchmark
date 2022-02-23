@@ -75,17 +75,19 @@ All the [Extreme Forecast Index](https://www.ecmwf.int/assets/elearning/efi/efi1
 
 It includes:
 
-| Parameter name                |  ECMWF key    |
-|-------------------------------|---------------|
-| 2 metre temperature efi     	|  2ti          |  
-| 10 metre wind speed efi	    |  10ws         |
-| 10 metre wind gust efi	    |  10fgi        |
-| cape efi	                    |  capei        |
-| cape shear efi	            |  capesi       |
-| Maximum temperature at 2m efi	|  mx2ti        |
-| Minimum temperature at 2m efi	|  mn2ti        |
-| Snowfall efi	                |  sfi	        |
-| Total precipitation efi	    |  tpi          |
+TODO: add links for the efi
+
+| Parameter name                                                                                 |  ECMWF key | Remarks                         |
+|------------------------------------------------------------------------------------------------|------------|---------------------------------|
+| [2 metre temperature efi](https://apps.ecmwf.int/codes/grib/param-db/?id=132167)            	 |  2ti       |                                 |
+| [10 metre wind speed efi](https://apps.ecmwf.int/codes/grib/param-db/?id=132165)               |  10wsi     |                                 |
+| [10 metre wind gust efi](https://apps.ecmwf.int/codes/grib/param-db/?id=132049)                |  10fgi     |                                 |
+| [cape efi](https://apps.ecmwf.int/codes/grib/param-db/?id=132059)	                             |  capei     |                                 |
+| [cape shear efi](https://apps.ecmwf.int/codes/grib/param-db/?id=132044)	                     |  capesi    |                                 |
+| [Maximum temperature at 2m efi](https://apps.ecmwf.int/codes/grib/param-db/?id=132201)	     |  mx2ti     |                                 |
+| [Minimum temperature at 2m efi](https://apps.ecmwf.int/codes/grib/param-db/?id=132202)	     |  mn2ti     |                                 |
+| [Snowfall efi](https://apps.ecmwf.int/codes/grib/param-db/?id=132144)	                         |  sfi	      |                                 |
+| [Total precipitation efi](https://apps.ecmwf.int/codes/grib/param-db/?id=132228)	             |  tpi       |                                 |
 
 The EFI are available for the model step range (in hours) 0-24, 24-48, 48-72, 72-96, 96-120, 120-144 and 144-168.
 
