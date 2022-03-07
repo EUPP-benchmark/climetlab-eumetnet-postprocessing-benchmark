@@ -75,9 +75,10 @@ class TrainingDataForecast(Dataset):
             if day not in days[year_month]:
                 days[year_month].append(day)
 
+        parameters = [param for param in self.parameter if param != "cin"]  # fix for cin observations bug in the dataset, should be solved later at the analysis dataset level
         sources_list = list()
         for year_month in days:
-            request = {"param": self.parameter,
+            request = {"param": parameters,
                        "date": days[year_month],
                        # Parameters passed to the filename mangling
                        "url": self._BASEURL,
