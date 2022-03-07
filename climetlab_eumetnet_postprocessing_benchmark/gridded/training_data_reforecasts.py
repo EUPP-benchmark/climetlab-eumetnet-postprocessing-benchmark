@@ -42,7 +42,12 @@ class TrainingDataReforecast(TrainingDataForecast):
                 if day not in days[year_month]:
                     days[year_month].append(day)
 
-        parameters = [param for param in self.parameter if param != "cin"]  # fix for cin observations bug in the dataset, should be solved later at the analysis dataset level
+        if isinstance(self.parameter, (tuple, list)):  # fix for cin observations bug in the dataset, should be solved later at the analysis dataset level
+            parameters = [param for param in self.parameter if param != "cin"]
+        elif self.parameter == "cin":
+            parameters = ""
+        else:
+            parameters = self.parameter
         sources_list = list()
         for year_month in days:
             request = {"param": parameters,
