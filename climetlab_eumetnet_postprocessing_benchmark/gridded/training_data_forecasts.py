@@ -16,7 +16,7 @@ from climetlab.indexing import PerUrlIndex
 from ..config import baseurl
 from ..utils import convert_to_datetime
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 _terms_of_use = """By downloading data from this dataset, you agree to the terms and conditions defined at
 
