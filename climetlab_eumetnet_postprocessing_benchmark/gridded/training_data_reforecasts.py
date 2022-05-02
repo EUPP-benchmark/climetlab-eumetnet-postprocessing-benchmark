@@ -227,6 +227,7 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
         else:
             new_obs = obs
         new_obs = new_obs.stack(datetime=("time", "step")).drop_vars("datetime").swap_dims({"datetime": "time"}).rename({"valid_time": "time"})
+        new_obs = new_obs.where(new_obs['time.year'] >= 1997, drop=True)  # Treats edge cases near the start of 2017
         obs_time = new_obs.time.to_pandas()
         obs_time_list = list(map(convert_to_datetime, obs_time))
         idx = list()
