@@ -328,6 +328,39 @@ ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-r
 ds.to_xarray()
 ```
 
+### 1.8 - Static fields
+
+Various static fields associated to the forecast grid can be obtained, with the purpose of serving as predictors for the postprocessing.
+
+> **Remark:**  For consistency with the rest of the dataset, we use the ECMWF parameters names, terminology and units here.
+> However, please note that the fields provided are from other non-ECMWF data sources evaluated at grid points.
+> Currently, the main data source is the [Copernicus Land Monitoring Service](https://land.copernicus.eu/).
+
+
+It includes:
+
+| Parameter name                                                                                 |  ECMWF key | Remarks                                                                                                                                                                                                                                                            |
+|------------------------------------------------------------------------------------------------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Land use](https://apps.ecmwf.int/codes/grib/param-db/?id=260184)              	             |  landu     | Extracted from the [CORINE 2018](https://land.copernicus.eu/pan-european/corine-land-cover) dataset. Values and associated land type differ from the ECMWF one. Please look at the "legend" entry in the metadata for more details.                                |
+| [Model terrain height](https://apps.ecmwf.int/codes/grib/param-db/?id=260183)                  |  mterh     | Extracted from the [EU-DEM v1.1](https://land.copernicus.eu/imagery-in-situ/eu-dem) data elevation model dataset.                                                                                                                                                  |
+
+**Usage:** The static fields can be retrieved by calling
+
+``` python
+ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-static-fields', parameter)
+ds.to_xarray()
+```
+
+where the `parameter` argument is a string with one of the ECMWF keys described above.
+It is only possible to download one static field per call.
+
+**Example:**
+
+``` python
+ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-static-fields', 'mterh')
+ds.to_xarray()
+```
+
 ## 2 - Stations Data
 
 Not yet provided.

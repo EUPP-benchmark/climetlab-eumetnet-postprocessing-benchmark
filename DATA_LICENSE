@@ -30,3 +30,13 @@ Generated using Copernicus Climate Change Service information 2021.
 Hersbach et al. (2018): ERA5 hourly data on single levels from 1979 to present.
 
 Copernicus Climate Change Service (C3S) Climate Data Store (CDS). (Accessed on < 21-04-2021 >), doi:10.24381/cds.adbb2d47.
+
+----------------------
+# Static fields data #
+----------------------
+
+Land usage and model altitude:
+
+European Union, Copernicus Land Monitoring Service 2022, European Environment Agency (EEA)
+
+Retrieved from https://land.copernicus.eu/pan-european/corine-land-cover, July 2022
