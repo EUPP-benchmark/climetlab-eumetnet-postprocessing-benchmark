@@ -332,9 +332,9 @@ ds.to_xarray()
 
 Various static fields associated to the forecast grid can be obtained, with the purpose of serving as predictors for the postprocessing.
 
-> **Remark:**  For consistency with the rest of the dataset, we use the ECMWF parameters names, terminology and units here.
+> **Remark:**  For consistency with the rest of the dataset, we use the ECMWF parameters name, terminology and units here.
 > However, please note that the fields provided are from other non-ECMWF data sources evaluated at grid points.
-> Currently, the main data source is the [Copernicus Land Monitoring Service](https://land.copernicus.eu/).
+> Currently, the main data source being used is the [Copernicus Land Monitoring Service](https://land.copernicus.eu/).
 
 
 It includes:
