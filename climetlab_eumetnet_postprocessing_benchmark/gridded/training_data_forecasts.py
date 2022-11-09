@@ -20,10 +20,6 @@ __version__ = "0.1.9"
 
 _terms_of_use = """By downloading data from this dataset, you agree to the terms and conditions defined at
 
-    https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/LICENSE
-    
-and
-
     https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/DATA_LICENSE
 
 If you do not agree with such terms, do not download the data. """
@@ -45,7 +41,7 @@ class TrainingDataForecast(Dataset):
     _ensemble_alias = ["ensemble", "ens", "proba", "probabilistic"]
 
     def __init__(self, *args, **kwargs):
-        """Do almost nothing. To be overridden by the inherithing class."""
+        """Do almost nothing. To be overridden by the inheriting class."""
         self.parameter = list()
         self.date = ""
         self.leveltype = ""
