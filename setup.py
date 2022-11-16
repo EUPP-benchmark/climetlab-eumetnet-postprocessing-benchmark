@@ -38,11 +38,13 @@ setuptools.setup(
     license="BSD-3-Clause License",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    install_requires=["climetlab>=0.9.9"],
+    install_requires=["climetlab>=0.9.9", "zarr>=2.13.3"],
     extras_require=extras_require,
     zip_safe=True,
     entry_points={
         "climetlab.datasets": [
+
+            # original gridded datasets
             "eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_forecasts:TrainingDataForecastEfi",
             "eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_forecasts:TrainingDataForecastSurface",
             "eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_forecasts:TrainingDataForecastSurfacePostProcessed",
@@ -52,7 +54,25 @@ setuptools.setup(
             "eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_reforecasts:TrainingDataReforecastSurfacePostProcessed",
             "eumetnet-postprocessing-benchmark-training-data-gridded-static-fields= climetlab_eumetnet_postprocessing_benchmark.gridded.static_fields_data:StaticField",
 
-            # other datasets can be included here
+            # hacky phase datasets
+            # gridded datasets
+            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_forecasts:TrainingDataForecastEfi",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_forecasts:TrainingDataForecastSurface",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-forecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_forecasts:TrainingDataForecastSurfacePostProcessed",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-forecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_forecasts:TrainingDataForecastPressure",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-reforecasts-surface= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_reforecasts:TrainingDataReforecastSurface",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-reforecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_reforecasts:TrainingDataReforecastPressure",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-reforecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_reforecasts:TrainingDataReforecastSurfacePostProcessed",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-static-fields= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.static_fields_data:StaticField",
+
+            # stations datasets
+            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_forecasts:TrainingDataForecastEfi",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_forecasts:TrainingDataForecastSurface",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-forecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_forecasts:TrainingDataForecastSurfacePostProcessed",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-forecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_forecasts:TrainingDataForecastPressure",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-reforecasts-surface= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_reforecasts:TrainingDataReforecastSurface",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-reforecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_reforecasts:TrainingDataReforecastPressure",
+            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-reforecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_reforecasts:TrainingDataReforecastSurfacePostProcessed",
         ]
         # source plugins would be here
         # "climetlab.sources": []

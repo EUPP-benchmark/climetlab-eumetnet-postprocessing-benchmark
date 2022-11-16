@@ -5,7 +5,7 @@ import climetlab as cml
 from climetlab import Dataset
 from climetlab.normalize import normalize
 
-from ..config import baseurl
+from ...config import hacky_baseurl
 
 __version__ = "0.1.9"
 
@@ -19,7 +19,7 @@ If you do not agree with such terms, do not download the data. """
 class StaticField(Dataset):
     terms_of_use = _terms_of_use
 
-    _BASEURL = baseurl
+    _BASEURL = hacky_baseurl
 
     _static_parameters = ["landu", "mterh"]
 
@@ -27,8 +27,8 @@ class StaticField(Dataset):
     def __init__(self, parameter):
 
         if parameter == "landu":
-            url = self._BASEURL + 'data/static/land_cover.nc'
+            url = self._BASEURL + 'data/gridded_data/gridded_land_usage.zarr'
         elif parameter == "mterh":
-            url = self._BASEURL + 'data/static/model_altitude.nc'
+            url = self._BASEURL + 'data/gridded_data/gridded_model_terrain_height.zarr'
 
-        self.source = cml.load_source("url", url)
+        self.source = cml.load_source("zarr", url)
