@@ -12,3 +12,7 @@ nbformat
 nbconvert
 ipykernel
 matplotlib
+sphinx
+sphinxcontrib-bibtex
+jupyter-sphinx
+docutils==0.16

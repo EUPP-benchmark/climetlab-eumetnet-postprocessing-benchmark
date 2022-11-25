@@ -21,7 +21,7 @@ class StaticField(Dataset):
 
     _BASEURL = baseurl
 
-    _static_parameters = ["landu", "mterh"]
+    _static_parameters = ["landu", "mterh", "z"]
 
     @normalize("parameter", _static_parameters)
     def __init__(self, parameter):
@@ -30,5 +30,7 @@ class StaticField(Dataset):
             url = self._BASEURL + 'data/static/land_cover.nc'
         elif parameter == "mterh":
             url = self._BASEURL + 'data/static/model_altitude.nc'
+        elif parameter == "z":
+            url = self._BASEURL + 'data/static/000z.nc'
 
         self.source = cml.load_source("url", url)

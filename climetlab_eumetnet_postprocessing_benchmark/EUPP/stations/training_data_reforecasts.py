@@ -36,7 +36,7 @@ class TrainingDataReforecastPressure(TrainingDataForecastPressure):
 
     def __init__(self, level, country):
 
-        TrainingDataForecastPressure.__init__(self, "ensemble", level, country)
+        TrainingDataForecastPressure.__init__(self, level, "ensemble", country)
 
 
 class TrainingDataReforecastSurfacePostProcessed(TrainingDataForecastSurfacePostProcessed):

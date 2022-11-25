@@ -7,7 +7,7 @@ import climetlab as cml
 from climetlab import Dataset
 from climetlab.utils.patterns import Pattern
 
-from ...config import hacky_baseurl
+from ...config import EUPP_baseurl
 
 __version__ = "0.1.9"
 
@@ -22,7 +22,7 @@ class TrainingDataForecast(Dataset):
 
     terms_of_use = _terms_of_use
 
-    _BASEURL = hacky_baseurl
+    _BASEURL = EUPP_baseurl
 
     _PATTERN = ""
 
@@ -122,7 +122,7 @@ class TrainingDataForecastPressure(TrainingDataForecast):
 
     dataset = None
 
-    def __init__(self, kind, level):
+    def __init__(self, level, kind):
 
         TrainingDataForecast.__init__(self)
         self.kind = kind

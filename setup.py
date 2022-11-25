@@ -54,25 +54,25 @@ setuptools.setup(
             "eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.gridded.training_data_reforecasts:TrainingDataReforecastSurfacePostProcessed",
             "eumetnet-postprocessing-benchmark-training-data-gridded-static-fields= climetlab_eumetnet_postprocessing_benchmark.gridded.static_fields_data:StaticField",
 
-            # hacky phase datasets
+            # EUPP phase datasets
             # gridded datasets
-            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_forecasts:TrainingDataForecastEfi",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_forecasts:TrainingDataForecastSurface",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-forecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_forecasts:TrainingDataForecastSurfacePostProcessed",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-forecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_forecasts:TrainingDataForecastPressure",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-reforecasts-surface= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_reforecasts:TrainingDataReforecastSurface",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-reforecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_reforecasts:TrainingDataReforecastPressure",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-reforecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.training_data_reforecasts:TrainingDataReforecastSurfacePostProcessed",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-gridded-static-fields= climetlab_eumetnet_postprocessing_benchmark.hacky.gridded.static_fields_data:StaticField",
+            "EUPPBench-training-data-gridded-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.EUPP.gridded.training_data_forecasts:TrainingDataForecastEfi",
+            "EUPPBench-training-data-gridded-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.EUPP.gridded.training_data_forecasts:TrainingDataForecastSurface",
+            "EUPPBench-training-data-gridded-forecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.EUPP.gridded.training_data_forecasts:TrainingDataForecastSurfacePostProcessed",
+            "EUPPBench-training-data-gridded-forecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.EUPP.gridded.training_data_forecasts:TrainingDataForecastPressure",
+            "EUPPBench-training-data-gridded-reforecasts-surface= climetlab_eumetnet_postprocessing_benchmark.EUPP.gridded.training_data_reforecasts:TrainingDataReforecastSurface",
+            "EUPPBench-training-data-gridded-reforecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.EUPP.gridded.training_data_reforecasts:TrainingDataReforecastPressure",
+            "EUPPBench-training-data-gridded-reforecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.EUPP.gridded.training_data_reforecasts:TrainingDataReforecastSurfacePostProcessed",
+            "EUPPBench-training-data-gridded-static-fields= climetlab_eumetnet_postprocessing_benchmark.EUPP.gridded.static_fields_data:StaticField",
 
             # stations datasets
-            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_forecasts:TrainingDataForecastEfi",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_forecasts:TrainingDataForecastSurface",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-forecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_forecasts:TrainingDataForecastSurfacePostProcessed",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-forecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_forecasts:TrainingDataForecastPressure",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-reforecasts-surface= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_reforecasts:TrainingDataReforecastSurface",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-reforecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_reforecasts:TrainingDataReforecastPressure",
-            "eumetnet-postprocessing-hacky-benchmark-training-data-stations-reforecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.hacky.stations.training_data_reforecasts:TrainingDataReforecastSurfacePostProcessed",
+            "EUPPBench-training-data-stations-forecasts-efi= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_forecasts:TrainingDataForecastEfi",
+            "EUPPBench-training-data-stations-forecasts-surface= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_forecasts:TrainingDataForecastSurface",
+            "EUPPBench-training-data-stations-forecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_forecasts:TrainingDataForecastSurfacePostProcessed",
+            "EUPPBench-training-data-stations-forecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_forecasts:TrainingDataForecastPressure",
+            "EUPPBench-training-data-stations-reforecasts-surface= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_reforecasts:TrainingDataReforecastSurface",
+            "EUPPBench-training-data-stations-reforecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_reforecasts:TrainingDataReforecastPressure",
+            "EUPPBench-training-data-stations-reforecasts-surface-postprocessed= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_reforecasts:TrainingDataReforecastSurfacePostProcessed",
         ]
         # source plugins would be here
         # "climetlab.sources": []
