@@ -1,7 +1,7 @@
 EUPPBench datasets
 ==================
 
-The *EUPPBench* datasets are available on a smaller portion of Europe stored in `Zarr <https://zarr.readthedocs.io/en/stable/>`_
+The *EUPPBench* datasets are available on a small portion of Europe stored in `Zarr <https://zarr.readthedocs.io/en/stable/>`_
 format for an easy access allowing for slicing.
 The forecasts and observations datasets are already paired together, providing analysis-ready data
 for postprocessing benchmarking purposes.
@@ -748,7 +748,7 @@ Depending on the kind of dataset, dimensions and information are embedded in the
 Gridded data
 ~~~~~~~~~~~~
 
-The following metadata are available in the gridded forecast, reforecast and data:
+The following metadata are available in the gridded forecast, reforecast and observation data:
 
 +-------------------------------------+----------------------------------------------------------------------+
 | Metadata                            | Description                                                          |

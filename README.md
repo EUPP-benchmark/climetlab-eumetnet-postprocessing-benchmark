@@ -2,14 +2,14 @@
 
 [![PyPI version](https://badge.fury.io/py/climetlab-eumetnet-postprocessing-benchmark.svg)](https://badge.fury.io/py/climetlab-eumetnet-postprocessing-benchmark)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/climetlab-eumetnet-postprocessing-benchmark.svg)](https://pypi.org/project/climetlab-eumetnet-postprocessing-benchmark/)
-[![build](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml/badge.svg?branch=main)](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml)
+[![build](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml/badge.svg?branch=main)](https://github.com/EUPP-benchmark/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml)
 [<img src="https://img.shields.io/badge/docs-online-green.svg">](https://eupp-benchmark.github.io/EUPPBench-doc)
 
 A plugin for [climetlab](https://github.com/ecmwf/climetlab) to retrieve the Eumetnet postprocessing benchmark datasets.
 
 Ease the download of the dataset time-aligned forecasts, reforecasts (hindcasts) and observations ([ERA5 reanalysis](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)).
 
-> * **Climetlab plugin version**: 0.2.0
+> * **Climetlab plugin version**: 0.2.1
 > * **EUPPBench dataset version**: 1.0
 > * **Base dataset version**: 1.0
 > * **Dataset status**: [Datasets status](https://eupp-benchmark.github.io/EUPPBench-doc/files/datasets_status.html#datasets-status)
