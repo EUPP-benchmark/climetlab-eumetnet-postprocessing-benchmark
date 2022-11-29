@@ -104,7 +104,11 @@ jobs:
     - name: Check version
       run: |
         release=${GITHUB_REF##*/}
+        echo release
+        echo "$release"
         version=$(python setup.py --version)
+        echo version
+        echo "$version"
         test "$release" == "$version"
 
     - name: Build pip package
