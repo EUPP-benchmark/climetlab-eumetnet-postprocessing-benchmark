@@ -11,7 +11,7 @@ copyright = '2022, GIE EUMETNET - PP module'
 author = 'GIE EUMETNET - PP module'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0'  # version of the dataset, not of climetlab plugin
+release = 'v1.0'  # version of the dataset, not of climetlab plugin
 version = release
 
 # -- General configuration ---------------------------------------------------

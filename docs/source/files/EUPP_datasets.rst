@@ -24,7 +24,7 @@ A forecasts and observations dataset on a regular latitude-longitude grid.
 
 -  The gridded EUPPBench postprocessing benchmark dataset contains
    `ECMWF <https://www.ecmwf.int/>`__ ensemble and deterministic
-   forecasts over a small domain in Europe, rom 47.75° to 53.5° in latitude, and from 2.5° to 10.5° in longitude,
+   forecasts over a small domain in Europe, rom 45.75° to 53.5° in latitude, and from 2.5° to 10.5° in longitude,
    and covers the years 2017-2018.
 -  It also contains the corresponding ERA5 reanalysis for the purpose of
    providing observations for the benchmark.
