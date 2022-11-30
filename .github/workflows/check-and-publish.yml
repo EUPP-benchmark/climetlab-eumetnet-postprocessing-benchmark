@@ -5,12 +5,12 @@ name: build
 
 on:
   push:
-    branch:
+    branches:
       - main
       - develop
 
   pull_request:
-    branch:
+    branches:
 
   release:
     types: [created]
