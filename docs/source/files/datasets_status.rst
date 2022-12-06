@@ -7,13 +7,16 @@ In addition to the datasets status below, one can check for the infrastructure s
 EUPPBench datasets
 ------------------
 
-* Status: |EUPP_grid_on| |EUPP_station_off|
+* Status: |EUPP_grid_on| |EUPP_station_on|
 
 +----------------------------------------------+--------------+---------------------------------+
 | News                                         | Date         | Additional Remarks              |
 +==============================================+==============+=================================+
-| EUPP stations dataset is currently down      | 30-nov-2022  | Should be back online next week |
-| due to a final update for the v1.0           | - now        |                                 |
+| Access to the EUPP stations dataset has been | 6-dec-2022   | /                               |
+| restored. v1.0 is now complete.              |              |                                 |
++----------------------------------------------+--------------+---------------------------------+
+| EUPP stations dataset is currently down      | 30-nov-2022  | /                               |
+| due to a final update for the v1.0           | - 6-dec 2022 |                                 |
 +----------------------------------------------+--------------+---------------------------------+
 | EUPP dataset v1.0 is unofficially up.        | 25-nov-2022  | /                               |
 +----------------------------------------------+--------------+---------------------------------+
