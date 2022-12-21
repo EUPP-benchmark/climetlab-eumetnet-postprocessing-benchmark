@@ -112,7 +112,7 @@ jobs:
       - name: Installing climetlab
         run: |
           C:\Miniconda\condabin\conda.bat activate base
-          C:\Miniconda\condabin\conda.bat install climetlab
+          pip install climetlab
 
       - name: Installing climetlab-eumetnet-postprocessing-benchmark
         run: |
