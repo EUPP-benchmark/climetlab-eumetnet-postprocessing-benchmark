@@ -129,7 +129,6 @@ jobs:
           C:\Miniconda\condabin\conda.bat activate base
           pip install pytest
           pip freeze
-#          pip install # dependencies for test/test_notebooks.py
           C:\Miniconda\condabin\conda.bat install cartopy=0.21 nbformat nbconvert ipykernel -c conda-forge # dependencies for test/test_notebooks.py
 
       - name: Run tests
