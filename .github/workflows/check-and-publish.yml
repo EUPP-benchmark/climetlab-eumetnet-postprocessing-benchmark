@@ -35,7 +35,7 @@ jobs:
       matrix:
         # platform: ["ubuntu-latest"]
         # python-version: ["3.8"]
-        platform: ["ubuntu-latest", "macos-latest", "windows-latest"]
+        platform: ["ubuntu-latest", "macos-latest"]
         python-version: ["3.8", "3.9", "3.10"]
 
     
@@ -80,6 +80,64 @@ jobs:
           cd tests
           $CONDA/bin/pytest
 
+  checks-windows:
+    strategy:
+      fail-fast: false
+      matrix:
+        # platform: ["ubuntu-latest"]
+        # python-version: ["3.8"]
+        platform: ["windows-latest"]
+        python-version: ["3.8", "3.9", "3.10"]
+
+
+    name: Python ${{ matrix.python-version }} on ${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
+
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+
+          python-version: ${{ matrix.python-version }}
+
+      - name: Updating pip
+        run: |
+          C:\Miniconda\condabin\conda.bat activate base
+          C:\Miniconda\condabin\conda.bat install pip
+          C:\Miniconda\condabin\conda.bat init powershell
+          pip debug --verbose
+
+      - name: Installing climetlab
+        run: |
+          C:\Miniconda\condabin\conda.bat activate base
+          C:\Miniconda\condabin\conda.bat install climetlab
+
+      - name: Installing climetlab-eumetnet-postprocessing-benchmark
+        run: |
+          pwd
+          ls
+          ls *
+          ls */*
+          C:\Miniconda\condabin\conda.bat activate base
+          pip install .
+          pip install s3fs  # disabled for the moment in climetlab setup
+
+      - name: Install tests tools
+        run: |
+          C:\Miniconda\condabin\conda.bat activate base
+          pip install pytest
+          pip freeze
+          pip install nbformat nbconvert ipykernel matplotlib # dependencies for test/test_notebooks.py
+          C:\Miniconda\condabin\conda.bat install cartopy # dependencies for test/test_notebooks.py
+
+      - name: Run tests
+        run: |
+          cd tests
+          C:\Miniconda\condabin\conda.bat activate base
+          pytest
+
   deploy:
 
     
@@ -87,7 +145,7 @@ jobs:
     
 
     name: Upload to Pypi
-    needs: checks
+    needs: [checks, checks-windows]
 
     runs-on: ubuntu-latest
 
