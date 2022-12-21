@@ -23,7 +23,7 @@ A forecasts and observations dataset on a regular latitude-longitude grid.
     In blue, the EUPPBench dataset domain inside the :ref:`files/base_datasets:Base datasets over Europe's domain`.
 
 -  The gridded EUPPBench postprocessing benchmark dataset contains
-   `ECMWF <https://www.ecmwf.int/>`__ ensemble and deterministic
+   `ECMWF`_ ensemble and deterministic
    forecasts over a small domain in Europe, from 45.75° to 53.5° in latitude, and from 2.5° to 10.5° in longitude,
    and covers the years 2017-2018.
 -  It also contains the corresponding ERA5 reanalysis for the purpose of
@@ -903,6 +903,19 @@ one can save them to disk by using the :meth:`xarray.Dataset.to_netcdf` function
    obs = ds.get_observations_as_xarray()
    obs.to_netcdf('austria_reforecasts.nc')
 
+Finding the units of a given data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In general, we align with the units of the `ECMWF`_ data. You can find the particular units of a given data by clicking on the parameter's name in
+the table above. For many variables, the units are also available in the metadata of the forecasts. For example, the following code snippet show how to retrieve the units of
+surface variable in the station dataset:
+
+.. jupyter-execute::
+
+   ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-surface', "austria")
+   fcs = ds.to_xarray()
+   fcs.v100.units
+
 Data License
 ------------
 
@@ -912,6 +925,10 @@ See the
 Station observations were provided by European National Meteorological Services within the framework of their open data policy, and are sourced in the metadata of the
 corresponding datasets.
 
+Swiss station data are part of this dataset but are presently restricted. These station data may be obtained from `IDAWEB <https://gate.meteoswiss.ch/idaweb/>`_ at MeteoSwiss
+and we are not entitled to provide it online. Registration with IDAWEB can be initiated `here <https://gate.meteoswiss.ch/idaweb/prepareRegistration.do>`_.
+Please also read `these information <https://gate.meteoswiss.ch/idaweb/more.do?language=en>`_.
+
 .. _reforecasts: https://www.ecmwf.int/en/forecasts/documentation-and-support/extended-range/re-forecast-medium-and-extended-forecast-range
 .. _Cycle 45r1: https://www.ecmwf.int/en/forecasts/documentation-and-support/evolution-ifs/cycles/summary-cycle-45r1
 .. _Cycle 43r3: https://www.ecmwf.int/en/forecasts/about-our-forecasts/evolution-ifs/cycles/cycle-43r3
@@ -919,3 +936,4 @@ corresponding datasets.
 .. _Cycle 43r3 full documentation: https://www.ecmwf.int/en/publications/search/?solrsort=sort_label%20asc&secondary_title=%22IFS%20Documentation%20CY43R3%22
 .. _xarray: http://xarray.pydata.org/en/stable/index.html
 .. _CORINE 2018: https://land.copernicus.eu/pan-european/corine-land-cover
+.. _ECMWF: https://www.ecmwf.int/
