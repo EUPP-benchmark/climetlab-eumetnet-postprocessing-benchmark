@@ -143,7 +143,7 @@ class TrainingDataForecastPressure(TrainingDataForecast):
         self.source = cml.load_source("zarr", urls)
 
 
-class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
+class TrainingDataForecastSurfaceProcessed(TrainingDataForecast):
     name = None  # TODO
     home_page = "-"  # TODO
     licence = "-"  # TODO

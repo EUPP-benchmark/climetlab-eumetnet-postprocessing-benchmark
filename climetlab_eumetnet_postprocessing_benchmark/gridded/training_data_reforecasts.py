@@ -10,7 +10,7 @@ import climetlab as cml
 from climetlab.indexing import PerUrlIndex
 
 from .training_data_forecasts import TrainingDataForecast, TrainingDataForecastSurface, TrainingDataForecastPressure,\
-    TrainingDataForecastSurfacePostProcessed
+    TrainingDataForecastSurfaceProcessed
 from ..utils import convert_to_datetime
 
 __version__ = "0.2.2"
@@ -124,7 +124,7 @@ class TrainingDataReforecastPressure(TrainingDataReforecast, TrainingDataForecas
         TrainingDataForecastPressure.__init__(self, date, parameter, level, "ensemble")
 
 
-class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, TrainingDataForecastSurfacePostProcessed):
+class TrainingDataReforecastSurfaceProcessed(TrainingDataReforecast, TrainingDataForecastSurfaceProcessed):
     name = None  # TODO
     home_page = "-"  # TODO
     licence = "-"  # TODO
@@ -140,7 +140,7 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataReforecast, Trainin
 
     def __init__(self, date, parameter):
 
-        TrainingDataForecastSurfacePostProcessed.__init__(self, date, parameter, "ensemble")
+        TrainingDataForecastSurfaceProcessed.__init__(self, date, parameter, "ensemble")
         for par in self._not_6:
             self._parameters_loffset.update({par: 0})
 

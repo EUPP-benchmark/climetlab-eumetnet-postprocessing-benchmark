@@ -297,7 +297,7 @@ class TrainingDataForecastPressure(TrainingDataForecast):
             self.source = cml.load_source("indexed-urls", PerUrlIndex(self._PATTERN), request)
 
 
-class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
+class TrainingDataForecastSurfaceProcessed(TrainingDataForecast):
     name = None  # TODO
     home_page = "-"  # TODO
     licence = "-"  # TODO

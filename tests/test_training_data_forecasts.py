@@ -39,7 +39,7 @@ def test_fcs_press():
 
 
 def test_fcs_pp():
-    ds = cml.load_dataset("eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-postprocessed",
+    ds = cml.load_dataset("eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-processed",
                           date="2017-12-28",
                           parameter=["mx2t6"],
                           kind="hr")

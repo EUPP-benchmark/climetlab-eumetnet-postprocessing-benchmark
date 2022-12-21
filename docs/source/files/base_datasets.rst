@@ -294,12 +294,12 @@ to ``'highres'`` or ``'ensemble'``.
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-pressure', "2017-12-02", "z", 500, "highres")
    ds.to_xarray()
 
-1.4 - Postprocessed surface variable forecasts
+1.4 - Processed surface variable forecasts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Postprocessed surface variables can be obtained for each forecast date,
+Processed surface variables can be obtained for each forecast date,
 both for the ensemble (51 members) and deterministic runs. A
-postprocessed variable is either accumulated, averaged or filtered.
+processed variable is either accumulated, averaged or filtered.
 
 It includes:
 
@@ -358,11 +358,11 @@ available for the model steps (in hours) 6, 12, 18, 24, 30, 36, 42, 48,
 150, 156, 162, 168, 174, 180, 186, 192, 198, 204, 210, 216, 222, 228,
 234 and 240. All the steps are automatically retrieved.
 
-**Usage:** The postprocessed surface variables forecasts can be retrieved by calling
+**Usage:** The processed surface variables forecasts can be retrieved by calling
 
 .. code:: python
 
-   ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-postprocessed', date, parameter, kind)
+   ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-processed', date, parameter, kind)
    ds.to_xarray()
 
 where the ``date`` argument is a string with a single date, and the
@@ -382,7 +382,7 @@ deterministic or ensemble forecasts, by setting it to ``'highres'`` or
 
 .. code:: python
 
-   ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-postprocessed', "2017-12-02", "mx2t6", "highres")
+   ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-processed', "2017-12-02", "mx2t6", "highres")
    ds.to_xarray()
 
 1.5 - Surface variable reforecasts
@@ -458,10 +458,10 @@ as a string or an integer.
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-pressure', "2017-12-28", "z", 500)
    ds.to_xarray()
 
-1.7 - Postprocessed surface variable reforecasts
+1.7 - Processed surface variable reforecasts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Postprocessed surface variables as described in section **1.4** can also
+Processed surface variables as described in section **1.4** can also
 be obtained as ensemble reforecasts (11 members).
 
 The reforecast are available for the same model steps as the surface
@@ -476,7 +476,7 @@ variables described in section **1.5**.
 
 .. code:: python
 
-   ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface-postprocessed', date, parameter)
+   ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface-processed', date, parameter)
    ds.to_xarray()
 
 where the ``date`` argument is a string with a single date, and the
@@ -494,7 +494,7 @@ keys.
 
 .. code:: python
 
-   ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface-postprocessed', "2017-12-28", "mx2t6")
+   ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface-processed', "2017-12-28", "mx2t6")
    ds.to_xarray()
 
 1.8 - Static fields

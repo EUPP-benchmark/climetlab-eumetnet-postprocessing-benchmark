@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from .training_data_forecasts import TrainingDataForecastSurface, TrainingDataForecastPressure,\
-    TrainingDataForecastSurfacePostProcessed
+    TrainingDataForecastSurfaceProcessed
 
 __version__ = "0.2.2"
 
@@ -39,7 +39,7 @@ class TrainingDataReforecastPressure(TrainingDataForecastPressure):
         TrainingDataForecastPressure.__init__(self, level, "ensemble", country)
 
 
-class TrainingDataReforecastSurfacePostProcessed(TrainingDataForecastSurfacePostProcessed):
+class TrainingDataReforecastSurfaceProcessed(TrainingDataForecastSurfaceProcessed):
     name = None  # TODO
     home_page = "-"  # TODO
     licence = "-"  # TODO
@@ -52,5 +52,5 @@ class TrainingDataReforecastSurfacePostProcessed(TrainingDataForecastSurfacePost
 
     def __init__(self, country):
 
-        TrainingDataForecastSurfacePostProcessed.__init__(self, "ensemble", country)
+        TrainingDataForecastSurfaceProcessed.__init__(self, "ensemble", country)
 
