@@ -7,7 +7,7 @@ from climetlab.normalize import normalize
 
 from ..config import baseurl
 
-__version__ = "0.2.2"
+__version__ = "0.2.3"
 
 _terms_of_use = """By downloading data from this dataset, you agree to the terms and conditions defined at
 

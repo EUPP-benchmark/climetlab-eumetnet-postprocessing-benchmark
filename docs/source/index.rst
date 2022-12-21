@@ -15,7 +15,7 @@ then be processed by other languages, and a few line of Python codes suffice to 
 
 .. note::
 
-   * **Climetlab plugin version**: 0.2.2
+   * **Climetlab plugin version**: 0.2.3
    * **EUPPBench dataset version**: v1.0
    * **Base dataset version**: v1.0
    * **Dataset status**: :ref:`files/datasets_status:Datasets status`
@@ -48,6 +48,12 @@ notebooks <https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmar
 
 -  `demo_ensemble_forecasts.ipynb <https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks/demo_ensemble_forecasts.ipynb>`__
    |image2| |image3| |image4| |image7|
+
+-  `demo_EUPPBench_germany_station_data.ipynb <https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks/demo_EUPPBench_germany_station_data.ipynb>`__
+   |image15| |image16| |image17| |image21|
+
+-  `demo_EUPPBench_gridded_data.ipynb <https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks/demo_EUPPBench_gridded_data.ipynb>`__
+   |image18| |image19| |image20| |image22|
 
 The climetlab python plugin allows users to easily access the data with a few
 lines of code such as:
@@ -95,3 +101,19 @@ Indices and tables
    :target: https://deepnote.com/launch?name=MyProject&url=https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks/demo_training_data_forecasts.ipynb
 .. |image7| image:: https://deepnote.com/buttons/launch-in-deepnote-small.svg
    :target: https://deepnote.com/launch?name=MyProject&url=https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks/demo_ensemble_forecasts.ipynb
+.. |image15| image:: https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg
+   :target: https://nbviewer.jupyter.org/github/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/notebooks/demo_EUPPBench_germany_station_data.ipynb
+.. |image16| image:: https://colab.research.google.com/assets/colab-badge.svg
+   :target: https://colab.research.google.com/github/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/notebooks/demo_EUPPBench_germany_station_data.ipynb
+.. |image17| image:: https://mybinder.org/badge_logo.svg
+   :target: https://mybinder.org/v2/gh/Climdyn/climetlab-eumetnet-postprocessing-benchmark/main?filepath=notebooks/demo_EUPPBench_germany_station_data.ipynb
+.. |image18| image:: https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg
+   :target: https://nbviewer.jupyter.org/github/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/notebooks/demo_EUPPBench_gridded_data.ipynb
+.. |image19| image:: https://colab.research.google.com/assets/colab-badge.svg
+   :target: https://colab.research.google.com/github/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/notebooks/demo_EUPPBench_gridded_data.ipynb
+.. |image20| image:: https://mybinder.org/badge_logo.svg
+   :target: https://mybinder.org/v2/gh/Climdyn/climetlab-eumetnet-postprocessing-benchmark/main?filepath=notebooks/demo_EUPPBench_gridded_data.ipynb
+.. |image21| image:: https://deepnote.com/buttons/launch-in-deepnote-small.svg
+   :target: https://deepnote.com/launch?name=MyProject&url=https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks/demo_EUPPBench_germany_station_data.ipynb
+.. |image22| image:: https://deepnote.com/buttons/launch-in-deepnote-small.svg
+   :target: https://deepnote.com/launch?name=MyProject&url=https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks/demo_EUPPBench_gridded_data.ipynb

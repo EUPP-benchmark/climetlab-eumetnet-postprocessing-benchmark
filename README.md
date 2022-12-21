@@ -9,7 +9,7 @@ A plugin for [climetlab](https://github.com/ecmwf/climetlab) to retrieve the Eum
 
 Ease the download of the dataset time-aligned forecasts, reforecasts (hindcasts) and observations ([ERA5 reanalysis](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)).
 
-> * **Climetlab plugin version**: 0.2.2
+> * **Climetlab plugin version**: 0.2.3
 > * **EUPPBench dataset version**: 1.0
 > * **Base dataset version**: 1.0
 > * **Dataset status**: [Datasets status](https://eupp-benchmark.github.io/EUPPBench-doc/files/datasets_status.html#datasets-status)
@@ -41,6 +41,18 @@ See the [demo notebooks](https://github.com/Climdyn/climetlab-eumetnet-postproce
   [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Climdyn/climetlab-eumetnet-postprocessing-benchmark/main?filepath=notebooks/demo_ensemble_forecasts.ipynb)
   [<img src="https://deepnote.com/buttons/launch-in-deepnote-small.svg">](https://deepnote.com/launch?name=MyProject&url=https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks/demo_ensemble_forecasts.ipynb)
 
+- [demo_EUPPBench_germany_station_data.ipynb](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks/demo_EUPPBench_germany_station_data.ipynb)
+  [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/notebooks/demo_EUPPBench_germany_station_data.ipynb)
+  [![Open in colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/notebooks/demo_EUPPBench_germany_station_data.ipynb)
+  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Climdyn/climetlab-eumetnet-postprocessing-benchmark/main?filepath=notebooks/demo_EUPPBench_germany_station_data.ipynb)
+  [<img src="https://deepnote.com/buttons/launch-in-deepnote-small.svg">](https://deepnote.com/launch?name=MyProject&url=https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks/demo_EUPPBench_germany_station_data.ipynb)
+
+- [demo_EUPPBench_gridded_data.ipynb](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks/demo_EUPPBench_gridded_data.ipynb)
+  [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/notebooks/demo_EUPPBench_gridded_data.ipynb)
+  [![Open in colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/notebooks/demo_EUPPBench_gridded_data.ipynb)
+  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Climdyn/climetlab-eumetnet-postprocessing-benchmark/main?filepath=notebooks/demo_EUPPBench_gridded_data.ipynb)
+  [<img src="https://deepnote.com/buttons/launch-in-deepnote-small.svg">](https://deepnote.com/launch?name=MyProject&url=https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/tree/main/notebooks/demo_EUPPBench_gridded_data.ipynb)
+ 
 The climetlab python package allows easy access to the data with a few lines of code such as:
 ``` python
 # Uncomment the line below if climetlab and the plugin are not yet installed
