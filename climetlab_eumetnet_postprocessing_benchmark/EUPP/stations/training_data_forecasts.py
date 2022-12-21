@@ -152,7 +152,7 @@ class TrainingDataForecastPressure(TrainingDataForecast):
         return None
 
 
-class TrainingDataForecastSurfacePostProcessed(TrainingDataForecast):
+class TrainingDataForecastSurfaceProcessed(TrainingDataForecast):
     name = None  # TODO
     home_page = "-"  # TODO
     licence = "-"  # TODO

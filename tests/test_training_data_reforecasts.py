@@ -29,7 +29,7 @@ import numpy as np
 
 
 # def test_rfcs_surf_pp():
-#     ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface-postprocessed',
+#     ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface-processed',
 #                           date="2017-12-28",
 #                           parameter="mx2t6")
 #     xds = ds.to_xarray()

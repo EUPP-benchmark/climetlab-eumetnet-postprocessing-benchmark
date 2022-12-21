@@ -24,7 +24,7 @@ A forecasts and observations dataset on a regular latitude-longitude grid.
 
 -  The gridded EUPPBench postprocessing benchmark dataset contains
    `ECMWF <https://www.ecmwf.int/>`__ ensemble and deterministic
-   forecasts over a small domain in Europe, rom 45.75° to 53.5° in latitude, and from 2.5° to 10.5° in longitude,
+   forecasts over a small domain in Europe, from 45.75° to 53.5° in latitude, and from 2.5° to 10.5° in longitude,
    and covers the years 2017-2018.
 -  It also contains the corresponding ERA5 reanalysis for the purpose of
    providing observations for the benchmark.
@@ -267,12 +267,12 @@ to ``'highres'`` or ``'ensemble'``.
    ds = cml.load_dataset('EUPPBench-training-data-gridded-forecasts-pressure', 500, "highres")
    ds.to_xarray()
 
-1.4 - Postprocessed surface variable forecasts
+1.4 - Processed surface variable forecasts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Postprocessed surface variables can be obtained for each forecast date,
+Processed surface variables can be obtained for each forecast date,
 both for the ensemble (51 members) and deterministic runs. A
-postprocessed variable is either accumulated, averaged or filtered.
+processed variable is either accumulated, averaged or filtered.
 
 It includes:
 
@@ -327,11 +327,11 @@ It includes:
 All these variables are accumulated or filtered over the last 6 hours
 preceding a given forecast timestamp. As a consequence, a `6' was added to the ECMWF key to denote this.
 
-**Usage:** The postprocessed surface variables forecasts can be retrieved by calling
+**Usage:** The processed surface variables forecasts can be retrieved by calling
 
 .. code:: python
 
-   ds = cml.load_dataset('EUPPBench-training-data-gridded-forecasts-surface-postprocessed', kind)
+   ds = cml.load_dataset('EUPPBench-training-data-gridded-forecasts-surface-processed', kind)
    ds.to_xarray()
 
 where the ``kind`` argument allows to select the deterministic or ensemble forecasts, by setting it to ``'highres'`` or
@@ -341,7 +341,7 @@ where the ``kind`` argument allows to select the deterministic or ensemble forec
 
 .. jupyter-execute::
 
-   ds = cml.load_dataset('EUPPBench-training-data-gridded-forecasts-surface-postprocessed', "highres")
+   ds = cml.load_dataset('EUPPBench-training-data-gridded-forecasts-surface-processed', "highres")
    ds.to_xarray()
 
 1.5 - Surface variable reforecasts
@@ -400,10 +400,10 @@ The ``level`` argument is the pressure level, as a string or an integer.
    ds = cml.load_dataset('EUPPBench-training-data-gridded-reforecasts-pressure', 500)
    ds.to_xarray()
 
-1.7 - Postprocessed surface variable reforecasts
+1.7 - Processed surface variable reforecasts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Postprocessed surface variables as described in section :ref:`files/EUPPBench_datasets:1.4 - Postprocessed surface variable forecasts`
+Processed surface variables as described in section :ref:`files/EUPPBench_datasets:1.4 - Processed surface variable forecasts`
 can also be obtained as ensemble reforecasts (11 members).
 
 .. note::
@@ -415,14 +415,14 @@ can also be obtained as ensemble reforecasts (11 members).
 
 .. code:: python
 
-   ds = cml.load_dataset('EUPPBench-training-data-gridded-reforecasts-surface-postprocessed')
+   ds = cml.load_dataset('EUPPBench-training-data-gridded-reforecasts-surface-processed')
    ds.to_xarray()
 
 **Example:**
 
 .. jupyter-execute::
 
-   ds = cml.load_dataset('EUPPBench-training-data-gridded-reforecasts-surface-postprocessed')
+   ds = cml.load_dataset('EUPPBench-training-data-gridded-reforecasts-surface-processed')
    ds.to_xarray()
 
 1.8 - Static fields
@@ -598,24 +598,24 @@ The ``country`` argument must be chosen amongst the list [``belgium``, ``austria
    ds = cml.load_dataset('EUPPBench-training-data-stations-forecasts-pressure', 500, "highres", "austria")
    ds.to_xarray()
 
-2.4 - Postprocessed surface variable forecasts
+2.4 - Processed surface variable forecasts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Postprocessed surface variables can be obtained for each forecast date,
+Processed surface variables can be obtained for each forecast date,
 both for the ensemble (51 members) and deterministic runs. A
-postprocessed variable is either accumulated, averaged or filtered.
+processed variable is either accumulated, averaged or filtered.
 
-The same variables as in section :ref:`files/EUPPBench_datasets:2.4 - Postprocessed surface variable forecasts` are available.
+The same variables as in section :ref:`files/EUPPBench_datasets:2.4 - Processed surface variable forecasts` are available.
 
 .. note::
 
    Only the variables ``tp6`` and ``10fg6`` have presently station observations.
 
-**Usage:** The postprocessed surface variables forecasts can be retrieved by calling
+**Usage:** The processed surface variables forecasts can be retrieved by calling
 
 .. code:: python
 
-   ds = cml.load_dataset('EUPPBench-training-data-stations-forecasts-surface-postprocessed', kind, country)
+   ds = cml.load_dataset('EUPPBench-training-data-stations-forecasts-surface-processed', kind, country)
    ds.to_xarray()
 
 where the ``kind`` argument allows to select the deterministic or ensemble forecasts, by setting it to ``'highres'`` or
@@ -626,7 +626,7 @@ The ``country`` argument must be chosen amongst the list [``belgium``, ``austria
 
 .. jupyter-execute::
 
-   ds = cml.load_dataset('EUPPBench-training-data-stations-forecasts-surface-postprocessed', "highres", "austria")
+   ds = cml.load_dataset('EUPPBench-training-data-stations-forecasts-surface-processed', "highres", "austria")
    ds.to_xarray()
 
 2.5 - Surface variable reforecasts
@@ -695,10 +695,10 @@ The ``country`` argument must be chosen amongst the list [``belgium``, ``austria
    ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-pressure', 500, "austria")
    ds.to_xarray()
 
-2.7 - Postprocessed surface variable reforecasts
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.7 - Processed surface variable reforecasts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Postprocessed surface variables as described in section :ref:`files/EUPPBench_datasets:1.4 - Postprocessed surface variable forecasts`
+Processed surface variables as described in section :ref:`files/EUPPBench_datasets:1.4 - Processed surface variable forecasts`
 can also be obtained as ensemble reforecasts (11 members).
 
 .. note::
@@ -714,7 +714,7 @@ can also be obtained as ensemble reforecasts (11 members).
 
 .. code:: python
 
-   ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-surface-postprocessed', country)
+   ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-surface-processed', country)
    ds.to_xarray()
 
 The ``country`` argument must be chosen amongst the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
@@ -723,7 +723,7 @@ The ``country`` argument must be chosen amongst the list [``belgium``, ``austria
 
 .. jupyter-execute::
 
-   ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-surface-postprocessed', "austria")
+   ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-surface-processed', "austria")
    ds.to_xarray()
 
 3 - Getting the observations corresponding to the (re)forecasts
@@ -735,7 +735,7 @@ using the ``get_observations_as_xarray`` method:
 
 .. jupyter-execute::
 
-   ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-surface-postprocessed', "austria")
+   ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-surface-processed', "austria")
    obs = ds.get_observations_as_xarray()
    obs
 
@@ -899,7 +899,7 @@ one can save them to disk by using the :meth:`xarray.Dataset.to_netcdf` function
 
 .. code:: python
 
-   ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-surface-postprocessed', "austria")
+   ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-surface-processed', "austria")
    obs = ds.get_observations_as_xarray()
    obs.to_netcdf('austria_reforecasts.nc')
 
