@@ -24,7 +24,7 @@ then be processed by other languages, and a few line of Python codes suffice to 
    :maxdepth: 1
    :caption: Currently available datasets:
 
-   files/EUPP_datasets
+   files/EUPPBench_datasets
    files/base_datasets
 
 Using climetlab to access the data

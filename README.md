@@ -18,7 +18,7 @@ Ease the download of the dataset time-aligned forecasts, reforecasts (hindcasts)
 
 There are currently two sub-datasets available:
 
-* [The EUPPBench dataset](https://eupp-benchmark.github.io/EUPPBench-doc/files/EUPP_datasets.html)
+* [The EUPPBench dataset](https://eupp-benchmark.github.io/EUPPBench-doc/files/EUPPBench_datasets.html)
 * [The base dataset over Europe's domain](https://eupp-benchmark.github.io/EUPPBench-doc/files/base_datasets.html)
 
 They are both documented [here](https://eupp-benchmark.github.io/EUPPBench-doc/index.html).
