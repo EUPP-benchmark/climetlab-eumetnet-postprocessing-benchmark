@@ -51,13 +51,13 @@ jobs:
           
           python-version: ${{ matrix.python-version }}
           
-
       - name: Updating pip
         run: |
-          python -m pip install --upgrade pip
-          pip debug --verbose
+          $CONDA/bin/conda install pip
+          $CONDA/bin/pip debug --verbose
 
-      - run: pip install climetlab
+      - name: Installing climetlab
+        run: $CONDA/bin/pip install climetlab
 
       - name: Installing climetlab-eumetnet-postprocessing-benchmark
         run: |
@@ -65,19 +65,20 @@ jobs:
           ls
           ls *
           ls */*
-          pip install .
-          pip install s3fs  # disabled for the moment in climetlab setup
+          $CONDA/bin/pip install .
+          $CONDA/bin/pip install s3fs  # disabled for the moment in climetlab setup
 
       - name: Install tests tools
         run: |
-          pip install pytest
-          pip freeze
-          pip install nbformat nbconvert ipykernel matplotlib cartopy # dependencies for test/test_notebooks.py
+          $CONDA/bin/pip install pytest
+          $CONDA/bin/pip freeze
+          $CONDA/bin/pip install nbformat nbconvert ipykernel matplotlib # dependencies for test/test_notebooks.py
+          $CONDA/bin/conda install cartopy # dependencies for test/test_notebooks.py
 
       - name: Run tests
         run: |
           cd tests
-          pytest
+          $CONDA/bin/pytest
 
   deploy:
 
