@@ -66,6 +66,7 @@ jobs:
           ls *
           ls */*
           pip install .
+          pip install s3fs
 
       - name: Install tests tools
         run: |
