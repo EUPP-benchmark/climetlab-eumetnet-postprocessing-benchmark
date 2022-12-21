@@ -19,6 +19,9 @@ Copyright (c) 2021 European Centre for Medium-Range Weather Forecasts (ECMWF).
 # Observation data #
 --------------------
 
+Gridded data
+------------
+
 Copernicus ERA5 gridded reanalysis data source
 
 Source https://cds.climate.copernicus.eu/
@@ -31,6 +34,11 @@ Hersbach et al. (2018): ERA5 hourly data on single levels from 1979 to present.
 
 Copernicus Climate Change Service (C3S) Climate Data Store (CDS). (Accessed on < 21-04-2021 >), doi:10.24381/cds.adbb2d47.
 
+Station observations
+--------------------
+
+Source: Royal Meteorological Institute of Belgium (RMIB), https://www.meteo.be; Météo-France, https://meteofrance.fr; ZAMG, Zentralanstalt für Meteorologie und Geodynamik, https://www.zamg.ac.at/; Royal Netherlands Meteorological Institute (KNMI), https://www.knmi.nl; DWD, Deutscher Wetterdienst, https://www.dwd.de/
+
 ----------------------
 # Static fields data #
 ----------------------
@@ -40,3 +48,12 @@ Land usage and model altitude:
 European Union, Copernicus Land Monitoring Service 2022, European Environment Agency (EEA)
 
 Retrieved from https://land.copernicus.eu/pan-european/corine-land-cover, July 2022
+
+Surface geopotential:
+
+Source https://www.ecmwf.int
+
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+Copyright (c) 2021 European Centre for Medium-Range Weather Forecasts (ECMWF).
+
+
