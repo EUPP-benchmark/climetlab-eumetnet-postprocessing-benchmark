@@ -66,13 +66,13 @@ jobs:
           ls *
           ls */*
           pip install .
-          pip install s3fs
+          pip install s3fs  # disabled for the moment in climetlab setup
 
       - name: Install tests tools
         run: |
           pip install pytest
           pip freeze
-          pip install nbformat nbconvert ipykernel matplotlib # dependencies for test/test_notebooks.py
+          pip install nbformat nbconvert ipykernel matplotlib cartopy # dependencies for test/test_notebooks.py
 
       - name: Run tests
         run: |
