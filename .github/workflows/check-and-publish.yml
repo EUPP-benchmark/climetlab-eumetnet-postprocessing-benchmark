@@ -72,8 +72,7 @@ jobs:
         run: |
           $CONDA/bin/pip install pytest
           $CONDA/bin/pip freeze
-          $CONDA/bin/pip install nbformat nbconvert ipykernel matplotlib # dependencies for test/test_notebooks.py
-          $CONDA/bin/conda install cartopy # dependencies for test/test_notebooks.py
+          $CONDA/bin/conda install cartopy=0.21 nbformat nbconvert ipykernel matplotlib -c conda-forge # dependencies for test/test_notebooks.py
 
       - name: Run tests
         run: |
