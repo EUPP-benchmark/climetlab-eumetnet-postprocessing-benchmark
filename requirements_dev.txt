@@ -16,3 +16,4 @@ sphinx
 sphinxcontrib-bibtex
 jupyter-sphinx
 docutils==0.16
+cartopy
