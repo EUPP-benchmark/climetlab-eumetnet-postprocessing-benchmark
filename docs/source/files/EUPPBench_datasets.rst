@@ -348,7 +348,7 @@ where the ``kind`` argument allows to select the deterministic or ensemble forec
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The surface variables for the ensemble reforecasts (11 members) can be
-obtained for each reforecast date. All the variables described at in the section :ref:`files/EUPP_datasets:1.2 - Surface variable forecasts`
+obtained for each reforecast date. All the variables described at in the section :ref:`files/EUPPBench_datasets:1.2 - Surface variable forecasts`
 above are available.
 
 .. note::
@@ -376,7 +376,7 @@ above are available.
 
 The variables on pressure level for the ensemble reforecasts (11
 members) can be obtained for each reforecast date. All the variables
-described in the section :ref:`files/EUPP_datasets:1.3 - Pressure level variable forecasts` above are available.
+described in the section :ref:`files/EUPPBench_datasets:1.3 - Pressure level variable forecasts` above are available.
 
 .. note::
 
@@ -403,7 +403,7 @@ The ``level`` argument is the pressure level, as a string or an integer.
 1.7 - Postprocessed surface variable reforecasts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Postprocessed surface variables as described in section :ref:`files/EUPP_datasets:1.4 - Postprocessed surface variable forecasts`
+Postprocessed surface variables as described in section :ref:`files/EUPPBench_datasets:1.4 - Postprocessed surface variable forecasts`
 can also be obtained as ensemble reforecasts (11 members).
 
 .. note::
@@ -507,7 +507,7 @@ All the `Extreme Forecast
 Index <https://www.ecmwf.int/assets/elearning/efi/efi1/story_html5.html>`__
 (EFI) variables can be obtained for each forecast date.
 
-The same variables as in section :ref:`files/EUPP_datasets:1.1 - Extreme Forecast Index` are available.
+The same variables as in section :ref:`files/EUPPBench_datasets:1.1 - Extreme Forecast Index` are available.
 
 The EFI are available for the model step ranges (in hours) 0-24, 24-48,
 48-72, 72-96, 96-120.
@@ -541,7 +541,7 @@ The surface variables can be obtained for each forecast date, both for
 the ensemble (51 members) and deterministic runs.
 
 
-The same variables as in section :ref:`files/EUPP_datasets:1.2 - Surface variable forecasts` are available.
+The same variables as in section :ref:`files/EUPPBench_datasets:1.2 - Surface variable forecasts` are available.
 
 .. note::
 
@@ -572,7 +572,7 @@ The ``country`` argument must be chosen amongst the list [``belgium``, ``austria
 The variables on pressure level can be obtained for each forecast date,
 both for the ensemble (51 members) and deterministic runs.
 
-The same variables as in section :ref:`files/EUPP_datasets:2.3 - Pressure level variable forecasts` are available.
+The same variables as in section :ref:`files/EUPPBench_datasets:2.3 - Pressure level variable forecasts` are available.
 
 .. note::
 
@@ -605,7 +605,7 @@ Postprocessed surface variables can be obtained for each forecast date,
 both for the ensemble (51 members) and deterministic runs. A
 postprocessed variable is either accumulated, averaged or filtered.
 
-The same variables as in section :ref:`files/EUPP_datasets:2.4 - Postprocessed surface variable forecasts` are available.
+The same variables as in section :ref:`files/EUPPBench_datasets:2.4 - Postprocessed surface variable forecasts` are available.
 
 .. note::
 
@@ -633,7 +633,7 @@ The ``country`` argument must be chosen amongst the list [``belgium``, ``austria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The surface variables for the ensemble reforecasts (11 members) can be
-obtained for each reforecast date. All the variables described at in the section :ref:`files/EUPP_datasets:1.2 - Surface variable forecasts`
+obtained for each reforecast date. All the variables described at in the section :ref:`files/EUPPBench_datasets:1.2 - Surface variable forecasts`
 above are available.
 
 .. note::
@@ -666,7 +666,7 @@ where the ``country`` argument must be chosen amongst the list [``belgium``, ``a
 
 The variables on pressure level for the ensemble reforecasts (11
 members) can be obtained for each reforecast date. All the variables
-described in the section :ref:`files/EUPP_datasets:1.3 - Pressure level variable forecasts` above are available.
+described in the section :ref:`files/EUPPBench_datasets:1.3 - Pressure level variable forecasts` above are available.
 
 .. note::
 
@@ -698,7 +698,7 @@ The ``country`` argument must be chosen amongst the list [``belgium``, ``austria
 2.7 - Postprocessed surface variable reforecasts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Postprocessed surface variables as described in section :ref:`files/EUPP_datasets:1.4 - Postprocessed surface variable forecasts`
+Postprocessed surface variables as described in section :ref:`files/EUPPBench_datasets:1.4 - Postprocessed surface variable forecasts`
 can also be obtained as ensemble reforecasts (11 members).
 
 .. note::
@@ -894,7 +894,7 @@ Saving the data to a NetCDF file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is particularly useful if one wants to reuse the data with another programming language.
-For example, if one has downloaded the observations shown in section :ref:`files/EUPP_datasets:3 - Getting the observations corresponding to the (re)forecasts`,
+For example, if one has downloaded the observations shown in section :ref:`files/EUPPBench_datasets:3 - Getting the observations corresponding to the (re)forecasts`,
 one can save them to disk by using the :meth:`xarray.Dataset.to_netcdf` functionality of the `xarray`_ :class:`~xarray.Dataset`:
 
 .. code:: python
