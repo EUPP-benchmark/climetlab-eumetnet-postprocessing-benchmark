@@ -129,7 +129,7 @@ jobs:
           C:\Miniconda\condabin\conda.bat activate base
           pip install pytest
           pip freeze
-          pip install nbformat nbconvert ipykernel matplotlib # dependencies for test/test_notebooks.py
+          pip install nbformat nbconvert ipykernel matplotlib==3.5 # dependencies for test/test_notebooks.py (3.5 for matplotlib is temporary)
           C:\Miniconda\condabin\conda.bat install cartopy # dependencies for test/test_notebooks.py
 
       - name: Run tests
