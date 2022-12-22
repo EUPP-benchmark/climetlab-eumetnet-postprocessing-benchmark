@@ -13,7 +13,7 @@ from .training_data_forecasts import TrainingDataForecast, TrainingDataForecastS
     TrainingDataForecastSurfaceProcessed
 from ..utils import convert_to_datetime
 
-__version__ = "0.2.3"
+__version__ = "0.2.4"
 
 # TODO: Add a check for valid reforecast date and then warn the user if not valid
 
