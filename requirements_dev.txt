@@ -17,3 +17,4 @@ sphinxcontrib-bibtex
 jupyter-sphinx
 docutils==0.16
 cartopy
+sphinxcontrib-svg2pdfconverter

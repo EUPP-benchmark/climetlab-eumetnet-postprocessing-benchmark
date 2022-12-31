@@ -34,6 +34,7 @@ extensions = [
     'sphinx.ext.autosectionlabel',
     'sphinxcontrib.bibtex',
     'jupyter_sphinx',
+    'sphinxcontrib.inkscapeconverter',
 ]
 
 templates_path = ['_templates']
