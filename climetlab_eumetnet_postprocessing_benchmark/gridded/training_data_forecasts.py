@@ -329,19 +329,12 @@ class TrainingDataForecastSurfaceProcessed(TrainingDataForecast):
     for par in _not_6:
         _parameters_ufunc[par] = 'sum'
 
-    _parameters_base = {"10fg6": 0,
-                        "mn2t6": 0,
-                        "mx2t6": 0}
+    _parameters_offset = {"10fg6": '0H',
+                           "mn2t6": '0H',
+                           "mx2t6": '0H'}
 
     for par in _not_6:
-        _parameters_base[par] = 0
-
-    _parameters_loffset = {"10fg6": 0,
-                           "mn2t6": 0,
-                           "mx2t6": 0}
-
-    for par in _not_6:
-        _parameters_loffset[par] = '5H'
+        _parameters_offset[par] = '5H'
 
     @normalize("parameter", _surf_pp_parameters)
     @normalize("date", "date(%Y%m%d)")
@@ -414,17 +407,14 @@ class TrainingDataForecastSurfaceProcessed(TrainingDataForecast):
                 var = var[1:]
 
             if self._parameters_ufunc[var] == "sum":
-                ds_resampled = da.resample({'step': '6H'}, label='right', closed='right',
-                                           base=self._parameters_base[var],
-                                           loffset=self._parameters_loffset[var]).sum()
+                ds_resampled = da.resample({'step': '6H'},
+                                           offset=self._parameters_offset[var]).sum()
             elif self._parameters_ufunc[var] == "min":
-                ds_resampled = da.resample({'step': '6H'}, label='right', closed='right',
-                                           base=self._parameters_base[var],
-                                           loffset=self._parameters_loffset[var]).min()
+                ds_resampled = da.resample({'step': '6H'},
+                                           offset=self._parameters_offset[var]).min()
             elif self._parameters_ufunc[var] == "max":
-                ds_resampled = da.resample({'step': '6H'}, label='right', closed='right',
-                                           base=self._parameters_base[var],
-                                           loffset=self._parameters_loffset[var]).max()
+                ds_resampled = da.resample({'step': '6H'},
+                                           offset=self._parameters_offset[var]).max()
             else:  # for debug, do nothing
                 ds_resampled = da
             ds_list.append(ds_resampled.to_dataset())
