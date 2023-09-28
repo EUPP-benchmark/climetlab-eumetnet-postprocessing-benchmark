@@ -13,7 +13,7 @@ from .training_data_forecasts import TrainingDataForecast, TrainingDataForecastS
     TrainingDataForecastSurfaceProcessed
 from ..utils import convert_to_datetime
 
-__version__ = "0.2.4"
+__version__ = "0.2.5"
 
 # TODO: Add a check for valid reforecast date and then warn the user if not valid
 
@@ -142,7 +142,7 @@ class TrainingDataReforecastSurfaceProcessed(TrainingDataReforecast, TrainingDat
 
         TrainingDataForecastSurfaceProcessed.__init__(self, date, parameter, "ensemble")
         for par in self._not_6:
-            self._parameters_loffset.update({par: 0})
+            self._parameters_offset.update({par: '0H'})
 
     # Warning : function not yet ready !!!!
     def get_observations_as_xarray(self, rfcs_kwargs=None, **obs_kwargs):
