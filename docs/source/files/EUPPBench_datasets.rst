@@ -142,13 +142,13 @@ It includes:
 | s://apps.ecmwf.int/codes/ |           |                           |
 | grib/param-db/?id=164>`__ |           |                           |
 +---------------------------+-----------+---------------------------+
-| `100 metre U wind         | 100u      | Observations not          |
-| component  <https:/       |           | available                 |
+| `100 metre U wind         | 100u      |                           |
+| component  <https:/       |           |                           |
 | /apps.ecmwf.int/codes/gri |           |                           |
 | b/param-db/?id=228246>`__ |           |                           |
 +---------------------------+-----------+---------------------------+
-| `100 metre V wind         | 100v      | Observations not          |
-| component  <https:/       |           | available                 |
+| `100 metre V wind         | 100v      |                           |
+| component  <https:/       |           |                           |
 | /apps.ecmwf.int/codes/gri |           |                           |
 | b/param-db/?id=228247>`__ |           |                           |
 +---------------------------+-----------+---------------------------+
