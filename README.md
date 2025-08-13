@@ -10,18 +10,23 @@ A plugin for [climetlab](https://github.com/ecmwf/climetlab) to retrieve the Eum
 Ease the download of the dataset time-aligned forecasts, reforecasts (hindcasts) and observations ([ERA5 reanalysis](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)).
 
 > * **Climetlab plugin version**: 0.2.5
-> * **EUPPBench dataset version**: 1.0
+> * **Intake catalogues version**: 0.2.5
 > * **Base dataset version**: 1.0
+> * **EUPPBench dataset version**: 1.0
+> * **EUPreciPBench dataset version**: 0.5
 > * **Dataset status**: [Datasets status](https://eupp-benchmark.github.io/EUPPBench-doc/files/datasets_status.html#datasets-status)
+
+An [Intake catalogue](https://github.com/EUPP-benchmark/intake-eumetnet-postprocessing-benchmark) is also available, as an alternative way to get the datasets.
 
 ## Documentation of the datasets
 
-There are currently two sub-datasets available:
+There are currently three sub-datasets available:
 
-* [The EUPPBench dataset](https://eupp-benchmark.github.io/EUPPBench-doc/files/EUPPBench_datasets.html)
 * [The base dataset over Europe's domain](https://eupp-benchmark.github.io/EUPPBench-doc/files/base_datasets.html)
+* [The EUPPBench dataset](https://eupp-benchmark.github.io/EUPPBench-doc/files/EUPPBench_datasets.html)
+* [The EUPreciPBench dataset]() (not accessible yet)
 
-They are both documented [here](https://eupp-benchmark.github.io/EUPPBench-doc/index.html).
+They are documented [here](https://eupp-benchmark.github.io/EUPPBench-doc/index.html).
 
 ## Using climetlab to access the data
 
@@ -70,12 +75,12 @@ obs = ds.get_observations_as_xarray()
 
 ## Support and contributing
 
-Please open a [issue on github](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/issues).
+Please open a [issue on github](https://github.com/EUPP-benchmark/climetlab-eumetnet-postprocessing-benchmark/issues).
 
 ## LICENSE
 
-See the [LICENSE](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/LICENSE) file for the code, and the [DATA_LICENSE](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/DATA_LICENSE) for the data.
+See the [LICENSE](https://github.com/EUPP-benchmark/climetlab-eumetnet-postprocessing-benchmark/blob/main/LICENSE) file for the code, and the [DATA_LICENSE](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/DATA_LICENSE) for the data.
 
 ## Authors
 
-See the [CONTRIBUTORS.md](https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/blob/main/CONTRIBUTORS.md) file.
+See the [CONTRIBUTORS.md](https://github.com/EUPP-benchmark/climetlab-eumetnet-postprocessing-benchmark/blob/main/CONTRIBUTORS.md) file.
