@@ -28,7 +28,7 @@ setuptools.setup(
     name=package_name,
     version=version,
     description=(
-        "A plugin for climetlab to retrieve the Eumetnet postprocessing benchmark dataset."
+        "A plugin for climetlab to retrieve the EUMETNET postprocessing benchmark dataset."
     ),
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
