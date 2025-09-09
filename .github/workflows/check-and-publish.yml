@@ -36,13 +36,8 @@ jobs:
         # platform: ["ubuntu-latest"]
         # python-version: ["3.9"]
         platform: ["ubuntu-latest", "macos-latest", "windows-latest"]
-        python-version: ["3.9", "3.10", "3.11"]
-        exclude:
-          # excludes python 3.11 on windows
-          - platform: "windows-latest"
-            python-version: "3.11"
+        python-version: ["3.9", "3.10"]
 
-    
     name: Python ${{ matrix.python-version }} on ${{ matrix.platform }}
     runs-on: ${{ matrix.platform }}
     
