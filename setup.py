@@ -73,6 +73,12 @@ setuptools.setup(
             "EUPPBench-training-data-stations-reforecasts-surface= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_reforecasts:TrainingDataReforecastSurface",
             "EUPPBench-training-data-stations-reforecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_reforecasts:TrainingDataReforecastPressure",
             "EUPPBench-training-data-stations-reforecasts-surface-processed= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_reforecasts:TrainingDataReforecastSurfaceProcessed",
+
+            # EUPrecipP phase datasets
+            # gridded datasets
+            "EUPreciPBench-gridded-precipitation-forecasts= climetlab_eumetnet_postprocessing_benchmark.EUPreciP.precipitations:PrecipitationForecast",
+            "EUPreciPBench-gridded-predictors-forecasts= climetlab_eumetnet_postprocessing_benchmark.EUPreciP.precipitations:PredictorsForecast",
+            "EUPreciPBench-gridded-precipitation-observations= climetlab_eumetnet_postprocessing_benchmark.EUPreciP.precipitations:PrecipitationObservation",
         ]
         # source plugins would be here
         # "climetlab.sources": []

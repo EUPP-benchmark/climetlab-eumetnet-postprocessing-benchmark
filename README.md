@@ -9,8 +9,8 @@ A plugin for [climetlab](https://github.com/ecmwf/climetlab) to retrieve the Eum
 
 Ease the download of the dataset time-aligned forecasts, reforecasts (hindcasts) and observations ([ERA5 reanalysis](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)).
 
-> * **Climetlab plugin version**: 0.2.5
-> * **Intake catalogues version**: 0.2.5
+> * **Climetlab plugin version**: 0.3.0
+> * **Intake catalogues version**: 0.2.0
 > * **Base dataset version**: 1.0
 > * **EUPPBench dataset version**: 1.0
 > * **EUPreciPBench dataset version**: 0.5
@@ -24,7 +24,7 @@ There are currently three sub-datasets available:
 
 * [The base dataset over Europe's domain](https://eupp-benchmark.github.io/EUPPBench-doc/files/base_datasets.html)
 * [The EUPPBench dataset](https://eupp-benchmark.github.io/EUPPBench-doc/files/EUPPBench_datasets.html)
-* [The EUPreciPBench dataset]() (not accessible yet)
+* [The EUPreciPBench dataset]()
 
 They are documented [here](https://eupp-benchmark.github.io/EUPPBench-doc/index.html).
 
