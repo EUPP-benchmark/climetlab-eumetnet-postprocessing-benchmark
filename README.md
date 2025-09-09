@@ -1,4 +1,4 @@
-# The Eumetnet postprocessing benchmark dataset Climetlab plugin
+# The EUMETNET postprocessing benchmark dataset Climetlab plugin
 
 [![PyPI version](https://badge.fury.io/py/climetlab-eumetnet-postprocessing-benchmark.svg)](https://badge.fury.io/py/climetlab-eumetnet-postprocessing-benchmark)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/climetlab-eumetnet-postprocessing-benchmark.svg)](https://pypi.org/project/climetlab-eumetnet-postprocessing-benchmark/)
