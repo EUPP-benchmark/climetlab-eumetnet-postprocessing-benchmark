@@ -25,6 +25,7 @@ then be processed by other languages, and a few line of Python codes suffice to 
    :caption: Currently available datasets:
 
    files/EUPPBench_datasets
+   files/EUPreciPBench_datasets
    files/base_datasets
 
 Using climetlab to access the data
@@ -68,6 +69,27 @@ lines of code such as:
 
 which for instance download the deterministic (high-resolution) forecasts for the 2
 metres temperature.
+
+
+Using the Intake catalogue to access the data
+---------------------------------------------
+
+An `Intake catalogue <https://github.com/EUPP-benchmark/intake-eumetnet-postprocessing-benchmark>`__ is also available, as an alternative way to get the datasets.
+Note that the :ref:`files/base_datasets:Base datasets over Europe's domain` cannot be retrieved by this method.
+
+
+Access through the catalogue can be done with the Python command line interface in a few lines:
+
+.. code:: python
+
+   # Uncomment the line below if the catalogue is not yet installed
+   #!pip install euppbench-datasets
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   ds = cat.euppbench.training_data.gridded.EUPPBench_highres_forecasts_surface.to_dask()
+
+which download the `original EUPPBench deterministic (high-resolution) forecasts <https://eupp-benchmark.github.io/EUPPBench-doc/files/EUPPBench_datasets.html#surface-variable-forecasts>`__
+in the `xarray <http://xarray.pydata.org/en/stable/index.html>`__ format.
 
 
 Indices and tables

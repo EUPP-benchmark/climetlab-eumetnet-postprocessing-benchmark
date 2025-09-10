@@ -98,6 +98,14 @@ The EFI are available for the model step ranges (in hours) 0-24, 24-48,
    ds = cml.load_dataset('EUPPBench-training-data-gridded-forecasts-efi')
    ds.to_xarray()
 
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   ds = cat.euppbench.training_data.gridded.EUPPBench_forecasts_efi.to_dask()
+
 **Example:**
 
 .. jupyter-execute::
@@ -207,6 +215,20 @@ where the ``kind`` argument allows to select the
 deterministic or ensemble forecasts, by setting it to ``'highres'`` or
 ``'ensemble'``.
 
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the ensemble forecasts
+   ds_ens = cat.euppbench.training_data.gridded.EUPPBench_ensemble_forecasts_surface.to_dask()
+   # Fetching the deterministic (highres) forecasts
+   ds_hr = cat.euppbench.training_data.gridded.EUPPBench_highres_forecasts_surface.to_dask()
+   # Fetching the corresponding observations
+   ds_obs = cat.euppbench.training_data.gridded.EUPPBench_forecasts_observations_surface.to_dask()
+
+
 **Example:**
 
 .. jupyter-execute::
@@ -259,6 +281,21 @@ calling
 where the ``level`` argument is the pressure level, as a string or an integer. The ``kind`` argument
 allows to select the deterministic or ensemble forecasts, by setting it
 to ``'highres'`` or ``'ensemble'``.
+
+Alternatively, one can use the `Intake catalogue`_, for example for the 500 hPa level:
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the ensemble forecasts
+   ds_ens = cat.euppbench.training_data.gridded.EUPPBench_ensemble_forecasts_pressure_500.to_dask()
+   # Fetching the deterministic (highres) forecasts
+   ds_hr = cat.euppbench.training_data.gridded.EUPPBench_highres_forecasts_pressure_500.to_dask()
+   # Fetching the corresponding observations
+   ds_obs = cat.euppbench.training_data.gridded.EUPPBench_forecasts_observations_pressure_500.to_dask()
+
+but the other levels can be fetched in the same way, by replacing the :code:`500` in the calls.
 
 **Example:**
 
@@ -337,6 +374,19 @@ preceding a given forecast timestamp. As a consequence, a `6' was added to the E
 where the ``kind`` argument allows to select the deterministic or ensemble forecasts, by setting it to ``'highres'`` or
 ``'ensemble'``.
 
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the ensemble forecasts
+   ds_ens = cat.euppbench.training_data.gridded.EUPPBench_ensemble_forecasts_surface_processed.to_dask()
+   # Fetching the deterministic (highres) forecasts
+   ds_hr = cat.euppbench.training_data.gridded.EUPPBench_highres_forecasts_surface_processed.to_dask()
+   # Fetching the corresponding observations
+   ds_obs = cat.euppbench.training_data.gridded.EUPPBench_forecasts_observations_surface_processed.to_dask()
+
 **Example:**
 
 .. jupyter-execute::
@@ -363,6 +413,16 @@ above are available.
    ds = cml.load_dataset('EUPPBench-training-data-gridded-reforecasts-surface')
    ds.to_xarray()
 
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the ensemble reforecasts
+   ds_ens = cat.euppbench.training_data.gridded.EUPPBench_ensemble_reforecasts_surface.to_dask()
+   # Fetching the corresponding observations
+   ds_obs = cat.euppbench.training_data.gridded.EUPPBench_reforecasts_observations_surface.to_dask()
 
 **Example:**
 
@@ -393,6 +453,19 @@ calling
 
 The ``level`` argument is the pressure level, as a string or an integer.
 
+Alternatively, one can use the `Intake catalogue`_, for example for the 500 hPa level:
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the ensemble reforecasts
+   ds_ens = cat.euppbench.training_data.gridded.EUPPBench_ensemble_reforecasts_pressure_500.to_dask()
+   # Fetching the corresponding observations
+   ds_obs = cat.euppbench.training_data.gridded.EUPPBench_reforecasts_observations_pressure_500.to_dask()
+
+but the other levels can be fetched in the same way, by replacing the :code:`500` in the calls.
+
 **Example:**
 
 .. jupyter-execute::
@@ -417,6 +490,17 @@ can also be obtained as ensemble reforecasts (11 members).
 
    ds = cml.load_dataset('EUPPBench-training-data-gridded-reforecasts-surface-processed')
    ds.to_xarray()
+
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the ensemble reforecasts
+   ds_ens = cat.euppbench.training_data.gridded.EUPPBench_ensemble_reforecasts_surface_processed.to_dask()
+   # Fetching the corresponding observations
+   ds_obs = cat.euppbench.training_data.gridded.EUPPBench_reforecasts_observations_surface_processed.to_dask()
 
 **Example:**
 
@@ -465,6 +549,17 @@ It includes:
 where the ``parameter`` argument is a string with one of the ECMWF keys
 described above. It is only possible to download one static field per
 call.
+
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the land usage field
+   ds = cat.euppbench.training_data.gridded.EUPPBench_land_use.to_dask()
+
+The other static field are also available in the same way.
 
 **Example:**
 
@@ -521,6 +616,16 @@ The EFI are available for the model step ranges (in hours) 0-24, 24-48,
 
 where the ``country`` argument must be chosen amongst the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
 
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   ds = cat.euppbench.training_data.stations.austria.EUPPBench_forecasts_efi.to_dask()
+
+where :code:`austria` can be replaced by another country in the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
+
 **Example:**
 
 .. jupyter-execute::
@@ -559,6 +664,21 @@ deterministic or ensemble forecasts, by setting it to ``'highres'`` or
 ``'ensemble'``.
 The ``country`` argument must be chosen amongst the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
 
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the ensemble forecasts
+   ds_ens = cat.euppbench.training_data.stations.austria.EUPPBench_ensemble_forecasts_surface.to_dask()
+   # Fetching the deterministic (highres) forecasts
+   ds_hr = cat.euppbench.training_data.stations.austria.EUPPBench_highres_forecasts_surface.to_dask()
+   # Fetching the corresponding observations
+   ds_obs = cat.euppbench.training_data.stations.austria.EUPPBench_forecasts_observations_surface.to_dask()
+
+where :code:`austria` can be replaced by another country in the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
+
 **Example:**
 
 .. jupyter-execute::
@@ -591,6 +711,20 @@ allows to select the deterministic or ensemble forecasts, by setting it
 to ``'highres'`` or ``'ensemble'``.
 The ``country`` argument must be chosen amongst the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
 
+Alternatively, one can use the `Intake catalogue`_, for example for the 500 hPa level:
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the ensemble forecasts
+   ds_ens = cat.euppbench.training_data.stations.austria.EUPPBench_ensemble_forecasts_pressure_500.to_dask()
+   # Fetching the corresponding observations
+   ds_obs = cat.euppbench.training_data.stations.austria.EUPPBench_forecasts_observations_pressure_500.to_dask()
+
+but the other levels can be fetched in the same way, by replacing the :code:`500` in the calls.
+The country can also be changed, by replacing :code:`austria` by another country in the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
+
 **Example:**
 
 .. jupyter-execute::
@@ -621,6 +755,21 @@ The same variables as in section :ref:`files/EUPPBench_datasets:2.4 - Processed 
 where the ``kind`` argument allows to select the deterministic or ensemble forecasts, by setting it to ``'highres'`` or
 ``'ensemble'``.
 The ``country`` argument must be chosen amongst the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
+
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the ensemble forecasts
+   ds_ens = cat.euppbench.training_data.stations.austria.EUPPBench_ensemble_forecasts_surface_processed.to_dask()
+   # Fetching the deterministic (highres) forecasts
+   ds_hr = cat.euppbench.training_data.stations.austria.EUPPBench_highres_forecasts_surface_processed.to_dask()
+   # Fetching the corresponding observations
+   ds_obs = cat.euppbench.training_data.stations.austria.EUPPBench_forecasts_observations_surface_processed.to_dask()
+
+where :code:`austria` can be replaced by another country in the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
 
 **Example:**
 
@@ -653,6 +802,19 @@ above are available.
    ds.to_xarray()
 
 where the ``country`` argument must be chosen amongst the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
+
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the ensemble reforecasts
+   ds_ens = cat.euppbench.training_data.stations.austria.EUPPBench_ensemble_reforecasts_surface.to_dask()
+   # Fetching the corresponding observations
+   ds_obs = cat.euppbench.training_data.stations.austria.EUPPBench_reforecasts_observations_surface.to_dask()
+
+where :code:`austria` can be replaced by another country in the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
 
 **Example:**
 
@@ -688,6 +850,18 @@ calling
 The ``level`` argument is the pressure level, as a string or an integer.
 The ``country`` argument must be chosen amongst the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
 
+Alternatively, one can use the `Intake catalogue`_, for example for the 500 hPa level:
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the ensemble reforecasts
+   ds_ens = cat.euppbench.training_data.stations.austria.EUPPBench_ensemble_reforecasts_pressure_500.to_dask()
+
+but the other levels can be fetched in the same way, by replacing the :code:`500` in the calls.
+The country can also be changed, by replacing :code:`austria` by another country in the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
+
 **Example:**
 
 .. jupyter-execute::
@@ -719,6 +893,20 @@ can also be obtained as ensemble reforecasts (11 members).
 
 The ``country`` argument must be chosen amongst the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
 
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the ensemble reforecasts
+   ds_ens = cat.euppbench.training_data.stations.austria.EUPPBench_ensemble_reforecasts_surface_processed.to_dask()
+   # Fetching the corresponding observations
+   ds_obs = cat.euppbench.training_data.stations.austria.EUPPBench_reforecasts_observations_surface_processed.to_dask()
+
+
+where :code:`austria` can be replaced by another country in the list [``belgium``, ``austria``, ``france``, ``germany``, ``netherlands``].
+
 **Example:**
 
 .. jupyter-execute::
@@ -729,7 +917,8 @@ The ``country`` argument must be chosen amongst the list [``belgium``, ``austria
 3 - Getting the observations corresponding to the (re)forecasts
 ---------------------------------------------------------------
 
-Once obtained, the observations (if available) corresponding to the downloaded forecasts or reforecasts
+For the users using the climetlab plugin, once the (re)forecasts have been obtained,
+the observations (if available) corresponding to the downloaded forecasts or reforecasts
 can be retrieved in the `xarray`_ format by
 using the ``get_observations_as_xarray`` method:
 
@@ -916,6 +1105,8 @@ surface variable in the station dataset:
    fcs = ds.to_xarray()
    fcs.v100.units
 
+The same remark applies equally to the data fetched via the `Intake catalogue`_.
+
 Data License
 ------------
 
@@ -937,3 +1128,4 @@ Please also read `these information <https://gate.meteoswiss.ch/idaweb/more.do?l
 .. _xarray: http://xarray.pydata.org/en/stable/index.html
 .. _CORINE 2018: https://land.copernicus.eu/pan-european/corine-land-cover
 .. _ECMWF: https://www.ecmwf.int/
+.. _Intake catalogue: https://github.com/EUPP-benchmark/intake-eumetnet-postprocessing-benchmark
