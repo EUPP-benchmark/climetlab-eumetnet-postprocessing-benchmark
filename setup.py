@@ -28,7 +28,7 @@ setuptools.setup(
     name=package_name,
     version=version,
     description=(
-        "A plugin for climetlab to retrieve the Eumetnet postprocessing benchmark dataset."
+        "A plugin for climetlab to retrieve the EUMETNET postprocessing benchmark dataset."
     ),
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
@@ -73,6 +73,12 @@ setuptools.setup(
             "EUPPBench-training-data-stations-reforecasts-surface= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_reforecasts:TrainingDataReforecastSurface",
             "EUPPBench-training-data-stations-reforecasts-pressure= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_reforecasts:TrainingDataReforecastPressure",
             "EUPPBench-training-data-stations-reforecasts-surface-processed= climetlab_eumetnet_postprocessing_benchmark.EUPP.stations.training_data_reforecasts:TrainingDataReforecastSurfaceProcessed",
+
+            # EUPrecipP phase datasets
+            # gridded datasets
+            "EUPreciPBench-gridded-precipitation-forecasts= climetlab_eumetnet_postprocessing_benchmark.EUPreciP.precipitations:PrecipitationForecast",
+            "EUPreciPBench-gridded-predictors-forecasts= climetlab_eumetnet_postprocessing_benchmark.EUPreciP.precipitations:PredictorsForecast",
+            "EUPreciPBench-gridded-precipitation-observations= climetlab_eumetnet_postprocessing_benchmark.EUPreciP.precipitations:PrecipitationObservation",
         ]
         # source plugins would be here
         # "climetlab.sources": []
@@ -85,7 +91,6 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
-        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
         "Operating System :: OS Independent",
