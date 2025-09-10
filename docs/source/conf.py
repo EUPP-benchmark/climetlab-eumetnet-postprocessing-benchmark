@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'The EUPP postprocessing benchmark dataset documentation'
-copyright = '2022, GIE EUMETNET - PP module'
-author = 'GIE EUMETNET - PP module'
+copyright = '2025, SNC EUMETNET - PP module'
+author = 'SNC EUMETNET - PP module'
 
 # The full version, including alpha/beta/rc tags
 release = 'v1.0'  # version of the dataset, not of climetlab plugin

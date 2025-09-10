@@ -66,6 +66,7 @@ Alternatively, one can use the `Intake catalogue`_
 
 .. jupyter-execute::
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPreciPBench-gridded-precipitation-forecasts')
    ds.to_xarray()
 
