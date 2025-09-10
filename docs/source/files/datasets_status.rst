@@ -24,6 +24,20 @@ EUPPBench datasets
 | EUPP dataset v1.0 is unofficially up.        | 25-nov-2022  | /                               |
 +----------------------------------------------+--------------+---------------------------------+
 
+EUPreciPBench datasets
+----------------------
+
+* Status: |EUPreciP_on|
+
++----------------------------------------------+--------------+---------------------------------+
+| News                                         | Date         | Additional Remarks              |
++==============================================+==============+=================================+
+|                                              |              | /                               |
+|                                              |              |                                 |
++----------------------------------------------+--------------+---------------------------------+
+| EUPreciP dataset v0.5 is unofficially up.    | 10-sep-2025  | v1.0 is pending publication     |
++----------------------------------------------+--------------+---------------------------------+
+
 EUMETNET base datasets
 ----------------------
 
@@ -43,3 +57,6 @@ EUMETNET base datasets
 
 .. |EUPP_station_on| image:: https://img.shields.io/badge/EUPP%20station%20dataset-Online-green.svg
 .. |EUPP_station_off| image:: https://img.shields.io/badge/EUPP%20station%20dataset-Offline-red.svg
+
+.. |EUPreciP_on| image:: https://img.shields.io/badge/EUPreciP%20dataset-Online-green.svg
+.. |EUPreciP_off| image:: https://img.shields.io/badge/EUPreciP%20dataset-Offline-red.svg
