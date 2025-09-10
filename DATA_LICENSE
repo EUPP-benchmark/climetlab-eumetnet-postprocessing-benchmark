@@ -3,6 +3,9 @@
 License for the data
 --------------------
 
+----------------------------
+# EUPPBench & Base dataset #
+----------------------------
 
 -----------------
 # Forecast data #
@@ -56,4 +59,31 @@ Source https://www.ecmwf.int
 Creative Commons Attribution 4.0 International (CC BY 4.0)
 Copyright (c) 2021 European Centre for Medium-Range Weather Forecasts (ECMWF).
 
+-----------------
+# EUPreciPBench #
+-----------------
 
+-----------------
+## Forecast data
+-----------------
+
+Gridded forecast data source
+
+Producer: Deutsche Wetterdienst (DWD), Offenbach (https://www.dwd.de)
+
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+--------------------
+## Observation data
+--------------------
+
+Gridded data
+------------
+
+EURADCLIM 1 hour accumulated radar precipitation data
+
+Source: KNMI
+
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Webpage: https://dataplatform.knmi.nl/dataset/rad-opera-hourly-rainfall-accumulation-euradclim-2-0
