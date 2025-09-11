@@ -7,7 +7,7 @@ from climetlab.normalize import normalize
 
 from ...config import EUPP_baseurl
 
-__version__ = "0.2.7"
+__version__ = "0.2.8"
 
 _terms_of_use = """By downloading data from this dataset, you agree to the terms and conditions defined at
 

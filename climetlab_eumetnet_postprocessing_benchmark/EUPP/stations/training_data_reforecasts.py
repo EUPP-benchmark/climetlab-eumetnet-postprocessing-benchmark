@@ -4,7 +4,7 @@ from __future__ import annotations
 from .training_data_forecasts import TrainingDataForecastSurface, TrainingDataForecastPressure,\
     TrainingDataForecastSurfaceProcessed
 
-__version__ = "0.2.7"
+__version__ = "0.2.8"
 
 
 class TrainingDataReforecastSurface(TrainingDataForecastSurface):
