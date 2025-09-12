@@ -1103,6 +1103,7 @@ one can save them to disk by using the :meth:`xarray.Dataset.to_netcdf` function
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-surface-processed', "austria")
    obs = ds.get_observations_as_xarray()
    obs.to_netcdf('austria_reforecasts.nc')
