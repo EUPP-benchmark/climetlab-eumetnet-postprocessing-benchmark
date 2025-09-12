@@ -95,6 +95,7 @@ The EFI are available for the model step ranges (in hours) 0-24, 24-48,
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-gridded-forecasts-efi')
    ds.to_xarray()
 
@@ -208,6 +209,7 @@ Some missing observations will become available later.
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-gridded-forecasts-surface', kind)
    ds.to_xarray()
 
@@ -275,6 +277,7 @@ calling
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-EUPP-training-data-gridded-forecasts-pressure', level, kind)
    ds.to_xarray()
 
@@ -368,6 +371,7 @@ preceding a given forecast timestamp. As a consequence, a `6' was added to the E
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-gridded-forecasts-surface-processed', kind)
    ds.to_xarray()
 
@@ -410,6 +414,7 @@ above are available.
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-gridded-reforecasts-surface')
    ds.to_xarray()
 
@@ -448,6 +453,7 @@ calling
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-gridded-reforecasts-pressure', level)
    ds.to_xarray()
 
@@ -488,6 +494,7 @@ can also be obtained as ensemble reforecasts (11 members).
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-gridded-reforecasts-surface-processed')
    ds.to_xarray()
 
@@ -543,6 +550,7 @@ It includes:
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-gridded-static-fields', parameter)
    ds.to_xarray()
 
@@ -611,6 +619,7 @@ The EFI are available for the model step ranges (in hours) 0-24, 24-48,
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-stations-forecasts-efi', country)
    ds.to_xarray()
 
@@ -656,6 +665,7 @@ The same variables as in section :ref:`files/EUPPBench_datasets:1.2 - Surface va
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-stations-forecasts-surface', kind, country)
    ds.to_xarray()
 
@@ -703,6 +713,7 @@ calling
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-EUPP-training-data-stations-forecasts-pressure', level, kind, country)
    ds.to_xarray()
 
@@ -749,6 +760,7 @@ The same variables as in section :ref:`files/EUPPBench_datasets:2.4 - Processed 
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-stations-forecasts-surface-processed', kind, country)
    ds.to_xarray()
 
@@ -798,6 +810,7 @@ above are available.
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-surface', country)
    ds.to_xarray()
 
@@ -844,6 +857,7 @@ calling
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-pressure', level, country)
    ds.to_xarray()
 
@@ -888,6 +902,7 @@ can also be obtained as ensemble reforecasts (11 members).
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('EUPPBench-training-data-stations-reforecasts-surface-processed', country)
    ds.to_xarray()
 

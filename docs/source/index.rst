@@ -16,8 +16,10 @@ then be processed by other languages, and a few line of Python codes suffice to 
 .. note::
 
    * **Climetlab plugin version**: 0.2.8
-   * **EUPPBench dataset version**: v1.0
+   * **Intake catalogues version**: 0.2.0
    * **Base dataset version**: v1.0
+   * **EUPPBench dataset version**: v1.0
+   * **EUPreciPBench dataset version**: 0.5
    * **Dataset status**: :ref:`files/datasets_status:Datasets status`
 
 .. toctree::

@@ -96,6 +96,7 @@ The EFI are available for the model step range (in hours) 0-24, 24-48,
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-efi', date, parameter)
    ds.to_xarray()
 
@@ -108,6 +109,7 @@ the EFI parameters.
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-efi', "2017-12-02", "2ti")
    ds.to_xarray()
 
@@ -217,6 +219,7 @@ The forecasts are available for the model steps (in hours) 0, 1, 2, 3,
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface', date, parameter, kind)
    ds.to_xarray()
 
@@ -231,6 +234,7 @@ deterministic or ensemble forecasts, by setting it to ``'highres'`` or
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface', "2017-12-02", "sd", "highres")
    ds.to_xarray()
 
@@ -276,6 +280,7 @@ calling
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-pressure', date, parameter, level, kind)
    ds.to_xarray()
 
@@ -291,6 +296,7 @@ to ``'highres'`` or ``'ensemble'``.
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-pressure', "2017-12-02", "z", 500, "highres")
    ds.to_xarray()
 
@@ -362,6 +368,7 @@ available for the model steps (in hours) 6, 12, 18, 24, 30, 36, 42, 48,
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-processed', date, parameter, kind)
    ds.to_xarray()
 
@@ -382,6 +389,7 @@ deterministic or ensemble forecasts, by setting it to ``'highres'`` or
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-forecasts-surface-processed', "2017-12-02", "mx2t6", "highres")
    ds.to_xarray()
 
@@ -407,6 +415,7 @@ retrieved.
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface', date, parameter)
    ds.to_xarray()
 
@@ -419,6 +428,7 @@ parameters.
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface', "2017-12-28", "sd")
    ds.to_xarray()
 
@@ -442,6 +452,7 @@ calling
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-pressure', date, parameter, level)
    ds.to_xarray()
 
@@ -455,6 +466,7 @@ as a string or an integer.
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-pressure', "2017-12-28", "z", 500)
    ds.to_xarray()
 
@@ -476,6 +488,7 @@ variables described in section **1.5**.
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface-processed', date, parameter)
    ds.to_xarray()
 
@@ -494,6 +507,7 @@ keys.
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-reforecasts-surface-processed', "2017-12-28", "mx2t6")
    ds.to_xarray()
 
@@ -531,6 +545,7 @@ It includes:
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-static-fields', parameter)
    ds.to_xarray()
 
@@ -542,6 +557,7 @@ call.
 
 .. code:: python
 
+   import climetlab as cml
    ds = cml.load_dataset('eumetnet-postprocessing-benchmark-training-data-gridded-static-fields', 'mterh')
    ds.to_xarray()
 
