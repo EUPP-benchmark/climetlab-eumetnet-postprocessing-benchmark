@@ -272,4 +272,5 @@ https://doi.org/10.5194/essd-15-1441-2023 .
 .. _EURADCLIM: https://dataplatform.knmi.nl/dataset/rad-opera-hourly-rainfall-accumulation-euradclim-2-0
 .. _Intake catalogue: https://github.com/EUPP-benchmark/intake-eumetnet-postprocessing-benchmark
 .. _Jefferson instability index: https://adgeo.copernicus.org/articles/7/131/2006/
+.. _CORINE 2018: https://land.copernicus.eu/pan-european/corine-land-cover
 
