@@ -6,10 +6,11 @@ import warnings
 import climetlab as cml
 from climetlab import Dataset
 from climetlab.utils.patterns import Pattern
+from climetlab.normalize import normalize
 
 from ..config import EUPreciP_baseurl
 
-__version__ = "0.2.8"
+__version__ = "0.3.1"
 
 _terms_of_use = """By downloading data from this dataset, you agree to the terms and conditions defined at
 
@@ -82,3 +83,29 @@ class PrecipitationObservation(CosmoDataForecast):
 
     def __init__(self):
         CosmoDataForecast.__init__(self, ".EURADCLIM_tp")
+
+
+class StaticField(CosmoDataForecast):
+
+    name = None  # TODO
+    home_page = "-"  # TODO
+    licence = "-"  # TODO
+    documentation = "-"  # TODO
+    citation = "-"  # TODO
+
+    dataset = None
+
+    _static_parameters = ["landu", "mterh", "z"]
+
+    @normalize("parameter", _static_parameters)
+    def __init__(self, parameter):
+
+        if parameter == "landu":
+            CosmoDataForecast.__init__(self, "_land_usage")
+        elif parameter == "mterh":
+            CosmoDataForecast.__init__(self, "_model_terrain_height")
+        elif parameter == "z":
+            CosmoDataForecast.__init__(self, "_z")
+
+
+        self.source = cml.load_source("url", url)

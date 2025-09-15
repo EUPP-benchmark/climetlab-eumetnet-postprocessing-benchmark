@@ -15,8 +15,8 @@ then be processed by other languages, and a few line of Python codes suffice to 
 
 .. note::
 
-   * **Climetlab plugin version**: 0.2.8
-   * **Intake catalogues version**: 0.2.0
+   * **Climetlab plugin version**: 0.3.1
+   * **Intake catalogues version**: 0.2.2
    * **Base dataset version**: v1.0
    * **EUPPBench dataset version**: v1.0
    * **EUPreciPBench dataset version**: 0.5

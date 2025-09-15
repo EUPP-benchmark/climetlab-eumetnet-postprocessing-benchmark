@@ -9,7 +9,7 @@ from climetlab.utils.patterns import Pattern
 
 from ...config import EUPP_baseurl
 
-__version__ = "0.2.8"
+__version__ = "0.3.1"
 
 _terms_of_use = """By downloading data from this dataset, you agree to the terms and conditions defined at
 
