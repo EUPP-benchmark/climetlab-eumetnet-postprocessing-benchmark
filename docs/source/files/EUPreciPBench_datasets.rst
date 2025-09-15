@@ -17,8 +17,8 @@ the :ref:`files/EUPPBench_datasets:EUPPBench datasets` (0.25°), but they are co
     In blue, the EUPreciPBench dataset domain inside the :ref:`files/base_datasets:Base datasets over Europe's domain`.
 
 -  The gridded EUPPreciBench postprocessing benchmark dataset contains
-   `COSMO`_ DE and D2 ensemble forecasts over a small domain in Europe, from 45.75° to 53.5° in latitude, and from 2.5° to 10.5° in longitude,
-   and covers the years 2017-2019.
+   `COSMO`_ DE and D2 ensemble forecasts over a small domain in Europe, from 46.0° to 53.2° in latitude, and from 2.5° to 10.4° in longitude,
+   and covers the years 2017-2020.
 -  It also contains the corresponding `EURADCLIM`_ radar composite for the purpose of
    providing observations for the benchmark.
 -  The forecasts provided are the COSMO runs initialized at 03Z.
@@ -158,7 +158,7 @@ Alternatively, one can use the `Intake catalogue`_
 
    import euppbench_datasets
    cat = euppbench_datasets.open_catalog()
-   cat.euprecipbench.EUPreciPBench_EURADCLIM_observations.to_dask()
+   ds = cat.euprecipbench.EUPreciPBench_EURADCLIM_observations.to_dask()
 
 **Example:**
 
@@ -170,7 +170,61 @@ Alternatively, one can use the `Intake catalogue`_
 4 - Static fields
 -----------------
 
-Not yet available.
+Various static fields associated to the forecast grid can be obtained,
+with the purpose of serving as predictors for the postprocessing.
+
+.. note::
+
+   For consistency with the rest of the dataset, we use the
+   ECMWF parameters name, terminology and units here. However, please
+   note that - except for the Surface Geopotential - the fields provided are from other non-ECMWF data sources
+   evaluated at grid points. Currently, the main data source being used
+   is the `Copernicus Land Monitoring
+   Service <https://land.copernicus.eu/>`__.
+
+It includes:
+
++---------------------------------------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------------------+
+| Parameter name                                                                  | ECMWF key | Remarks                                                                                                     |
++=================================================================================+===========+=============================================================================================================+
+| `Land use <https://apps.ecmwf.int/codes/grib/param-db/?id=260184>`_             | landu     | Extracted from the `CORINE 2018`_ dataset.                                                                  |
+|                                                                                 |           | Values and associated land type differ from the ECMWF one.                                                  |
+|                                                                                 |           | Please look at the “legend” entry in the metadata for more details.                                         |
++---------------------------------------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------------------+
+| `Model terrain height <https://apps.ecmwf.int/codes/grib/param-db/?id=260183>`_ | mterh     | Extracted from the `EU-DEMv1.1 <https://land.copernicus.eu/imagery-in-situ/eu-dem>`__ data elevation model  |
+|                                                                                 |           | dataset.                                                                                                    |
++---------------------------------------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------------------+
+| `Surface Geopotential <https://apps.ecmwf.int/codes/grib/param-db/?id=129>`_    | z         | The model orography can be obtained by dividing the surface geopotential by g=9.80665 ms :math:`{}^{-2}`.   |
++---------------------------------------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------------------+
+
+**Usage:** The static fields can be retrieved by calling
+
+.. code:: python
+
+   ds = cml.load_dataset('EUPreciPBench-gridded-static-fields', parameter)
+   ds.to_xarray()
+
+where the ``parameter`` argument is a string with one of the ECMWF keys
+described above. It is only possible to download one static field per
+call.
+
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   # Fetching the land usage field
+   ds = cat.euprecipbench.EUPreciPBench_land_usage.to_dask()
+
+The other static field are also available in the same way.
+
+**Example:**
+
+.. jupyter-execute::
+
+   ds = cml.load_dataset('EUPreciPBench-gridded-static-fields', 'landu')
+   ds.to_xarray()
 
 
 5 - Explanation of the metadata
