@@ -82,7 +82,7 @@ class PrecipitationObservation(CosmoDataForecast):
     dataset = None
 
     def __init__(self):
-        CosmoDataForecast.__init__(self, ".EURADCLIM_tp")
+        CosmoDataForecast.__init__(self, "_EURADCLIM_tp")
 
 
 class StaticField(CosmoDataForecast):
@@ -106,6 +106,3 @@ class StaticField(CosmoDataForecast):
             CosmoDataForecast.__init__(self, "_model_terrain_height")
         elif parameter == "z":
             CosmoDataForecast.__init__(self, "_z")
-
-
-        self.source = cml.load_source("url", url)

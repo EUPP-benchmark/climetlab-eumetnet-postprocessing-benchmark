@@ -24,7 +24,7 @@ There are currently three sub-datasets available:
 
 * [The base dataset over Europe's domain](https://eupp-benchmark.github.io/EUPPBench-doc/files/base_datasets.html)
 * [The EUPPBench dataset](https://eupp-benchmark.github.io/EUPPBench-doc/files/EUPPBench_datasets.html)
-* [The EUPreciPBench dataset]()
+* [The EUPreciPBench dataset](https://eupp-benchmark.github.io/EUPPBench-doc/files/EUPreciPBench_datasets.html)
 
 They are documented [here](https://eupp-benchmark.github.io/EUPPBench-doc/index.html).
 
