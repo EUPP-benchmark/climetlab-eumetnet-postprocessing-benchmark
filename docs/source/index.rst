@@ -15,7 +15,7 @@ then be processed by other languages, and a few line of Python codes suffice to 
 
 .. note::
 
-   * **Climetlab plugin version**: 0.3.1
+   * **Climetlab plugin version**: 0.3.2
    * **EUPPBench dataset version**: v1.0
    * **Base dataset version**: v1.0
    * **Dataset status**: :ref:`files/datasets_status:Datasets status`

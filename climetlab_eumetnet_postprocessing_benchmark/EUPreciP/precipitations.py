@@ -10,7 +10,7 @@ from climetlab.normalize import normalize
 
 from ..config import EUPreciP_baseurl
 
-__version__ = "0.3.1"
+__version__ = "0.3.2"
 
 _terms_of_use = """By downloading data from this dataset, you agree to the terms and conditions defined at
 
@@ -69,6 +69,20 @@ class PredictorsForecast(CosmoDataForecast):
 
     def __init__(self):
         CosmoDataForecast.__init__(self, "_predictors")
+
+
+class CapeMlForecast(CosmoDataForecast):
+
+    name = None  # TODO
+    home_page = "-"  # TODO
+    licence = "-"  # TODO
+    documentation = "-"  # TODO
+    citation = "-"  # TODO
+
+    dataset = None
+
+    def __init__(self):
+        CosmoDataForecast.__init__(self, "_cape_ml")
 
 
 class PrecipitationObservation(CosmoDataForecast):
