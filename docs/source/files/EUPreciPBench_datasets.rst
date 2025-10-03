@@ -313,7 +313,7 @@ one can save them to disk by using the :meth:`xarray.Dataset.to_netcdf` function
    import climetlab as cml
    ds = cml.load_dataset('EUPreciPBench-gridded-precipitation-observations')
    obs = ds.to_xarray()
-   obs.isel(time=0).to_netcdf('first_forecast_observation_grid.nc')
+   obs.isel(time=0).to_netcdf('first_forecast_gridded_observations.nc')
 
 Finding the units of a given data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -77,6 +77,9 @@ Using the Intake catalogue to access the data
 ---------------------------------------------
 
 An `Intake catalogue <https://github.com/EUPP-benchmark/intake-eumetnet-postprocessing-benchmark>`__ is also available, as an alternative way to get the datasets.
+
+|PyPI Intake version| |PyPI Intake pyversions|
+
 Note that the :ref:`files/base_datasets:Base datasets over Europe's domain` cannot be retrieved by this method.
 
 
@@ -105,6 +108,10 @@ Indices and tables
    :target: https://badge.fury.io/py/climetlab-eumetnet-postprocessing-benchmark
 .. |PyPI pyversions| image:: https://img.shields.io/pypi/pyversions/climetlab-eumetnet-postprocessing-benchmark.svg
    :target: https://pypi.org/project/climetlab-eumetnet-postprocessing-benchmark/
+.. |PyPI Intake version| image:: https://badge.fury.io/py/euppbench-datasets.svg
+   :target: https://badge.fury.io/py/euppbench-datasets
+.. |PyPI Intake pyversions| image:: https://img.shields.io/pypi/pyversions/euppbench-datasets.svg
+   :target: https://pypi.org/project/euppbench-datasets
 .. |build| image:: https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml/badge.svg?branch=main
    :target: https://github.com/Climdyn/climetlab-eumetnet-postprocessing-benchmark/actions/workflows/check-and-publish.yml
 .. |Binder| image:: https://mybinder.org/badge_logo.svg
