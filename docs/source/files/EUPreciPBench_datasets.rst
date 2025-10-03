@@ -126,7 +126,46 @@ Alternatively, one can use the `Intake catalogue`_
    ds = cml.load_dataset('EUPreciPBench-gridded-predictors-forecasts')
    ds.to_xarray()
 
-3 - Precipitation Observations Data
+
+3 - CAPE ML Forecasts Data
+--------------------------
+
+It consists of the Convective Available Potential Energy computed on mean layer.
+For more details about this variable, please follow
+this `link <https://www.cosmo-model.org/content/model/cosmo/techReports/docs/techReport17.pdf>`__.
+
++---------------------------------------------+-----------+---------+---------+
+| Parameter name                              | ECMWF key | Units   | Remarks |
++=============================================+===========+=========+=========+
+| `Convective Available Potential Energy,     | cape_ml   | J kg-1  |         |
+| mean layer <https://ap                      |           |         |         |
+| ps.ecmwf.int/codes/grib/param-db/500153>`__ |           |         |         |
++---------------------------------------------+-----------+---------+---------+
+
+**Usage:** The CAPE ML forecasts can be retrieved by calling
+
+.. code:: python
+
+   import climetlab as cml
+   ds = cml.load_dataset('EUPreciPBench-gridded-cape-ml-forecasts')
+   ds.to_xarray()
+
+Alternatively, one can use the `Intake catalogue`_
+
+.. code:: python
+
+   import euppbench_datasets
+   cat = euppbench_datasets.open_catalog()
+   ds = cat.euprecipbench.EUPreciPBench_cape_ml_forecasts.to_dask()
+
+**Example:**
+
+.. jupyter-execute::
+
+   ds = cml.load_dataset('EUPreciPBench-gridded-cape-ml-forecasts')
+   ds.to_xarray()
+
+4 - Precipitation Observations Data
 -----------------------------------
 
 It consists in the total precipitation variable accumulated in the past hour:
@@ -167,7 +206,7 @@ Alternatively, one can use the `Intake catalogue`_
    ds = cml.load_dataset('EUPreciPBench-gridded-precipitation-observations')
    ds.to_xarray()
 
-4 - Static fields
+5 - Static fields
 -----------------
 
 Various static fields associated to the forecast grid can be obtained,
@@ -227,7 +266,7 @@ The other static field are also available in the same way.
    ds.to_xarray()
 
 
-5 - Explanation of the metadata
+6 - Explanation of the metadata
 -------------------------------
 
 For all data, attributes specifying the sources and the license are always present.
@@ -258,6 +297,38 @@ Depending on the kind of dataset, dimensions and information are embedded in the
 
    **Bold** metadata denotes dimensions indexing the datasets.
 
+
+Tips & Tricks
+-------------
+
+Saving the data to a NetCDF file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is particularly useful if one wants to reuse the data with another programming language.
+For example, if one has downloaded the ...,
+one can save them to disk by using the :meth:`xarray.Dataset.to_netcdf` functionality of the `xarray`_ :class:`~xarray.Dataset`:
+
+.. code:: python
+
+   import climetlab as cml
+   ds = cml.load_dataset('EUPreciPBench-gridded-precipitation-observations')
+   ds.isel(time=0).to_netcdf('first_forecast_observation_grid.nc')
+
+Finding the units of a given data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can find the particular units of a given data by clicking on the parameter's name in
+the table above. For many variables, the units are also available in the metadata of the forecasts. For example, the following code snippet show how to retrieve the units of
+surface variable in the station dataset:
+
+.. jupyter-execute::
+
+   ds = cml.load_dataset('EUPreciPBench-gridded-precipitation-observations')
+   fcs = ds.to_xarray()
+   fcs.tp.units
+
+The same remark applies equally to the data fetched via the `Intake catalogue`_.
+
 Data License
 ------------
 
@@ -273,4 +344,5 @@ https://doi.org/10.5194/essd-15-1441-2023 .
 .. _Intake catalogue: https://github.com/EUPP-benchmark/intake-eumetnet-postprocessing-benchmark
 .. _Jefferson instability index: https://adgeo.copernicus.org/articles/7/131/2006/
 .. _CORINE 2018: https://land.copernicus.eu/pan-european/corine-land-cover
+.. _xarray: http://xarray.pydata.org/en/stable/index.html
 
