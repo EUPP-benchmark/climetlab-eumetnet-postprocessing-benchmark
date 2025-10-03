@@ -305,27 +305,29 @@ Saving the data to a NetCDF file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is particularly useful if one wants to reuse the data with another programming language.
-For example, if one has downloaded the ...,
+For example, if one has downloaded the the observations shown in section :ref:`files/EUPreciPBench_datasets:4 - Precipitation Observations Data`,
 one can save them to disk by using the :meth:`xarray.Dataset.to_netcdf` functionality of the `xarray`_ :class:`~xarray.Dataset`:
 
 .. code:: python
 
    import climetlab as cml
    ds = cml.load_dataset('EUPreciPBench-gridded-precipitation-observations')
-   ds.isel(time=0).to_netcdf('first_forecast_observation_grid.nc')
+   obs = ds.to_xarray()
+   obs.isel(time=0).to_netcdf('first_forecast_observation_grid.nc')
 
 Finding the units of a given data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can find the particular units of a given data by clicking on the parameter's name in
-the table above. For many variables, the units are also available in the metadata of the forecasts. For example, the following code snippet show how to retrieve the units of
-surface variable in the station dataset:
+You can find the particular units of a given data in the table above.
+For many variables, the units are also available in the metadata of the forecasts.
+For example, the following code snippet show how to retrieve the units of
+total precipitation variable observations dataset:
 
 .. jupyter-execute::
 
    ds = cml.load_dataset('EUPreciPBench-gridded-precipitation-observations')
-   fcs = ds.to_xarray()
-   fcs.tp.units
+   obs = ds.to_xarray()
+   obs.tp.units
 
 The same remark applies equally to the data fetched via the `Intake catalogue`_.
 
