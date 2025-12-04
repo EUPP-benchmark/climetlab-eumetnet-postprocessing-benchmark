@@ -20,7 +20,7 @@ An [Intake catalogue](https://github.com/EUPP-benchmark/intake-eumetnet-postproc
 
 ## Installation
 
-The catalogue can be installed using [pip](https://pypi.org/).
+The plugin can be installed using [pip](https://pypi.org/).
 Type in a terminal
 
     pip install climetlab climetlab-eumetnet-postprocessing-benchmark
