@@ -117,6 +117,6 @@ class StaticField(CosmoDataForecast):
         elif parameter == "mterh":
             CosmoDataForecast.__init__(self, "_model_terrain_height")
         elif parameter == "hsurf_DE":
-            CosmoDataForecast.__init__(self, "_COSMO_DE_mean_orographic_height.zarr")
+            CosmoDataForecast.__init__(self, "_COSMO_DE_mean_orographic_height")
         elif parameter == "hsurf_D2":
-            CosmoDataForecast.__init__(self, "_COSMO_D2_mean_orographic_height.zarr")
+            CosmoDataForecast.__init__(self, "_COSMO_D2_mean_orographic_height")
