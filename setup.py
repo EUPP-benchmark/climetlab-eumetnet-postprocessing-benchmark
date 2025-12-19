@@ -78,6 +78,7 @@ setuptools.setup(
             # gridded datasets
             "EUPreciPBench-gridded-precipitation-forecasts= climetlab_eumetnet_postprocessing_benchmark.EUPreciP.precipitations:PrecipitationForecast",
             "EUPreciPBench-gridded-predictors-forecasts= climetlab_eumetnet_postprocessing_benchmark.EUPreciP.precipitations:PredictorsForecast",
+            "EUPreciPBench-gridded-cape-ml-forecasts= climetlab_eumetnet_postprocessing_benchmark.EUPreciP.precipitations:CapeMlForecast",
             "EUPreciPBench-gridded-precipitation-observations= climetlab_eumetnet_postprocessing_benchmark.EUPreciP.precipitations:PrecipitationObservation",
             "EUPreciPBench-gridded-static-fields= climetlab_eumetnet_postprocessing_benchmark.EUPreciP.precipitations:StaticField",
 
