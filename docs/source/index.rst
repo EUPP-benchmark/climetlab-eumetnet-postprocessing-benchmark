@@ -30,6 +30,35 @@ then be processed by other languages, and a few line of Python codes suffice to 
    files/EUPreciPBench_datasets
    files/base_datasets
 
+Installing the software to access the datasets
+----------------------------------------------
+
+The climetlab plugin
+~~~~~~~~~~~~~~~~~~~~
+
+The plugin can be installed using `pip <https://pypi.org/>`_.
+Type in a terminal
+
+.. code:: bash
+
+    pip install climetlab climetlab-eumetnet-postprocessing-benchmark
+
+and you are set! See below for the usage.
+
+
+The Intake catalogue
+~~~~~~~~~~~~~~~~~~~~
+
+The plugin can be installed using `pip <https://pypi.org/>`_.
+Type in a terminal
+
+.. code:: bash
+
+    pip install euppbench-datasets
+
+and you are set! See below for the usage.
+
+
 Using climetlab to access the data
 ----------------------------------
 

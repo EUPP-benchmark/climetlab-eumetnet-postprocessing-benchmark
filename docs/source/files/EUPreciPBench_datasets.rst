@@ -52,6 +52,12 @@ It consists in the total precipitation variable accumulated in the past hour:
    The units for the total precipitation here are not consistent with the :ref:`files/EUPPBench_datasets:EUPPBench datasets`
    total precipitation units. As the latter uses meters as units, there is a factor 1000 between the two.
 
+.. warning::
+
+    Please note that, although we use the ECMWF key `tp` to name the variable, here it represents the total
+    accumulated precipitation over the previous hour, and not since the start of the forecast simulation, as is
+    usually the case for the ECMWF variable `tp`.
+
 **Usage:** The precipitation forecasts can be retrieved by calling
 
 .. code:: python
@@ -223,18 +229,22 @@ with the purpose of serving as predictors for the postprocessing.
 
 It includes:
 
-+---------------------------------------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------------------+
-| Parameter name                                                                  | ECMWF key | Remarks                                                                                                     |
-+=================================================================================+===========+=============================================================================================================+
-| `Land use <https://apps.ecmwf.int/codes/grib/param-db/?id=260184>`_             | landu     | Extracted from the `CORINE 2018`_ dataset.                                                                  |
-|                                                                                 |           | Values and associated land type differ from the ECMWF one.                                                  |
-|                                                                                 |           | Please look at the “legend” entry in the metadata for more details.                                         |
-+---------------------------------------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------------------+
-| `Model terrain height <https://apps.ecmwf.int/codes/grib/param-db/?id=260183>`_ | mterh     | Extracted from the `EU-DEMv1.1 <https://land.copernicus.eu/imagery-in-situ/eu-dem>`__ data elevation model  |
-|                                                                                 |           | dataset.                                                                                                    |
-+---------------------------------------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------------------+
-| `Surface Geopotential <https://apps.ecmwf.int/codes/grib/param-db/?id=129>`_    | z         | The model orography can be obtained by dividing the surface geopotential by g=9.80665 ms :math:`{}^{-2}`.   |
-+---------------------------------------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------+-----------+-----------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| Parameter name                                                                       | ECMWF key | Intake catalogue key                    | Remarks                                                                                                     |
++======================================================================================+===========+=========================================+=============================================================================================================+
+| `Land use <https://apps.ecmwf.int/codes/grib/param-db/?id=260184>`_                  | landu     | EUPreciPBench_land_usage                | Extracted from the `CORINE 2018`_ dataset.                                                                  |
+|                                                                                      |           |                                         | Values and associated land type differ from the ECMWF one.                                                  |
+|                                                                                      |           |                                         | Please look at the “legend” entry in the metadata for more details.                                         |
++--------------------------------------------------------------------------------------+-----------+-----------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| `Model terrain height <https://apps.ecmwf.int/codes/grib/param-db/?id=260183>`_      | mterh     | EUPreciPBench_model_terrain_height      | Extracted from the `EU-DEMv1.1 <https://land.copernicus.eu/imagery-in-situ/eu-dem>`__ data elevation model  |
+|                                                                                      |           |                                         | dataset.                                                                                                    |
++--------------------------------------------------------------------------------------+-----------+-----------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| `Geometric Height of the earths surface above sea level                              | hsurf_DE  | EUPreciPBench_mean_orographic_height_DE | Geometric Height of the earths surface above sea level for the COSMO DE model.                              |
+| DE <https://codes.ecmwf.int/grib/param-db/500007>`__                                 |           |                                         |                                                                                                             |
++--------------------------------------------------------------------------------------+-----------+-----------------------------------------+-------------------------------------------------------------------------------------------------------------+
+| `Geometric Height of the earths surface above sea level                              | hsurf_D2  | EUPreciPBench_mean_orographic_height_D2 | Geometric Height of the earths surface above sea level for the COSMO D2 model.                              |
+| D2 <https://codes.ecmwf.int/grib/param-db/500007>`__                                 |           |                                         |                                                                                                             |
++--------------------------------------------------------------------------------------+-----------+-----------------------------------------+-------------------------------------------------------------------------------------------------------------+
 
 **Usage:** The static fields can be retrieved by calling
 
@@ -247,7 +257,9 @@ where the ``parameter`` argument is a string with one of the ECMWF keys
 described above. It is only possible to download one static field per
 call.
 
-Alternatively, one can use the `Intake catalogue`_
+Alternatively, one can use the `Intake catalogue`_.
+In that case, the Intake catalogue key in the table above must be used to get the corresponding static field.
+For example, for land usage data:
 
 .. code:: python
 
