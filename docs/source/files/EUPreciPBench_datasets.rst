@@ -25,7 +25,8 @@ the :ref:`files/EUPPBench_datasets:EUPPBench datasets` (0.25°), but they are co
 -  The COSMO ensemble consists of 20 members.
 -  The gridded data resolution is 0.025° x 0.025° which corresponds
    roughly to 2.5 kilometers. COSMO DE, D2 and EURADCLIM data have been regridded to this resolution from their native grid.
--  COSMO DE forecasts (prior to May 2018) only covers part of the EUPPBench domain. COSMO D2 forecasts cover the full EUPPBench domain.
+-  COSMO DE forecasts (prior to 16th May 2018) only covers part of the EUPPBench domain. COSMO D2 forecasts cover the full EUPPBench domain.
+   **As a result, prior to 16th May 2018, a subset of the grid points do not possess any data and are set to** :code:`np.nan` **.**
 -  Forecasts are hourly, up to 2 days ahead, but do not include the analysis at 03Z.
 
 
@@ -309,6 +310,19 @@ Depending on the kind of dataset, dimensions and information are embedded in the
 
    **Bold** metadata denotes dimensions indexing the datasets.
 
+7 - COSMO model changes
+-----------------------
+
+* `Model changes in COSMO-DE (1st January 2017 - 15th May 2018) <https://www.dwd.de/DE/fachnutzer/forschung_lehre/numerische_wettervorhersage/nwv_aenderungen/_functions/DownloadBox_modellaenderungen/2019_2016_cosmo_de_eps_Download_Box.html?nn=16102&lsbId=479224>`_
+* `Model changes in COSMO-D2 (16th May 2018 - 31th December 2020) <https://www.dwd.de/DE/fachnutzer/forschung_lehre/numerische_wettervorhersage/nwv_aenderungen/_functions/DownloadBox_modellaenderungen/2018_2020_cosmo_d2_eps_Download_Box.html;jsessionid=AF771959B9BCF27F2FA1A477F1E4E804.live21061?nn=16102>`_
+
+Main changes:
+
+- Before 28.2.2017, members were obtained from 4 different models. Afterwards, they were obtained from the same model.
+
+- 29.2.2017 : Use of KENDA and ICON-EU-EPS in COSMO-DE-EPS
+
+- 16.5.2018 : Implementation of COSMO-D2-EPS
 
 Tips & Tricks
 -------------

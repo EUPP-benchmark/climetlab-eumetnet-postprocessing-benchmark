@@ -12,6 +12,8 @@ easily analysis-ready datasets that can be used to perform benchmarking tasks of
 The main tool to download and manage the data is a Python plugin. It can however convert the data to formats that can
 then be processed by other languages, and a few line of Python codes suffice to obtain the datasets.
 
+An Intake catalogue is also available, as an alternative way to get the datasets.
+
 
 .. note::
 
@@ -30,8 +32,11 @@ then be processed by other languages, and a few line of Python codes suffice to 
    files/EUPreciPBench_datasets
    files/base_datasets
 
+
 Installing the software to access the datasets
 ----------------------------------------------
+
+Two different methods are available: a climetlab plugin and an Intake catalogue.
 
 The climetlab plugin
 ~~~~~~~~~~~~~~~~~~~~
@@ -49,7 +54,7 @@ and you are set! See below for the usage.
 The Intake catalogue
 ~~~~~~~~~~~~~~~~~~~~
 
-The plugin can be installed using `pip <https://pypi.org/>`_.
+The catalogue can be installed using `pip <https://pypi.org/>`_.
 Type in a terminal
 
 .. code:: bash
